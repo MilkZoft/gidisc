@@ -1,0 +1,299 @@
+body {
+	background-color: #212121;	
+}
+
+.center {
+	text-align: center !important;
+}
+
+.no-decoration {
+	text-decoration: none;
+}
+
+.logo h1 {
+	width: 170px;
+	height: 88px;
+	background-image: url('../images/logo.png');
+	background-repeat: no-repeat;
+	text-indent: -9999px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.search {
+	padding-top: 30px;
+}
+
+.top-menu ul {
+	margin: 0px;
+	padding: 0px;
+	padding-top: 35px;
+	list-style: none;
+}
+
+.top-menu ul li {
+	display: inline;
+}
+
+.top-menu ul li a {
+	margin-left: 5px;
+	text-decoration: none;
+	color: #1d73de;
+	font-size: 1em;
+}
+
+.top-menu ul li a:hover {
+	color: #0052b5;
+}
+
+.menu {
+	background-color: #77c8fc;
+	height: 40px;
+	border-top: 1px solid #1e9ced;
+	border-bottom: 1px solid #1e9ced;
+}
+
+.menu ul {
+	margin: 0px;
+	margin-left: 20px;
+	padding: 0px;
+	list-style: none;
+}
+
+.menu ul li {
+	display: inline;
+	color: #0074be;
+	line-height: 40px;
+	margin-left: 15px;
+}
+
+.menu ul li a {
+	color: #0074be;
+}
+
+.bottom-menu {
+	background-color: #77c8fc;
+	height: 60px;
+	border-top: 1px solid #1e9ced;
+	border-bottom: 1px solid #1e9ced;
+}
+
+.bottom-menu ul {
+	width: 550px;
+	margin: 0 auto;
+	padding: 0px;
+	list-style: none;
+}
+
+.bottom-menu ul li {
+	display: inline;
+	color: #0074be;
+	line-height: 60px;
+	margin-left: 15px;
+	text-align: center;
+}
+
+.bottom-menu ul li a {
+	color: #0074be;
+}
+
+.wrapper {
+	padding: 10px;
+}
+
+.footer {
+      background-color: #212121;
+	color: #FFF;
+	padding-left: 40px;
+	text-align: justify;
+}
+
+.users {
+	padding-top: 40px;
+	padding-left: 120px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.bg-white {
+	background-color: #FFF;
+}
+
+.tiny-image {
+	background-image: url(../images/icons/tiny-icons.png);
+	background-repeat: no-repeat;
+}
+
+.tiny-trash {
+	background-position: -180px -20px;	
+}
+
+.tiny-trash-off {
+	background-position: -200px -20px;	
+}		
+
+.tiny-restore {
+	background-position: -200px -2px;	
+}
+
+.tiny-search {
+	background-position: -160px -19px;	
+}
+
+.tiny-add {
+	background-position: -20px -1px;
+}
+
+.tiny-edit {
+	background-position: -40px -20px;	
+}
+
+.tiny-edit-off {
+	background-position: -63px -20px;	
+}
+
+.tiny-delete {
+	background-position: 0px -19px;
+}
+
+.tiny-delete-off {
+	background-position: -22px -19px;
+}
+
+.tiny-home {
+	background-position: -82px -16px;
+}
+
+.tiny-config {
+	background-position: -80px 0px;	
+}
+
+.tiny-apps {
+	background-position: -40px -1px;
+}
+
+.tiny-blog {
+	background-position: -58px -1px;
+}
+
+.tiny-feedback {
+	background-position: -97px 0px;
+}
+
+.tiny-links {
+	background-position: -98px -17px;
+}
+
+.tiny-pages {
+	background-position: -139px -16px;
+}
+
+.tiny-users {
+	background-position: -118px -17px;
+}
+
+.tiny-logout {
+	background-position: -180px -1px;
+}
+
+.topbar .dropdown-menu a, .dropdown-menu a {
+	padding: 4px 10px !important;
+}
+
+.menu-dropdown, .dropdown-menu {
+    top: 25px !important;
+    min-width: 15px !important;
+    padding: 8px 0 0 !important;
+}
+
+.open .menu, .dropdown.open .menu, .open .dropdown-toggle, .dropdown.open .dropdown-toggle {
+	 color: #1D73DE !important;
+}
+
+.topbar div > ul a, .nav a {
+	 padding: 3px 3px 0px;
+}
+
+.box {
+	width: 750px;
+	margin: 0 auto;
+	margin-right: 55px;
+}
+
+.box-top {
+	height: 29px; 
+	background-image: url(../images/porlets2.gif);
+	background-position: -20px 0px;
+	background-repeat: repeat-x; 
+	line-height: 29px;
+	margin: 2em 0 0 0;
+}
+
+.box-content {
+	background-image: url(../images/porlets.gif);
+	background-repeat: repeat-y; 
+	background-color: #FFFFFF;
+}
+
+.box-content-wrapper {
+	background-color: #FFFFFF;
+	width: 336px;
+	margin: 0 auto;
+}
+
+.box-content-close {
+	padding: 0 12px 0 12px; 
+	background-image: url(../images/porlets.gif);
+	background-position: right; 
+	background-repeat: repeat-y;
+}
+
+.box-count {
+	width: 35px; 
+	float: left; 
+	text-align: right;
+}
+
+.box-content-wrapper ul {
+	margin: 0px;
+	padding: 0px;
+	margin-left: -10px;
+	list-style: none;
+}
+
+.box-content-wrapper ul li a {
+	display: block;
+	width: 340px;
+	border-bottom: 1px solid #EEEEEE;
+	text-indent: 20px;
+	background-color: #F5F5F5;
+	margin-left: 8px;
+}
+
+.box-content-wrapper ul li a:hover {
+	display: block;
+	width: 340px;
+	border-bottom: 1px solid #EEEEEE;
+	text-indent: 20px;
+	background-color: #FFFFFF;
+}
+
+.box-bottom {
+	height: 11px; 
+	background-image: url(../images/porlets2.gif);
+	background-position: 0 -62px;
+	background-repeat: repeat-x; 
+	margin: 0px;
+}
+
+.resalt {
+	text-align: center;
+	font-size: 5em;
+	font-family: Georgia, Times, serif;
+	color: #CCC;
+	margin: 0 auto;
+	margin-right: 55px;
+	width: 750px;
+}

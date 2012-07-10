@@ -1,0 +1,114 @@
+body {
+	background-color: #212121;	
+}
+
+.logo h1 {
+	width: 170px;
+	height: 88px;
+	background-image: url('../images/logo.png');
+	background-repeat: no-repeat;
+	text-indent: -9999px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.search {
+	padding-top: 30px;
+}
+
+.top-menu ul {
+	margin: 0px;
+	padding: 0px;
+	padding-top: 35px;
+	list-style: none;
+}
+
+.top-menu ul li {
+	display: inline;
+}
+
+.top-menu ul li a {
+	margin-left: 5px;
+	text-decoration: none;
+	color: #1d73de;
+	font-size: 1em;
+}
+
+.top-menu ul li a:hover {
+	text-decoration: underline;
+}
+
+.menu {
+	background-color: #77c8fc;
+	height: 40px;
+	border-top: 1px solid #1e9ced;
+	border-bottom: 1px solid #1e9ced;
+}
+
+.menu ul {
+	margin: 0px;
+	margin-left: 20px;
+	padding: 0px;
+	list-style: none;
+}
+
+.menu ul li {
+	display: inline;
+	color: #0074be;
+	line-height: 40px;
+	margin-left: 15px;
+}
+
+.menu ul li a {
+	color: #0074be;
+}
+
+.bottom-menu {
+	background-color: #77c8fc;
+	height: 60px;
+	border-top: 1px solid #1e9ced;
+	border-bottom: 1px solid #1e9ced;
+}
+
+.bottom-menu ul {
+	width: 550px;
+	margin: 0 auto;
+	padding: 0px;
+	list-style: none;
+}
+
+.bottom-menu ul li {
+	display: inline;
+	color: #0074be;
+	line-height: 60px;
+	margin-left: 15px;
+	text-align: center;
+}
+
+.bottom-menu ul li a {
+	color: #0074be;
+}
+
+.wrapper {
+	padding: 10px;
+}
+
+.footer {
+      background-color: #212121;
+	color: #FFF;
+	padding-left: 40px;
+	text-align: justify;
+}
+
+.users {
+	padding-top: 40px;
+	padding-left: 120px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.bg-white {
+	background-color: #FFF;
+}

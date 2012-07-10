@@ -1,0 +1,17 @@
+#download { float:left; width:100%; font-size:15px; }
+#header { float:left; width:100%;  }
+#header .title { float:left; margin:50px 0 0 150px; } 
+#header .logo { float:left; margin-left:10px; }
+#datos { width:100%; margin-top:30px; float:left; margin-left:50px; }
+#datos .renglon { float:left; width:100% }
+.bold { font-weight:bold; padding-right:5px; }
+.nombre { float:left; width:550px; }
+table { float:left; margin:30px 0 0 50px; }
+table .observaciones { max-width:300px; height:auto; }
+#bloque { float:left; width:100%; margin:30px 0 0 50px; }
+#bloque p { float:left; width:100%; margin-top:10px; }
+#bloque span { width:300px; height:auto; }
+.clave { float:left; width:100%; }
+.claves { float:left; width:100%; }
+.claves span { float:left; width:100% !important; margin:10px 0 0 75px; }
+.upercase { text-transform:uppercase; }
