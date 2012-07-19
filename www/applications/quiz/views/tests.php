@@ -8,7 +8,7 @@
 	</select>
 	
 	<p>
-		<input type="hidden" value="<?php print $ID_Patient;?>" name="IDPatient">
-		<input id="send" class="btn btn-success" type="submit" value="<?php print __("Iniciar prueba");?>" name="save">
+		<input type="hidden" value="<?php print $IDPatient;?>" name="IDPatient">
+		<input id="send" class="btn btn-success" type="submit" value="<?php print __("Iniciar prueba");?>" name="apply">
 	</p>
 </form>

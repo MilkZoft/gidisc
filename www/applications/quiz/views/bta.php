@@ -1,0 +1,1 @@
+<embed src="<?php print path("www/applications/quiz/views/media/BTA.swf", TRUE); ?>"  width="550" height="450" align="absmiddle" quality="high"  pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
