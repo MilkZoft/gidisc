@@ -1,0 +1,55 @@
+#all {
+	margin: 0 auto;
+}
+
+#top {
+	margin: 0 auto;
+	width: 300px;
+}
+
+#section-top, #section-bottom {
+	margin: 0 auto;
+	width: 700px;
+}
+
+#section-top {
+	margin-bottom: 20px;
+} 
+
+#section-bottom span {
+	margin-left:250px;
+}
+
+#controls {
+	width: 160px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#goals-table {
+	width: 500px;
+	margin: 0 auto;
+}
+
+td {
+	width: 10px;
+}
+
+#goals-explain td input {
+	width: 20px;
+	text-align:center;
+}
+
+.obsv { width:300px !important; }
+
+.field {
+	display: inline-block;
+}
+
+.action-button {
+	font-size: 20px;
+	text-align: center;
+}
+
+tr th input { width:20px; text-align:center; } 
