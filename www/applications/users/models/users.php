@@ -335,7 +335,7 @@ class Users_Model extends ZP_Model {
 		
 		$query = "Username = '$username' AND Pwd = '$password' AND Situation = 'Active'";
 		$data  = $this->Db->findBySQL($query, $this->table);
-		
+	
 		if($data) {
 			return TRUE;
 		}
