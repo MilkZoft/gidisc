@@ -34,7 +34,13 @@ class CPanel_Controller extends ZP_Controller {
 	}
 
 	public function tests() {
+		$this->vars["peabody"] 	  = FALSE;
+		$this->vars["bta"]	   	  = FALSE;
+		$this->vars["d2"]		  = FALSE;
+		$this->vars["compresion"] = FALSE;
+		$this->vars["view"] 	  = $this->view("tests", TRUE);
 
+		$this->render("content", $this->vars);
 	}
 
 	public function home() {
