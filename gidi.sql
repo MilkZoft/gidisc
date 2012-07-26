@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 26, 2012 at 03:49 AM
+-- Generation Time: Jul 26, 2012 at 04:39 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -5452,7 +5452,7 @@ CREATE TABLE IF NOT EXISTS `zan_tokens` (
   `Start_Date` int(11) NOT NULL,
   PRIMARY KEY (`ID_Token`),
   KEY `fk_zan_tokens_zan_users1` (`ID_User`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=60 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=61 ;
 
 --
 -- Dumping data for table `zan_tokens`
@@ -5517,7 +5517,8 @@ INSERT INTO `zan_tokens` (`ID_Token`, `ID_User`, `Token`, `IP`, `Start_Date`) VA
 (56, 1516, 'DBFDC7937D', '::1', 1334901980),
 (57, 1516, '339813E9D6', '127.0.0.1', 1341931658),
 (58, 1516, 'D4300439B7', '::1', 1343183987),
-(59, 1518, '8930CE2D6E', '::1', 1343184328);
+(59, 1518, '8930CE2D6E', '::1', 1343184328),
+(60, 1518, 'C1EC5B00D4', '::1', 1343275656);
 
 -- --------------------------------------------------------
 
