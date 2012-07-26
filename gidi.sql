@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 26, 2012 at 04:39 AM
+-- Generation Time: Jul 26, 2012 at 06:04 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -2088,6 +2088,24 @@ INSERT INTO `zan_peabody_scores` (`ID_Score`, `Score`, `Age`, `Interval`, `Descr
 (123, '123', 'arriba de 17-11', '', ''),
 (124, '124', 'arriba de 17-11', '', ''),
 (125, '125', 'arriba de 17-11', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `zan_peabody_temp`
+--
+
+CREATE TABLE IF NOT EXISTS `zan_peabody_temp` (
+  `ID_User` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `Content` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `zan_peabody_temp`
+--
+
+INSERT INTO `zan_peabody_temp` (`ID_User`, `Content`) VALUES
+(1518, '{"Words1":[{"ID_Word":1,"Word":"Barco"},{"ID_Word":"2","Word":"Lu00e1mpara"},{"ID_Word":"3","Word":"Vaca"},{"ID_Word":"4","Word":"Vela"},{"ID_Word":"5","Word":"Trompeta"},{"ID_Word":"6","Word":"Rodilla"},{"ID_Word":"7","Word":"Jaula"},{"ID_Word":"8","Word":"Ambulancia"},{"ID_Word":"9","Word":"Leer"},{"ID_Word":"10","Word":"Flecha"},{"ID_Word":"11","Word":"Cuello"},{"ID_Word":"12","Word":"Mueble"},{"ID_Word":"13","Word":"Abeja"},{"ID_Word":"14","Word":"Hora"},{"ID_Word":"15","Word":"Medir"},{"ID_Word":"16","Word":"Ballena"},{"ID_Word":"17","Word":"Roto"},{"ID_Word":"18","Word":"Acariciar"},{"ID_Word":"19","Word":"Accidente"},{"ID_Word":"20","Word":"Canguro"},{"ID_Word":"21","Word":"Codo"},{"ID_Word":"22","Word":"Ru00edo"},{"ID_Word":"23","Word":"u00c1guila"},{"ID_Word":"24","Word":"Romper"},{"ID_Word":"25","Word":"Pintor"},{"ID_Word":"26","Word":"Vacu00edo"},{"ID_Word":"27","Word":"Pelear"},{"ID_Word":"28","Word":"Uniforme"},{"ID_Word":"29","Word":"Tronco"},{"ID_Word":"30","Word":"Lu00edquido"},{"ID_Word":"31","Word":"Grupo"},{"ID_Word":"32","Word":"Mu00fasico"},{"ID_Word":"33","Word":"Ceremonia"},{"ID_Word":"34","Word":"Culebra"},{"ID_Word":"35","Word":"Bebida"},{"ID_Word":"36","Word":"Mu00e9dico"},{"ID_Word":"37","Word":"Aislamiento"},{"ID_Word":"38","Word":"Mecu00e1nico"},{"ID_Word":"39","Word":"Premiar"},{"ID_Word":"40","Word":"Dentista"},{"ID_Word":"41","Word":"Hombro"},{"ID_Word":"42","Word":"Sobre"},{"ID_Word":"43","Word":"Joyas"},{"ID_Word":"44","Word":"Humano"},{"ID_Word":"45","Word":"Artista"},{"ID_Word":"46","Word":"Recoger"},{"ID_Word":"47","Word":"Construcciu00f3n"},{"ID_Word":"48","Word":"Dirigir"},{"ID_Word":"49","Word":"Arbusto"},{"ID_Word":"50","Word":"Bosque"},{"ID_Word":"51","Word":"Agricultura"},{"ID_Word":"52","Word":"Rau00edz"},{"ID_Word":"53","Word":"Nutritivo"},{"ID_Word":"54","Word":"Par"},{"ID_Word":"55","Word":"Secretaria"},{"ID_Word":"56","Word":"Iluminaciu00f3n"},{"ID_Word":"57","Word":"Carrete"},{"ID_Word":"58","Word":"Transparente"},{"ID_Word":"59","Word":"Cosechar"},{"ID_Word":"60","Word":"Discusiu00f3n"},{"ID_Word":"61","Word":"Cooperaciu00f3n"},{"ID_Word":"62","Word":"Barandal"},{"ID_Word":"63","Word":"Sorprendido"},{"ID_Word":"64","Word":"Gotear"},{"ID_Word":"65","Word":"Embudo"},{"ID_Word":"66","Word":"Tallo"},{"ID_Word":"67","Word":"Isla"},{"ID_Word":"68","Word":"u00c1ngulo"},{"ID_Word":"69","Word":"Desilusiu00f3n"},{"ID_Word":"70","Word":"Carpintero"},{"ID_Word":"71","Word":"Archivar"},{"ID_Word":"72","Word":"Mercantil"},{"ID_Word":"73","Word":"Cuarteto"},{"ID_Word":"74","Word":"Marco"},{"ID_Word":"75","Word":"Binocular"},{"ID_Word":"76","Word":"Judicial"},{"ID_Word":"77","Word":"Roer"},{"ID_Word":"78","Word":"Morsa"},{"ID_Word":"79","Word":"Confiar"},{"ID_Word":"80","Word":"Terno"},{"ID_Word":"81","Word":"Contemplar"},{"ID_Word":"82","Word":"Ave"},{"ID_Word":"83","Word":"Portu00e1til"},{"ID_Word":"84","Word":"Clasificar"},{"ID_Word":"85","Word":"Carrou00f1a"},{"ID_Word":"86","Word":"Bru00fajula"},{"ID_Word":"87","Word":"Esfu00e9rico"},{"ID_Word":"88","Word":"Felino"},{"ID_Word":"89","Word":"Paraleo"},{"ID_Word":"90","Word":"Sumergir"},{"ID_Word":"91","Word":"u00c1rido"},{"ID_Word":"92","Word":"Fru00e1gil"},{"ID_Word":"93","Word":"Instruir"},{"ID_Word":"94","Word":"Arquu00e9ologo"},{"ID_Word":"95","Word":"Consumir"},{"ID_Word":"96","Word":"Incandescente"},{"ID_Word":"97","Word":"Arrogante"},{"ID_Word":"98","Word":"Utensilio"},{"ID_Word":"99","Word":"Ira"},{"ID_Word":"100","Word":"Cu00edtrico"},{"ID_Word":"101","Word":"Lubricar"},{"ID_Word":"102","Word":"Eslabu00f3n"},{"ID_Word":"103","Word":"Morada"},{"ID_Word":"104","Word":"Anfibio"},{"ID_Word":"105","Word":"Prodigio"},{"ID_Word":"106","Word":"Jubilosa"},{"ID_Word":"107","Word":"Apariciu00f3n"},{"ID_Word":"108","Word":"Ascender"},{"ID_Word":"109","Word":"Fragmento"},{"ID_Word":"110","Word":"Perpendicular"},{"ID_Word":"111","Word":"Atuendo"},{"ID_Word":"112","Word":"Cu00f3rnea"},{"ID_Word":"113","Word":"Paralelogramo"},{"ID_Word":"114","Word":"Copioso"},{"ID_Word":"115","Word":"Inducir"},{"ID_Word":"116","Word":"Atu00f3nito"},{"ID_Word":"117","Word":"Transeu00fante"},{"ID_Word":"118","Word":"Emisiu00f3n"},{"ID_Word":"119","Word":"Obelisco"},{"ID_Word":"120","Word":"Ciu00e9naga"},{"ID_Word":"121","Word":"Ambulante"},{"ID_Word":"122","Word":"Cu00f3ncavo"},{"ID_Word":"123","Word":"Incisivo"},{"ID_Word":"124","Word":"Elipse"},{"ID_Word":"125","Word":"Deciduo"}],"Words2":false,"Start":1}');
 
 -- --------------------------------------------------------
 
