@@ -71,6 +71,18 @@ class Peabody_Model extends ZP_Model {
 		return $data;
 	}
 
+	public function editTemporal($data) {
+		$data = json_encode($data);
+
+		if($this->Db->findBy("ID_User", SESSION("ZanUserID"), "peabody_temp")) {
+			$this->Db->updateBySQL("peabody_temp", "Content => $data WHERE ID_User = '". SESSION("ZanUserID") ."'");
+
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
 	public function setTemporal($data) {
 		$data = json_encode($data);
 
