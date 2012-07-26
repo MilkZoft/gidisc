@@ -7,7 +7,9 @@ if(!defined("_access")) {
 }
 
 class Peabody_Controller extends ZP_Controller {
-	
+
+	static $data = NULL;
+
 	public function __construct() {
 		$this->Templates   = $this->core("Templates");
 		$this->Peabody_Model = $this->model("Peabody_Model");
@@ -30,12 +32,23 @@ class Peabody_Controller extends ZP_Controller {
 	public function start() {
 		if(POST("start")) {
 			if(POST("age") >= 3 and POST("age") <= 14) {
-				$data = $this->Peabody_Model->getWords(POST("age"));
-
-				$this->show($data["Words1"][0]["ID_Word"], $data["Words1"][0]["Word"])
+				redirect("peabody/image/0/". POST("age"));
 			} else {
 				showAlert("La edad es inválida", path("peabody"));
 			}
+		}
+	}
+
+	public function image($number, $age = 0) {
+		if($age > 0) {
+			$data = $this->Peabody_Model->getWords($age);
+			
+			$this->Peabody_Model->setTemporal($data);
+
+			redirect("peabody/image/". $data["Start"]);
+		} else {
+			$data = $this->Peabody_Model->getTemporal();
+			____($data->Words1[0]->Word);
 		}
 	}
 
@@ -44,7 +57,7 @@ class Peabody_Controller extends ZP_Controller {
 		$vars["word"]   = $word;
 		$vars["view"] 	= $this->view("image", TRUE);
 
-		$this->view("content", $vars);
+		$this->render("content", $vars);
 	}
 	
 }
