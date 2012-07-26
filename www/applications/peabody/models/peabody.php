@@ -6,14 +6,14 @@ if(!defined("_access")) {
 	die("Error: You don't have permission to access here...");
 }
 
-class Pages_Model extends ZP_Model {
+class Peabody_Model extends ZP_Model {
 	
 	public function __construct() {
 		$this->Db = $this->db();
 		
 		$this->helper(array("time", "alerts", "router"));
 		
-		$this->table    = "pages";
+		$this->table    = "peabody_words";
 		$this->language = whichLanguage(); 
 
 		$this->Data = $this->core("Data");
@@ -21,142 +21,42 @@ class Pages_Model extends ZP_Model {
 		$this->Data->table($this->table);
 	}
 	
-	public function cpanel($action, $limit = NULL, $order = "Language DESC", $search = NULL, $field = NULL, $trash = FALSE) {
-		if($action === "edit" or $action === "save") {
-			$validation = $this->editOrSave();
-			
-			if($validation) {
-				return $validation;
-			}
+	public function getWords($age) {
+		if($age == 3 or $age == 4) {
+			$data["Words1"] = $this->Db->findAll($this->table);
+			$data["Words2"] = FALSE;
+		} elseif($age == 5) {
+			$data["Words1"] = $this->Db->findBySQL("ID_Word >= 10", $this->table);
+			$data["Words2"] = $this->Db->findBySQL("ID_Word < 10", $this->table, NULL, "ID_Word DESC");
+		} elseif($age == 6) {
+			$data["Words1"] = $this->Db->findBySQL("ID_Word >= 26", $this->table);
+			$data["Words2"] = $this->Db->findBySQL("ID_Word < 26", $this->table, NULL, "ID_Word DESC");
+		} elseif($age == 7) {
+			$data["Words1"] = $this->Db->findBySQL("ID_Word >= 38", $this->table);
+			$data["Words2"] = $this->Db->findBySQL("ID_Word < 38", $this->table, NULL, "ID_Word DESC");
+		} elseif($age == 8) {
+			$data["Words1"] = $this->Db->findBySQL("ID_Word >= 50", $this->table);
+			$data["Words2"] = $this->Db->findBySQL("ID_Word < 50", $this->table, NULL, "ID_Word DESC");
+		} elseif($age == 9) {
+			$data["Words1"] = $this->Db->findBySQL("ID_Word >= 60", $this->table);
+			$data["Words2"] = $this->Db->findBySQL("ID_Word < 60", $this->table, NULL, "ID_Word DESC");
+		} elseif($age == 10) {
+			$data["Words1"] = $this->Db->findBySQL("ID_Word >= 70", $this->table);
+			$data["Words2"] = $this->Db->findBySQL("ID_Word < 70", $this->table, NULL, "ID_Word DESC");
+		} elseif($age == 11) {
+			$data["Words1"] = $this->Db->findBySQL("ID_Word >= 77", $this->table);
+			$data["Words2"] = $this->Db->findBySQL("ID_Word < 77", $this->table, NULL, "ID_Word DESC");
+		} elseif($age == 12) {
+			$data["Words1"] = $this->Db->findBySQL("ID_Word >= 82", $this->table);
+			$data["Words2"] = $this->Db->findBySQL("ID_Word < 82", $this->table, NULL, "ID_Word DESC");
+		} elseif($age == 13) {
+			$data["Words1"] = $this->Db->findBySQL("ID_Word >= 86", $this->table);
+			$data["Words2"] = $this->Db->findBySQL("ID_Word < 86", $this->table, NULL, "ID_Word DESC");
+		} elseif($age == 14) {
+			$data["Words1"] = $this->Db->findBySQL("ID_Word >= 90", $this->table);
+			$data["Words2"] = $this->Db->findBySQL("ID_Word < 90", $this->table, NULL, "ID_Word DESC");
 		}
-		
-		if($action === "all") {
-			return $this->all($trash, $order, $limit);
-		} elseif($action === "edit") {
-			return $this->edit();															
-		} elseif($action === "save") {
-			return $this->save();
-		} elseif($action === "search") {
-			return $this->seek($search, $field, $order);
-		}
-	}
-	
-	private function seek($search, $field, $order) {
-		if($search and $field) {
-			if($field === "ID") {
-				$data = $this->Db->find($search);
-			} else {
-				$data  = $this->Db->findBySQL("$field LIKE '%$search%'", $this->table, NULL, $order);
-			}
-		} else {
-			return FALSE;
-		}
-		
-		return $data;
-	}
-	
-	private function all($trash, $order, $limit) {
-		if(!$trash) {
-			if(SESSION("ZanUserPrivilege") === "super") {
-				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
-			} else {
-				$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, $order, $limit);
-			}	
-		} else {
-			if(SESSION("ZanUserPrivilege") === "super") {
-				$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, $order, $limit);
-			} else {
-				$data = $this->Db->findBySQL("Situation = 'Deleted'", $this->table, NULL, $order, $limit);
-			}
-		}
-		
-		return $data;	
-	}
-	
-	private function editOrSave() {
-		$validations = array(
-			"exists"  => array(
-							"Slug" 	   => slug(POST("title", "clean")), 
-							"Language" => POST("language")
-						),
-			"title"   => "required",
-			"content" => "required"
-		);
-
-		$data = array(
-			"ID_User"	 => SESSION("ZanUserID"),
-			"Slug"    	 => slug(POST("title", "clean")),
-			"Content" 	 => POST("content", "clean"),
-			"Start_Date" => now(4),
-			"Text_Date"	 => now(2)
-		);
-		
-		$this->data = $this->Data->proccess($data, $validations);
-		
-		if(isset($this->data["error"])) {
-			return $this->data["error"];
-		}
-		
-		return FALSE;
-	}
-	
-	private function save() {
-		if(POST("principal") > 0) {
-			$this->Db->update($this->table, array("Principal" => 0), "Language = '". POST("language") ."'");
-		}
-		
-		$this->Db->insert($this->table, $this->data);
-		
-		return getAlert("The page has been saved correctly", "success");
-	}
-	
-	private function edit() {
-		$this->Db->update($this->table, $this->data, POST("ID")); 
-			
-		return getAlert("The page has been edit correctly", "success");
-	}
-	
-	public function getByDefault() {
-		$data = $this->Db->findBySQL("Language = '$this->language' AND Principal = 1 AND Situation = 'Active'");
-			
-		return $data;
-	}
-		
-	public function getParent($ID, $invert = FALSE) {				
-		if($ID === 0) {
-			return false;
-		}
-				
-		if(!$invert) {
-			$data = $this->Db->find($ID);
-		} else {
-			$data = $this->Db->findBy("ID_Translation", $ID, NULL, "Language ASC, Title", NULL);
-		}
-		
-		return $data;
-	}		
-	
-	public function getBySlug($slug) {		
-		$data = $this->Db->findBySQL("Slug = '$slug' AND Language = '$this->language' AND Situation = 'Active'");
 
 		return $data;
-	}
-	
-	public function getID($slug) {		
-		$data = $this->Db->findBy("Slug", $slug);
-		
-		return (is_array($data)) ? $data[0][$this->primaryKey] : FALSE;
-	}
-	
-	public function getByID($ID) {
-		$this->Db->table($this->table);
-		
-		$data = $this->Db->find($ID);
-		
-		return $data;
-	}
-	
-	public function search($search) {
-		return $this->Db->query("SELECT * FROM zan_pages WHERE Title LIKE '%$search%' OR Content LIKE '%$search%'");
 	}
 }

@@ -10,7 +10,7 @@ class Peabody_Controller extends ZP_Controller {
 	
 	public function __construct() {
 		$this->Templates   = $this->core("Templates");
-		$this->Pages_Model = $this->model("Pages_Model");
+		$this->Peabody_Model = $this->model("Peabody_Model");
 
 		$this->helpers();
 		
@@ -24,6 +24,18 @@ class Peabody_Controller extends ZP_Controller {
 			$vars["view"] = $this->view("age", TRUE);
 
 			$this->render("content", $vars);
+		}
+	}
+
+	public function start() {
+		if(POST("start")) {
+			if(POST("age") >= 3 and POST("age") <= 14) {
+				$data = $this->Peabody_Model->getWords(POST("age"));
+
+				____($data);
+			} else {
+				showAlert("La edad es inválida", path("peabody"));
+			}
 		}
 	}
 	
