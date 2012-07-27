@@ -49,8 +49,8 @@ class Peabody_Controller extends ZP_Controller {
 		} else {
 			$data = $this->Peabody_Model->getTemporal();
 			$answers = $this->Peabody_Model->getTemporal(1);
-
-			if(POST("validate")) {
+			____($answers);
+			if(POST("validate")) { 
 				if(POST("option") == $data["Words1"][POST("number") - 1]["Answer"]) {
 					$answer["corrects"][POST("number") - 1] = POST("word");
 					$ok = TRUE;

@@ -99,7 +99,11 @@ class Peabody_Model extends ZP_Model {
 
 	public function getTemporal($answers = 0) {
 		$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Answers = '$answers'", "peabody_temp");
-		
+		if($answers != 0) {
+			$a = json_decode($data[0]["Content"], TRUE);
+			____($a);
+		}
+
 		return ($data) ? json_decode($data[0]["Content"], TRUE) : array();
 	}
 }
