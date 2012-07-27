@@ -71,11 +71,25 @@ class Peabody_Model extends ZP_Model {
 		return $data;
 	}
 
-	public function editTemporal($data) {
+	public function updateTemporal($data, $answers = 0) {
 		$data = json_encode($data);
 
-		if($this->Db->findBy("ID_User", SESSION("ZanUserID"), "peabody_temp")) {
-			$this->Db->updateBySQL("peabody_temp", "Content => $data WHERE ID_User = '". SESSION("ZanUserID") ."'");
+		if($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Answers = '$answers'", "peabody_temp")) {
+			$this->Db->updateBySQL("peabody_temp", "Answers = '$answers', Content => $data WHERE ID_User = '". SESSION("ZanUserID") ."'");
+
+			return TRUE;
+		} else {
+			$this->setTemporal($data, $answers);
+		}
+
+		return FALSE;
+	}
+
+	public function setTemporal($data, $answers = 0) {
+		$data = json_encode($data);
+
+		if(!$this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Answers = '$answers'", "peabody_temp")) {
+			$this->Db->insert("peabody_temp", array("ID_User" => SESSION("ZanUserID"), "Answers" => $answers, "Content" => $data));
 
 			return TRUE;
 		}
@@ -83,21 +97,9 @@ class Peabody_Model extends ZP_Model {
 		return FALSE;
 	}
 
-	public function setTemporal($data) {
-		$data = json_encode($data);
-
-		if(!$this->Db->findBy("ID_User", SESSION("ZanUserID"), "peabody_temp")) {
-			$this->Db->insert("peabody_temp", array("ID_User" => SESSION("ZanUserID"), "Content" => $data));
-
-			return TRUE;
-		}
-
-		return FALSE;
-	}
-
-	public function getTemporal() {
-		$data = $this->Db->findBy("ID_User", SESSION("ZanUserID"), "peabody_temp");
+	public function getTemporal($answers = 0) {
+		$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Answers = '$answers'", "peabody_temp");
 		
-		return json_decode($data[0]["Content"]);
+		return ($data) ? json_decode($data[0]["Content"], TRUE) : array();
 	}
 }

@@ -19,6 +19,12 @@ if(!defined("_access")) {
 	die("Error: You don't have permission to access here...");
 }
 
+function changeWord($word) {
+	$word = str_replace("Lu00e1mpara", "Lámpara", $word);
+
+	return $word;
+}
+
 /**
  * String Helper
  *
