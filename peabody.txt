@@ -1,125 +1,125 @@
-1. Barco
-2. Lámpara
-3. Vaca
-4. Vela
-5. Trompeta
-6. Rodilla
-7. Jaula
-8. Ambulancia
-9. Leer
-10. Flecha
-11. Cuello
-12. Mueble
-13. Abeja
-14. Hora
-15. Medir
-16. Ballena
-17. Roto
-18. Acariciar
-19. Accidente
-20. Canguro
-21. Codo
-22. Rio
-23. Aguila
-24. Romper
-25. Pintor
-26. Vacio
-27. Pelar
-28. Uniforme
-29. Tronco
-30. Liquido
-31. Grupo
-32. Musico
-33. Ceremonia
-34. Culebra
-35. Bebida
-36. Médico
-37. Aislamiento
-38. Mecánico
-39. Premiar
-40. Dentista
-41. Hombro
-42. Sobre
-43. Joyas
-44. Humano
-45. Artista
-46. Recoger
-47. Construcción
-48. Dirigir
-49. Arbusto
-50. Bosque
-51. Agricultura
-52. Raíz
-53. Nutritivo
-54. Par
-55. Secretaria
-56. Iluminación
-57. Carrete
-58. Transparente
-59. Cosechar
-60. Discusión
-61. Cooperación
-62. Barandal
-63. Sorprendido
-64. Gotear
-65. Embudo
-66. Tallo
-67. Isla
-68. Ángulo
-69. Desilusión
-70. Carpintero
-71. Archivar
-72. Mercantil
-73. Cuarteto
-74. Marco
-75. Binocular
-76. Judicial
-77. Roer
-78. Morsa
-79. Confiar
-80. Terno
-81. Contemplar
-82. Ave
-83. Portátil
-84. Clasificar
-85. Carroña
-86. Brújula
-87. Esférico
-88. Felino
-89. Paralelo
-90. Sumergir
-91. Árido
-92. Frágil
-93. Instruir
-94. Arqueo
-95. Consumir
-96. Incandescente
-97. Arrogante
-98. Utensilio
-99. Ira
-100. Cítrico
-101. Lubricar
-102. Eslabón
-103. Morada
-104. Anfibio
-105. Prodigio
-106. Jubilosa
-107. Aparición 
-108. Ascender
-109. Fragmento
-110. Perpendicular
-111. Atuendo
-112. Cornea
-113. Paralelogramo
-114. Copioso
-115. Inducir
-116. Atónito
-117. Transeúnte
-118. Emisión
-119. Obelisco
-120. Ciénega
-121. Ambulante
-122. Cóncavo
-123. Incisivo
-124. Elipse
-125. Deciduo
+1. Barco 		2
+2. Lámpara		4
+3. Vaca			1
+4. Vela			2
+5. Trompeta		1
+6. Rodilla		4
+7. Jaula		1
+8. Ambulancia	1
+9. Leer			4
+10. Flecha		2
+11. Cuello		3
+12. Mueble		3
+13. Abeja		3
+14. Hora		3
+15. Medir		2
+16. Ballena		2
+17. Roto		1
+18. Acariciar	1
+19. Accidente	2
+20. Canguro		2
+21. Codo		4
+22. Rio			3
+23. Aguila		2
+24. Romper		4
+25. Pintor		3
+26. Vacio		3
+27. Pelar 		3
+28. Uniforme	4
+29. Tronco		2
+30. Liquido		4
+31. Grupo		3
+32. Musico		2
+33. Ceremonia	4
+34. Culebra		4
+35. Bebida		1
+36. Médico		4
+37. Aislamiento	1
+38. Mecánico	2
+39. Premiar		3
+40. Dentista	3
+41. Hombro		3
+42. Sobre		2
+43. Joyas		1
+44. Humano		2
+45. Artista		3*
+46. Recoger		4
+47. Construcción 2
+48. Dirigir		2
+49. Arbusto		1
+50. Bosque		3
+51. Agricultura 4
+52. Raíz		2
+53. Nutritivo	3
+54. Par 		3
+55. Secretaria	4
+56. Iluminación	4
+57. Carrete		1
+58. Transparente 3
+59. Cosechar	1
+60. Discusión	1
+61. Cooperación	4
+62. Barandal	1
+63. Sorprendido	4
+64. Gotear		2
+65. Embudo		3
+66. Tallo		3
+67. Isla		1
+68. Ángulo		2
+69. Desilusión	4
+70. Carpintero	2
+71. Archivar	3
+72. Mercantil	1
+73. Cuarteto	4
+74. Marco		1
+75. Binocular	3
+76. Judicial	2
+77. Roer 		3
+78. Morsa		2
+79. Confiar		3
+80. Terno		4
+81. Contemplar	2
+82. Ave			3
+83. Portátil	2
+84. Clasificar	1
+85. Carroña		3
+86. Brújula		2*
+87. Esférico	2
+88. Felino		4
+89. Paralelo 	4
+90. Sumergir	4
+91. Árido		4
+92. Frágil		3
+93. Instruir	4
+94. Arqueo		4*
+95. Consumir	4
+96. Incandescente 4
+97. Arrogante	2*
+98. Utensilio	2
+99. Ira			3
+100. Cítrico	3
+101. Lubricar	1
+102. Eslabón	4
+103. Morada		1
+104. Anfibio	1
+105. Prodigio	1
+106. Jubilosa	2
+107. Aparición 	2*
+108. Ascender	3
+109. Fragmento	3
+110. Perpendicular 3
+111. Atuendo	4
+112. Cornea		2
+113. Paralelogramo	1
+114. Copioso	2
+115. Inducir	2*
+116. Atónito	3*
+117. Transeúnte 2
+118. Emisión	3
+119. Obelisco	1
+120. Ciénega	3
+121. Ambulante	2
+122. Cóncavo	4*
+123. Incisivo	1
+124. Elipse		4
+125. Deciduo	4

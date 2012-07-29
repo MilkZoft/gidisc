@@ -29,58 +29,203 @@ class Peabody_Controller extends ZP_Controller {
 		}
 	}
 
+	public function age($age) {
+		if($age == 3 or $age == 4) {
+			redirect("peabody/image/1/1/$age");
+		} elseif($age == 5) {
+			SESSION("Start", 10);
+
+			redirect("peabody/image/10/1/$age");
+		} elseif($age == 6) {
+			SESSION("Start", 26);
+
+			redirect("peabody/image/26/1/$age");
+		} elseif($age == 7) {
+			SESSION("Start", 38);
+
+			redirect("peabody/image/38/1/$age");
+		} elseif($age == 8) {
+			SESSION("Start", 50);
+
+			redirect("peabody/image/50/1/$age");
+		} elseif($age == 9) {
+			SESSION("Start", 60);
+
+			redirect("peabody/image/60/1/$age");
+		} elseif($age == 10) {
+			SESSION("Start", 70);
+
+			redirect("peabody/image/70/1/$age");
+		} elseif($age == 11) {
+			SESSION("Start", 77);
+
+			redirect("peabody/image/77/1/$age");
+		} elseif($age == 12) {
+			SESSION("Start", 82);
+
+			redirect("peabody/image/82/1/$age");
+		} elseif($age == 13) {
+			SESSION("Start", 86);
+
+			redirect("peabody/image/86/1/$age");
+		} elseif($age == 14) {
+			SESSION("Start", 90);
+
+			redirect("peabody/image/90/1/$age");
+		}
+	}
+
 	public function start() {
 		if(POST("start")) {
 			if(POST("age") >= 3 and POST("age") <= 14) {
-				redirect("peabody/image/0/". POST("age") ."/1");
+				redirect("peabody/age/". POST("age"));
 			} else {
 				showAlert("La edad es inválida", path("peabody"));
 			}
 		}
 	}
 
-	public function image($number, $age = 0, $start = FALSE) {
-		if($start) {
-			$data = $this->Peabody_Model->getWords($age);
-			
-			$this->Peabody_Model->setTemporal($data, "Data");
+	public function image($number, $block = 1, $age = 0) {
+		$data 		= $this->Peabody_Model->getWord($number);
+		$corrects 	= $this->Peabody_Model->getCorrects($block, $age);
+		$incorrects = $this->Peabody_Model->getIncorrects($block, $age);
+		$total 		= count($corrects) + count($incorrects);
 
-			redirect("peabody/image/". $data["Start"] ."/$age");
-		} else {
-			$data = $this->Peabody_Model->getTemporal();
-			$answers = $this->Peabody_Model->getTemporal(1);
-			____($answers);
-			if(POST("validate")) { 
-				if(POST("option") == $data["Words1"][POST("number") - 1]["Answer"]) {
-					$answer["corrects"][POST("number") - 1] = POST("word");
-					$ok = TRUE;
+		if(count($incorrects) == 6) {
+			redirect("peabody/finished/$age");
+		} elseif($total == 8) {
+			$block++;
+		}
+
+		if($data) {
+			if(POST("validate")) {
+				if((int) POST("option") == (int) $data[0]["Answer"]) {
+					$data[0]["Correct"] = 1;
 				} else {
-					$answer["incorrects"][POST("number") - 1] = POST("word"); 
-					$ok = FALSE;
+					$data[0]["Correct"] = 0;
 				}
-				
-				$this->Peabody_Model->updateTemporal($answer, 1);
 
-				if($ok) { 
-					redirect("peabody/image/". (POST("number") + 1) ."/$age");
+				$data[0]["Word"]    = decode($data[0]["Word"]);
+				$data[0]["ID_User"] = SESSION("ZanUserID");
+				$data[0]["Block"]   = POST("block");
+				$data[0]["Age"]     = POST("age");
+
+				$this->Peabody_Model->setWord($data[0]);
+
+				if($age <= 4) {
+					redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
 				} else {
-					if($age == 3 or $age == 4) {
-						redirect("peabody/image/". (POST("number") + 1) ."/$age");
+					if(POST("number") == 125) {
+						redirect("peabody/finished/$age");
+					}
+					
+					if(SESSION("Success")) {
+						redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
+					} elseif($data[0]["Correct"] == 1) {
+						if($number == $this->getStart($age)) {
+							SESSION("Last", $number);
+							SESSION("Corrects", 1);
+						} else {
+							SESSION("Corrects", SESSION("Corrects") + 1);
+						}
+
+						if(!SESSION("Error")) {
+							redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
+						} elseif(SESSION("Error") and SESSION("Corrects") == 8) {
+							SESSION("Error", FALSE);
+							SESSION("Success", TRUE);
+
+							if(SESSION("First") === TRUE) {
+								redirect("peabody/image/". (SESSION("Last") + 1) ."/$block/". POST("age"));
+							} else {
+								redirect("peabody/image/". (SESSION("LastError") + 1) ."/$block/". POST("age"));
+							}
+						} else {
+							SESSION("Start", SESSION("Start") - 1);
+
+							redirect("peabody/image/". SESSION("Start") ."/$block/". POST("age"));							
+						}
+					} else {
+						if($number == $this->getStart($age)) {
+							SESSION("Last", $number);
+							SESSION("Corrects", 0);
+							SESSION("First", TRUE);
+						} elseif(!SESSION("Error")) {
+							SESSION("LastError", $number);
+						}
+
+						SESSION("Error", 1);
+						SESSION("Start", SESSION("Start") - 1);
+
+						redirect("peabody/image/". SESSION("Start") ."/$block/". POST("age"));
 					}
 				}
+			} else {
+				$this->show($data[0]["ID_Word"], $data[0]["Word"], $block, $age);
 			}
-			
-			$this->show($data["Words1"][$number - 1]["ID_Word"], $data["Words1"][$number - 1]["Word"], $age);
 		}
 	}
 
-	public function show($number, $word, $age) {
+	public function getStart($age) {
+		if($age == 5) {
+			return 10;
+		} elseif($age == 6) {
+			return 26;
+		} elseif($age == 7) {
+			return 38;
+		} elseif($age == 8) {
+			return 50;
+		} elseif($age == 9) {
+			return 60;
+		} elseif($age == 10) {
+			return 70;
+		} elseif($age == 11) {
+			return 77;
+		} elseif($age == 12) {
+			return 82;
+		} elseif($age == 13) {
+			return 86;
+		} elseif($age == 14) {
+			return 90;
+		}
+	}
+
+	public function show($number, $word, $block, $age) {
 		$vars["number"] = $number;
-		$vars["word"]   = encode($word);
+		$vars["word"]   = $word;
 		$vars["age"]	= $age;
+		$vars["block"]  = $block;
 		$vars["view"] 	= $this->view("image", TRUE);
 
 		$this->render("content", $vars);
+	}
+
+	public function finished($age) {
+		$corrects = $this->Peabody_Model->getCorrects(TRUE, TRUE);
+
+		if(isset($corrects["low"]) and $corrects["low"] > 0) {
+			$j = 0;
+
+			for($i = ($corrects["low"] - 1); $i >= 1; $i--) {
+				$j++;
+			}
+
+			$corrects = count($corrects["data"]) + $j;
+		} elseif(isset($corrects["low"]) and $corrects["low"] == 0) {
+			$corrects = $this->getStart($age) - 6;
+		} else {
+			$corrects = count($corrects);
+		}
+
+		$score = $this->Peabody_Model->getScore($corrects);
+	
+		$this->Peabody_Model->setResult($score);
+
+		$vars["view"] = $this->view("finished", TRUE);
+
+		$this->render("content", $vars);
+		
+		exit;
 	}
 	
 }
