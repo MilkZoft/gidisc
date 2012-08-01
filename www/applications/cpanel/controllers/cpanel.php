@@ -22,8 +22,7 @@ class CPanel_Controller extends ZP_Controller {
 	}
 	
 	public function index() {
-		if($this->isAdmin) {
-			____(SESSION("ZanUserTypeID"));
+		if($this->isAdmin) {			
 			if((int) SESSION("ZanUserTypeID") === 1) {
 				$this->home();
 			} elseif((int) SESSION("ZanUserTypeID") === 4) {
