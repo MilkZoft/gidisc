@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 31, 2012 at 01:31 PM
+-- Generation Time: Aug 03, 2012 at 03:43 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -1937,15 +1937,14 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_results` (
   `Start_Date` int(11) NOT NULL DEFAULT '0',
   `Attempt` smallint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_Result`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `zan_peabody_results`
 --
 
 INSERT INTO `zan_peabody_results` (`ID_Result`, `ID_User`, `Result`, `Start_Date`, `Attempt`) VALUES
-(1, 1518, 'arriba de 17-11', 1343547758, 1),
-(2, 1518, '3-4', 1343667845, 2);
+(1, 1518, '13-7', 1343964869, 1);
 
 -- --------------------------------------------------------
 
@@ -2105,7 +2104,8 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_temp` (
   `Answer` tinyint(1) NOT NULL DEFAULT '1',
   `Block` tinyint(1) NOT NULL,
   `Age` smallint(2) NOT NULL,
-  `Correct` tinyint(1) NOT NULL DEFAULT '1'
+  `Correct` tinyint(1) NOT NULL DEFAULT '1',
+  `Correction` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -5477,7 +5477,7 @@ CREATE TABLE IF NOT EXISTS `zan_tokens` (
   `Start_Date` int(11) NOT NULL,
   PRIMARY KEY (`ID_Token`),
   KEY `fk_zan_tokens_zan_users1` (`ID_User`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
 
 --
 -- Dumping data for table `zan_tokens`
@@ -5559,7 +5559,8 @@ INSERT INTO `zan_tokens` (`ID_Token`, `ID_User`, `Token`, `IP`, `Start_Date`) VA
 (73, 1518, 'D65D968703', '::1', 1343546925),
 (74, 1518, '317D6ED09A', '::1', 1343547084),
 (75, 1518, '5DFD6A03DD', '::1', 1343547401),
-(76, 1518, '7B36637AB1', '::1', 1343667685);
+(76, 1518, '7B36637AB1', '::1', 1343667685),
+(77, 1518, '1287A15A07', '::1', 1343961371);
 
 -- --------------------------------------------------------
 
