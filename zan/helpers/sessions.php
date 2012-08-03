@@ -76,7 +76,7 @@ function createCookie($cookie = NULL, $value, $time = 604800, $redirect = FALSE,
  * @return mixed
  */ 
 function SESSION($session, $value = FALSE) {
-	if(!$value) {
+	if($value === FALSE) {
 		if(isset($_SESSION[$session])) {
 			return $_SESSION[$session];
 		} else {
