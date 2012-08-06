@@ -154,29 +154,42 @@ class Peabody_Controller extends ZP_Controller {
 							SESSION("Error", FALSE);
 							SESSION("Success", TRUE);
 
-							if(SESSION("First") === TRUE) {
-								redirect("peabody/image/". (SESSION("Last") + 1) ."/$block/". POST("age"));
+							if($block == 1) {
+								if(SESSION("First") === TRUE) {
+									redirect("peabody/image/". (SESSION("Last") + 1) ."/$block/". POST("age"));
+								} else {
+									redirect("peabody/image/". (SESSION("LastError") + 1) ."/$block/". POST("age"));
+								}
 							} else {
-								redirect("peabody/image/". (SESSION("LastError") + 1) ."/$block/". POST("age"));
+								redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
 							}
 						} else {
-							SESSION("Start", SESSION("Start") - 1);
+							if($block == 1) {
+								SESSION("Start", SESSION("Start") - 1);
 
-							redirect("peabody/image/". SESSION("Start") ."/$block/". POST("age"));							
+								redirect("peabody/image/". SESSION("Start") ."/$block/". POST("age"));							
+							} else {
+								redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
+							}
 						}
 					} else {
-						if($number == $this->getStart($age)) {
-							SESSION("Last", $number);
-							SESSION("Corrects", 0);
-							SESSION("First", TRUE);
-						} elseif(!SESSION("Error")) {
-							SESSION("LastError", $number);
+						if($block == 1) {
+							if($number == $this->getStart($age)) {
+								SESSION("Last", $number);
+								SESSION("Corrects", 0);
+								SESSION("First", TRUE);
+							} elseif(!SESSION("Error")) {
+								SESSION("LastError", $number);
+							}
+
+						
+							SESSION("Error", 1);
+							SESSION("Start", SESSION("Start") - 1);
+
+							redirect("peabody/image/". SESSION("Start") ."/$block/". POST("age"));
+						} else {
+							redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
 						}
-
-						SESSION("Error", 1);
-						SESSION("Start", SESSION("Start") - 1);
-
-						redirect("peabody/image/". SESSION("Start") ."/$block/". POST("age"));
 					}
 				}
 			} else {
