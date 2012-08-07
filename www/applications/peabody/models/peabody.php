@@ -116,7 +116,7 @@ class Peabody_Model extends ZP_Model {
 			return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1 AND Correction = 1", "peabody_temp");	
 		} 
 
-		return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Block = '$block' AND Age = '$age' AND Correct = 1", "peabody_temp");
+		return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Block = '$block' AND Age = '$age' AND Correct = 1 AND Correction = 0", "peabody_temp");
 	}
 
 	public function getCorrects($block = NULL, $age = NULL, $all = FALSE) {
@@ -145,8 +145,8 @@ class Peabody_Model extends ZP_Model {
 				return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1", "peabody_temp");
 			}
 		} 
-
-		return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Block = '$block' AND Age = '$age' AND Correct = 1", "peabody_temp");
+		
+		return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Block = '$block' AND Age = '$age' AND Correct = 1 AND Correction = 0", "peabody_temp");
 	}
 
 	public function getIncorrects($block, $age) {
