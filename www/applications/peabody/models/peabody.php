@@ -65,7 +65,7 @@ class Peabody_Model extends ZP_Model {
 		return $data;
 	}
 
-	public function setResult($score) {
+	public function setResult($score, $corrects) {
 		$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."'", "peabody_results", NULL, "ID_Result DESC", 1);
 		
 		if($data) {
@@ -74,7 +74,7 @@ class Peabody_Model extends ZP_Model {
 			$attempt = 1;
 		}
 
-		$this->Db->insert("peabody_results", array("ID_User" => SESSION("ZanUserID"), "Result" => $score, "Start_Date" => now(4), "Attempt" => $attempt));
+		$this->Db->insert("peabody_results", array("ID_User" => SESSION("ZanUserID"), "Result" => $score, "Corrects" => $corrects, "Start_Date" => now(4), "Attempt" => $attempt));
 
 		$this->Db->deleteBySQL("ID_User = '". SESSION("ZanUserID") ."'", "peabody_temp");
 

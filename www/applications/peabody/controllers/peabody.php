@@ -251,7 +251,7 @@ class Peabody_Controller extends ZP_Controller {
 
 		$score = $this->Peabody_Model->getScore($corrects);
 	
-		$this->Peabody_Model->setResult($score);
+		$this->Peabody_Model->setResult($score, $corrects);
 
 		$vars["view"] = $this->view("finished", TRUE);
 
