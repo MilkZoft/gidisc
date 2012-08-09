@@ -88,21 +88,8 @@ class Peabody_Controller extends ZP_Controller {
 	public function image($number, $block = 1, $age = 0) {
 		$data = $this->Peabody_Model->getWord($number);
 
-		if($block == 1) {
-			if($data) {
-				if(POST("validate")) {
-					if((int) POST("option") != (int) $data[0]["Answer"]) {
-						$this->Peabody_Model->setCorrections($age);
-
-						SESSION("Corrects", 0);
-					}
-				}
-			}
-		}
-
 		$corrects 	 = $this->Peabody_Model->getCorrects($block, $age);
 		$incorrects  = $this->Peabody_Model->getIncorrects($block, $age);
-		$corrections = $this->Peabody_Model->getCorrections($block, $age);
 
 		if($block == 1) {
 			$total = count($corrects);
@@ -158,7 +145,7 @@ class Peabody_Controller extends ZP_Controller {
 								if(SESSION("First") === TRUE) {
 									redirect("peabody/image/". (SESSION("Last") + 1) ."/$block/". POST("age"));
 								} else {
-									redirect("peabody/image/". (SESSION("LastError") + 1) ."/$block/". POST("age"));
+									redirect("peabody/image/". (SESSION("LastError") + 1) ."/2/". POST("age"));
 								}
 							} else {
 								redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
@@ -233,7 +220,7 @@ class Peabody_Controller extends ZP_Controller {
 	}
 
 	public function finished($age) {
-		$corrects = $this->Peabody_Model->getCorrects(TRUE, TRUE, TRUE);
+		$corrects = $this->Peabody_Model->getCorrects(TRUE, TRUE);
 
 		if(isset($corrects["low"]) and $corrects["low"] > 0) {
 			$j = 0;

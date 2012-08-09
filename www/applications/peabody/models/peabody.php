@@ -76,7 +76,7 @@ class Peabody_Model extends ZP_Model {
 
 		$this->Db->insert("peabody_results", array("ID_User" => SESSION("ZanUserID"), "Result" => $score, "Corrects" => $corrects, "Start_Date" => now(4), "Attempt" => $attempt));
 
-		$this->Db->deleteBySQL("ID_User = '". SESSION("ZanUserID") ."'", "peabody_temp");
+		//$this->Db->deleteBySQL("ID_User = '". SESSION("ZanUserID") ."'", "peabody_temp");
 
 		unset($_SESSION["Last"]);
 		unset($_SESSION["Corrects"]);
@@ -95,58 +95,21 @@ class Peabody_Model extends ZP_Model {
 		return ($data) ? $data[0]["Age"] : FALSE;
 	}
 
-	public function setCorrections($age = NULL) {
-		$this->Db->updateBySQL("peabody_temp", "Correction = '1' WHERE ID_User = '" . SESSION("ZanUserID") ."' AND Correct = '1' AND Block = '1' AND Age = '$age'");
-	
-		return TRUE;
-	}
 
-	public function getCorrections($block = NULL, $age = NULL) {
-		if($block === TRUE and $age === TRUE) {
-			$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1 AND Correction = 1", "peabody_temp", NULL, "ID_Word ASC", 1);
-
+	public function getCorrects($block = NULL, $age = NULL) {
+		if($block === TRUE and $age === TRUE) {			
+			$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1", "peabody_temp", NULL, "ID_Word ASC", 1);
+			
 			$return["low"] = ($data) ? $data[0]["ID_Word"] : 0;
 
-			$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1 AND Correction = 1", "peabody_temp");
-
+			$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1", "peabody_temp");
+			
 			$return["data"] = ($data) ? $data : 0;
 
 			return $return;
-		} elseif($block === TRUE) {
-			return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1 AND Correction = 1", "peabody_temp");	
-		} 
-
-		return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Block = '$block' AND Age = '$age' AND Correct = 1 AND Correction = 0", "peabody_temp");
-	}
-
-	public function getCorrects($block = NULL, $age = NULL, $all = FALSE) {
-		if($block === TRUE and $age === TRUE) {
-			if(!$all) {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1 AND Correction = 0", "peabody_temp", NULL, "ID_Word ASC", 1);
-			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1", "peabody_temp", NULL, "ID_Word ASC", 1);
-			}
-
-			$return["low"] = ($data) ? $data[0]["ID_Word"] : 0;
-
-			if(!$all) {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1 AND Correction = 0", "peabody_temp");
-			} else {
-				$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1", "peabody_temp");
-			}
-
-			$return["data"] = ($data) ? $data : 0;
-
-			return $return;
-		} elseif($block === TRUE) {
-			if(!$all) {
-				return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1 AND Correction = 0", "peabody_temp");
-			} else {
-				return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1", "peabody_temp");
-			}
 		} 
 		
-		return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Block = '$block' AND Age = '$age' AND Correct = 1 AND Correction = 0", "peabody_temp");
+		return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Block = '$block' AND Age = '$age' AND Correct = 1", "peabody_temp");
 	}
 
 	public function getIncorrects($block, $age) {
