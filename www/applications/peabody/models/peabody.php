@@ -85,6 +85,7 @@ class Peabody_Model extends ZP_Model {
 		unset($_SESSION["Start"]);
 		unset($_SESSION["First"]);
 		unset($_SESSION["LastError"]);
+		unset($_SESSION["ChangeBlock"]);
 
 		return TRUE;
 	}
