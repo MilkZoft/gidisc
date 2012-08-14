@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.2.4
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 09-08-2012 a las 01:37:37
--- Versión del servidor: 5.5.16
--- Versión de PHP: 5.3.8
+-- Host: localhost
+-- Generation Time: Aug 14, 2012 at 03:46 AM
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -17,13 +16,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `gidi`
+-- Database: `gidi`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_answers`
+-- Table structure for table `zan_answers`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_answers` (
@@ -36,10 +35,15 @@ CREATE TABLE IF NOT EXISTS `zan_answers` (
   KEY `fk_zan_answers_zan_tests1` (`ID_Test`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `zan_answers`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_areas`
+-- Table structure for table `zan_areas`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_areas` (
@@ -54,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `zan_areas` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
--- Volcado de datos para la tabla `zan_areas`
+-- Dumping data for table `zan_areas`
 --
 
 INSERT INTO `zan_areas` (`ID_Area`, `ID_Parent`, `ID_Parent2`, `Name`, `Slug`, `Monitoring`, `Situation`) VALUES
@@ -92,7 +96,7 @@ INSERT INTO `zan_areas` (`ID_Area`, `ID_Parent`, `ID_Parent2`, `Name`, `Slug`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_centers`
+-- Table structure for table `zan_centers`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_centers` (
@@ -114,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `zan_centers` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
--- Volcado de datos para la tabla `zan_centers`
+-- Dumping data for table `zan_centers`
 --
 
 INSERT INTO `zan_centers` (`ID_Center`, `ID_User`, `ID_Type_Center`, `Name`, `Address`, `District`, `Country`, `Contact`, `Phone`, `Start_Date`, `End_Date`, `Situation`) VALUES
@@ -133,7 +137,7 @@ INSERT INTO `zan_centers` (`ID_Center`, `ID_User`, `ID_Type_Center`, `Name`, `Ad
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_formats`
+-- Table structure for table `zan_formats`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_formats` (
@@ -152,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `zan_formats` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
--- Volcado de datos para la tabla `zan_formats`
+-- Dumping data for table `zan_formats`
 --
 
 INSERT INTO `zan_formats` (`ID_Format`, `ID_Therapist`, `ID_Patient`, `Month_`, `Comments`, `Work_Home`, `Date_Entry`, `Situation`, `ID_Area`, `Text_Date`) VALUES
@@ -167,7 +171,7 @@ INSERT INTO `zan_formats` (`ID_Format`, `ID_Therapist`, `ID_Patient`, `Month_`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_log`
+-- Table structure for table `zan_log`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_log` (
@@ -179,10 +183,15 @@ CREATE TABLE IF NOT EXISTS `zan_log` (
   PRIMARY KEY (`ID_Log`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `zan_log`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_modules`
+-- Table structure for table `zan_modules`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_modules` (
@@ -194,10 +203,15 @@ CREATE TABLE IF NOT EXISTS `zan_modules` (
   PRIMARY KEY (`ID_Module`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `zan_modules`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_objectives`
+-- Table structure for table `zan_objectives`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_objectives` (
@@ -209,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `zan_objectives` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
--- Volcado de datos para la tabla `zan_objectives`
+-- Dumping data for table `zan_objectives`
 --
 
 INSERT INTO `zan_objectives` (`ID_Objetive`, `ID_Area`, `Name`, `Situation`) VALUES
@@ -254,7 +268,7 @@ INSERT INTO `zan_objectives` (`ID_Objetive`, `ID_Area`, `Name`, `Situation`) VAL
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_objectives_answer`
+-- Table structure for table `zan_objectives_answer`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_objectives_answer` (
@@ -268,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `zan_objectives_answer` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 --
--- Volcado de datos para la tabla `zan_objectives_answer`
+-- Dumping data for table `zan_objectives_answer`
 --
 
 INSERT INTO `zan_objectives_answer` (`ID_Answer`, `ID_Objetive`, `Day_`, `Rating`, `Situation`) VALUES
@@ -303,7 +317,7 @@ INSERT INTO `zan_objectives_answer` (`ID_Answer`, `ID_Objetive`, `Day_`, `Rating
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_objectives_particular`
+-- Table structure for table `zan_objectives_particular`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_objectives_particular` (
@@ -318,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `zan_objectives_particular` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
--- Volcado de datos para la tabla `zan_objectives_particular`
+-- Dumping data for table `zan_objectives_particular`
 --
 
 INSERT INTO `zan_objectives_particular` (`ID_Objetive`, `ID_Format`, `Objetive`, `Date_Entry`, `Situation`, `Comments`) VALUES
@@ -334,7 +348,7 @@ INSERT INTO `zan_objectives_particular` (`ID_Objetive`, `ID_Format`, `Objetive`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_pages`
+-- Table structure for table `zan_pages`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_pages` (
@@ -355,7 +369,7 @@ CREATE TABLE IF NOT EXISTS `zan_pages` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
--- Volcado de datos para la tabla `zan_pages`
+-- Dumping data for table `zan_pages`
 --
 
 INSERT INTO `zan_pages` (`ID_Page`, `ID_User`, `ID_Translation`, `Title`, `Slug`, `Content`, `Views`, `Language`, `Principal`, `Start_Date`, `Text_Date`, `Situation`) VALUES
@@ -367,7 +381,7 @@ INSERT INTO `zan_pages` (`ID_Page`, `ID_User`, `ID_Translation`, `Title`, `Slug`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_patients`
+-- Table structure for table `zan_patients`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_patients` (
@@ -388,7 +402,7 @@ CREATE TABLE IF NOT EXISTS `zan_patients` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1516 ;
 
 --
--- Volcado de datos para la tabla `zan_patients`
+-- Dumping data for table `zan_patients`
 --
 
 INSERT INTO `zan_patients` (`ID_Patient`, `ID_Person`, `ID_Father`, `ID_Mother`, `ID_Therapist`, `Grade`, `Groupa`, `Background`, `Situation`) VALUES
@@ -1913,7 +1927,7 @@ INSERT INTO `zan_patients` (`ID_Patient`, `ID_Person`, `ID_Father`, `ID_Mother`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_peabody_results`
+-- Table structure for table `zan_peabody_results`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_peabody_results` (
@@ -1924,19 +1938,23 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_results` (
   `Start_Date` int(11) NOT NULL DEFAULT '0',
   `Attempt` smallint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_Result`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Volcado de datos para la tabla `zan_peabody_results`
+-- Dumping data for table `zan_peabody_results`
 --
 
 INSERT INTO `zan_peabody_results` (`ID_Result`, `ID_User`, `Result`, `Corrects`, `Start_Date`, `Attempt`) VALUES
-(1, 1518, '5-7', 39, 1344468946, 1);
+(1, 1518, '8-4', 64, 1344913591, 1),
+(2, 1518, '9-10', 75, 1344914064, 2),
+(3, 1518, '10-0', 76, 1344915228, 3),
+(4, 1518, '10-0', 76, 1344915455, 4),
+(5, 1518, '11-4', 84, 1344915932, 5);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_peabody_scores`
+-- Table structure for table `zan_peabody_scores`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_peabody_scores` (
@@ -1948,7 +1966,7 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_scores` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=126 ;
 
 --
--- Volcado de datos para la tabla `zan_peabody_scores`
+-- Dumping data for table `zan_peabody_scores`
 --
 
 INSERT INTO `zan_peabody_scores` (`ID_Score`, `Score`, `Age`, `Interval`) VALUES
@@ -2081,7 +2099,7 @@ INSERT INTO `zan_peabody_scores` (`ID_Score`, `Score`, `Age`, `Interval`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_peabody_temp`
+-- Table structure for table `zan_peabody_temp`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_peabody_temp` (
@@ -2095,10 +2113,47 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_temp` (
   `Correction` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `zan_peabody_temp`
+--
+
+INSERT INTO `zan_peabody_temp` (`ID_User`, `ID_Word`, `Word`, `Answer`, `Block`, `Age`, `Correct`, `Correction`) VALUES
+(1518, 70, 'Carpintero', 2, 1, 10, 1, 0),
+(1518, 71, 'Archivar', 3, 1, 10, 1, 0),
+(1518, 72, 'Mercantil', 1, 1, 10, 1, 0),
+(1518, 73, 'Cuarteto', 4, 1, 10, 1, 0),
+(1518, 74, 'Marco', 1, 1, 10, 1, 0),
+(1518, 75, 'Binocular', 3, 1, 10, 1, 0),
+(1518, 76, 'Judicial', 2, 2, 10, 0, 0),
+(1518, 69, 'Desilusión', 4, 1, 10, 1, 0),
+(1518, 68, 'Ángulo', 2, 1, 10, 1, 0),
+(1518, 77, 'Roer', 3, 2, 10, 1, 0),
+(1518, 78, 'Morsa', 2, 2, 10, 1, 0),
+(1518, 79, 'Confiar', 3, 2, 10, 1, 0),
+(1518, 80, 'Terno', 4, 2, 10, 0, 0),
+(1518, 81, 'Contemplar', 2, 2, 10, 0, 0),
+(1518, 82, 'Ave', 3, 2, 10, 0, 0),
+(1518, 83, 'Portátil', 2, 2, 10, 0, 0),
+(1518, 84, 'Clasificar', 1, 3, 10, 0, 0),
+(1518, 85, 'Carroña', 3, 3, 10, 1, 0),
+(1518, 86, 'Brújula', 2, 3, 10, 1, 0),
+(1518, 87, 'Esférico', 2, 3, 10, 1, 0),
+(1518, 88, 'Felino', 2, 3, 10, 1, 0),
+(1518, 89, 'Paraleo', 4, 3, 10, 0, 0),
+(1518, 90, 'Sumergir', 4, 3, 10, 0, 0),
+(1518, 91, 'Árido', 4, 3, 10, 1, 0),
+(1518, 92, 'Frágil', 3, 4, 10, 0, 0),
+(1518, 93, 'Instruir', 4, 4, 10, 1, 0),
+(1518, 94, 'Arquéologo', 4, 4, 10, 0, 0),
+(1518, 95, 'Consumir', 4, 4, 10, 0, 0),
+(1518, 96, 'Incandescente', 4, 4, 10, 0, 0),
+(1518, 97, 'Arrogante', 2, 4, 10, 0, 0),
+(1518, 98, 'Utensilio', 2, 4, 10, 0, 0);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_peabody_words`
+-- Table structure for table `zan_peabody_words`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_peabody_words` (
@@ -2109,7 +2164,7 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_words` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=126 ;
 
 --
--- Volcado de datos para la tabla `zan_peabody_words`
+-- Dumping data for table `zan_peabody_words`
 --
 
 INSERT INTO `zan_peabody_words` (`ID_Word`, `Word`, `Answer`) VALUES
@@ -2200,7 +2255,7 @@ INSERT INTO `zan_peabody_words` (`ID_Word`, `Word`, `Answer`) VALUES
 (85, 'Carroña', 3),
 (86, 'Brújula', 2),
 (87, 'Esférico', 2),
-(88, 'Felino', 4),
+(88, 'Felino', 2),
 (89, 'Paraleo', 4),
 (90, 'Sumergir', 4),
 (91, 'Árido', 4),
@@ -2242,7 +2297,7 @@ INSERT INTO `zan_peabody_words` (`ID_Word`, `Word`, `Answer`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_people`
+-- Table structure for table `zan_people`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_people` (
@@ -2262,7 +2317,7 @@ CREATE TABLE IF NOT EXISTS `zan_people` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1517 ;
 
 --
--- Volcado de datos para la tabla `zan_people`
+-- Dumping data for table `zan_people`
 --
 
 INSERT INTO `zan_people` (`ID_Person`, `Name`, `Last_Name`, `Maiden_Name`, `Email`, `Address`, `Phone`, `Cellular`, `Profession`, `Gender`, `Birthday`, `Date_Entry`) VALUES
@@ -3790,7 +3845,7 @@ INSERT INTO `zan_people` (`ID_Person`, `Name`, `Last_Name`, `Maiden_Name`, `Emai
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_people_photos`
+-- Table structure for table `zan_people_photos`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_people_photos` (
@@ -3803,10 +3858,15 @@ CREATE TABLE IF NOT EXISTS `zan_people_photos` (
   KEY `fk_zan_people_photos_zan_type_photos1` (`ID_Type_Photo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `zan_people_photos`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_questions`
+-- Table structure for table `zan_questions`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_questions` (
@@ -3818,10 +3878,15 @@ CREATE TABLE IF NOT EXISTS `zan_questions` (
   KEY `fk_zan_questions_zan_type_questions1` (`ID_Type_Question`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `zan_questions`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_re_patients_centers`
+-- Table structure for table `zan_re_patients_centers`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_re_patients_centers` (
@@ -3832,10 +3897,15 @@ CREATE TABLE IF NOT EXISTS `zan_re_patients_centers` (
   KEY `fk_zan_re_patients_centers_zan_patients1` (`ID_Patient`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `zan_re_patients_centers`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_re_test_questions`
+-- Table structure for table `zan_re_test_questions`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_re_test_questions` (
@@ -3846,10 +3916,15 @@ CREATE TABLE IF NOT EXISTS `zan_re_test_questions` (
   KEY `fk_zan_re_test_questions_zan_questions1` (`ID_Question`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `zan_re_test_questions`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_re_type_users_modules`
+-- Table structure for table `zan_re_type_users_modules`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_re_type_users_modules` (
@@ -3861,10 +3936,15 @@ CREATE TABLE IF NOT EXISTS `zan_re_type_users_modules` (
   KEY `fk_zan_re_typeusers_modules_zan_modules1` (`ID_Module`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `zan_re_type_users_modules`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_re_user_person`
+-- Table structure for table `zan_re_user_person`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_re_user_person` (
@@ -3875,7 +3955,7 @@ CREATE TABLE IF NOT EXISTS `zan_re_user_person` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `zan_re_user_person`
+-- Dumping data for table `zan_re_user_person`
 --
 
 INSERT INTO `zan_re_user_person` (`ID_User`, `ID_Person`) VALUES
@@ -5399,7 +5479,7 @@ INSERT INTO `zan_re_user_person` (`ID_User`, `ID_Person`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_tests`
+-- Table structure for table `zan_tests`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_tests` (
@@ -5415,10 +5495,15 @@ CREATE TABLE IF NOT EXISTS `zan_tests` (
   KEY `fk_zan_tests_zan_centers1` (`ID_Center`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `zan_tests`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_tokens`
+-- Table structure for table `zan_tokens`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_tokens` (
@@ -5429,10 +5514,10 @@ CREATE TABLE IF NOT EXISTS `zan_tokens` (
   `Start_Date` int(11) NOT NULL,
   PRIMARY KEY (`ID_Token`),
   KEY `fk_zan_tokens_zan_users1` (`ID_User`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=81 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=83 ;
 
 --
--- Volcado de datos para la tabla `zan_tokens`
+-- Dumping data for table `zan_tokens`
 --
 
 INSERT INTO `zan_tokens` (`ID_Token`, `ID_User`, `Token`, `IP`, `Start_Date`) VALUES
@@ -5515,12 +5600,14 @@ INSERT INTO `zan_tokens` (`ID_Token`, `ID_User`, `Token`, `IP`, `Start_Date`) VA
 (77, 1518, '1287A15A07', '::1', 1343961371),
 (78, 1518, 'E828FABEBE', '127.0.0.1', 1344283318),
 (79, 1518, '6CC656C0F5', '127.0.0.1', 1344351587),
-(80, 1518, 'FF0AA29CF5', '127.0.0.1', 1344467283);
+(80, 1518, 'FF0AA29CF5', '127.0.0.1', 1344467283),
+(81, 1518, '745FFB6081', '::1', 1344473554),
+(82, 1518, '6F202131D6', '::1', 1344909213);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_type_centers`
+-- Table structure for table `zan_type_centers`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_type_centers` (
@@ -5530,7 +5617,7 @@ CREATE TABLE IF NOT EXISTS `zan_type_centers` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `zan_type_centers`
+-- Dumping data for table `zan_type_centers`
 --
 
 INSERT INTO `zan_type_centers` (`ID_Type_Center`, `Type`) VALUES
@@ -5540,7 +5627,7 @@ INSERT INTO `zan_type_centers` (`ID_Type_Center`, `Type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_type_photos`
+-- Table structure for table `zan_type_photos`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_type_photos` (
@@ -5550,7 +5637,7 @@ CREATE TABLE IF NOT EXISTS `zan_type_photos` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Volcado de datos para la tabla `zan_type_photos`
+-- Dumping data for table `zan_type_photos`
 --
 
 INSERT INTO `zan_type_photos` (`ID_Type_Photo`, `Type`) VALUES
@@ -5561,7 +5648,7 @@ INSERT INTO `zan_type_photos` (`ID_Type_Photo`, `Type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_type_questions`
+-- Table structure for table `zan_type_questions`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_type_questions` (
@@ -5571,10 +5658,15 @@ CREATE TABLE IF NOT EXISTS `zan_type_questions` (
   PRIMARY KEY (`ID_Type_Question`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `zan_type_questions`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_type_tests`
+-- Table structure for table `zan_type_tests`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_type_tests` (
@@ -5583,10 +5675,15 @@ CREATE TABLE IF NOT EXISTS `zan_type_tests` (
   PRIMARY KEY (`ID_Type_Test`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `zan_type_tests`
+--
+
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_type_users`
+-- Table structure for table `zan_type_users`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_type_users` (
@@ -5596,7 +5693,7 @@ CREATE TABLE IF NOT EXISTS `zan_type_users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- Volcado de datos para la tabla `zan_type_users`
+-- Dumping data for table `zan_type_users`
 --
 
 INSERT INTO `zan_type_users` (`ID_Type_User`, `Type`) VALUES
@@ -5610,7 +5707,7 @@ INSERT INTO `zan_type_users` (`ID_Type_User`, `Type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `zan_users`
+-- Table structure for table `zan_users`
 --
 
 CREATE TABLE IF NOT EXISTS `zan_users` (
@@ -5625,7 +5722,7 @@ CREATE TABLE IF NOT EXISTS `zan_users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1519 ;
 
 --
--- Volcado de datos para la tabla `zan_users`
+-- Dumping data for table `zan_users`
 --
 
 INSERT INTO `zan_users` (`ID_User`, `ID_Type_User`, `Username`, `Pwd`, `Email`, `Situation`) VALUES
@@ -7150,83 +7247,83 @@ INSERT INTO `zan_users` (`ID_User`, `ID_Type_User`, `Username`, `Pwd`, `Email`, 
 (1518, 4, 'Paciente', '99b94460aa941d668e60262be137c7187045ed45', 'paciente@gidisc.org', 'Active');
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `zan_answers`
+-- Constraints for table `zan_answers`
 --
 ALTER TABLE `zan_answers`
   ADD CONSTRAINT `fk_zan_answers_zan_questions1` FOREIGN KEY (`ID_Question`) REFERENCES `zan_questions` (`ID_Question`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_zan_answers_zan_tests1` FOREIGN KEY (`ID_Test`) REFERENCES `zan_tests` (`ID_Test`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `zan_centers`
+-- Constraints for table `zan_centers`
 --
 ALTER TABLE `zan_centers`
   ADD CONSTRAINT `fk_zan_centers_zan_type_centers1` FOREIGN KEY (`ID_Type_Center`) REFERENCES `zan_type_centers` (`ID_Type_Center`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_zan_centers_zan_users1` FOREIGN KEY (`ID_User`) REFERENCES `zan_users` (`ID_User`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `zan_formats`
+-- Constraints for table `zan_formats`
 --
 ALTER TABLE `zan_formats`
   ADD CONSTRAINT `fk_zan_formats_zan_patients1` FOREIGN KEY (`ID_Patient`) REFERENCES `zan_patients` (`ID_Patient`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `zan_objectives_answer`
+-- Constraints for table `zan_objectives_answer`
 --
 ALTER TABLE `zan_objectives_answer`
   ADD CONSTRAINT `fk_zan_objectives_answer_zan_objectives_particular1` FOREIGN KEY (`ID_Objetive`) REFERENCES `zan_objectives_particular` (`ID_Objetive`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `zan_objectives_particular`
+-- Constraints for table `zan_objectives_particular`
 --
 ALTER TABLE `zan_objectives_particular`
   ADD CONSTRAINT `fk_zan_objectives_particular_zan_formats1` FOREIGN KEY (`ID_Format`) REFERENCES `zan_formats` (`ID_Format`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `zan_pages`
+-- Constraints for table `zan_pages`
 --
 ALTER TABLE `zan_pages`
   ADD CONSTRAINT `zan_pages_ibfk_1` FOREIGN KEY (`ID_User`) REFERENCES `zan_users` (`ID_User`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `zan_people_photos`
+-- Constraints for table `zan_people_photos`
 --
 ALTER TABLE `zan_people_photos`
   ADD CONSTRAINT `fk_zan_people_photos_zan_person1` FOREIGN KEY (`ID_Person`) REFERENCES `zan_people` (`ID_Person`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_zan_people_photos_zan_type_photos1` FOREIGN KEY (`ID_Type_Photo`) REFERENCES `zan_type_photos` (`ID_Type_Photo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `zan_questions`
+-- Constraints for table `zan_questions`
 --
 ALTER TABLE `zan_questions`
   ADD CONSTRAINT `fk_zan_questions_zan_type_questions1` FOREIGN KEY (`ID_Type_Question`) REFERENCES `zan_type_questions` (`ID_Type_Question`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `zan_re_patients_centers`
+-- Constraints for table `zan_re_patients_centers`
 --
 ALTER TABLE `zan_re_patients_centers`
   ADD CONSTRAINT `fk_zan_re_patients_centers_zan_centers1` FOREIGN KEY (`ID_Center`) REFERENCES `zan_centers` (`ID_Center`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_zan_re_patients_centers_zan_patients1` FOREIGN KEY (`ID_Patient`) REFERENCES `zan_patients` (`ID_Patient`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `zan_re_test_questions`
+-- Constraints for table `zan_re_test_questions`
 --
 ALTER TABLE `zan_re_test_questions`
   ADD CONSTRAINT `fk_zan_re_test_questions_zan_questions1` FOREIGN KEY (`ID_Question`) REFERENCES `zan_questions` (`ID_Question`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_zan_re_test_questions_zan_tests1` FOREIGN KEY (`ID_Test`) REFERENCES `zan_tests` (`ID_Test`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `zan_re_type_users_modules`
+-- Constraints for table `zan_re_type_users_modules`
 --
 ALTER TABLE `zan_re_type_users_modules`
   ADD CONSTRAINT `fk_zan_re_type_users_modules_zan_modules1` FOREIGN KEY (`ID_Module`) REFERENCES `zan_modules` (`ID_Module`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_zan_re_type_users_modules_zan_type_users1` FOREIGN KEY (`ID_Type_User`) REFERENCES `zan_type_users` (`ID_Type_User`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `zan_tests`
+-- Constraints for table `zan_tests`
 --
 ALTER TABLE `zan_tests`
   ADD CONSTRAINT `fk_zan_tests_zan_centers1` FOREIGN KEY (`ID_Center`) REFERENCES `zan_centers` (`ID_Center`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -7234,11 +7331,7 @@ ALTER TABLE `zan_tests`
   ADD CONSTRAINT `fk_zan_tests_zan_type_tests1` FOREIGN KEY (`ID_Type_Test`) REFERENCES `zan_type_tests` (`ID_Type_Test`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `zan_tokens`
+-- Constraints for table `zan_tokens`
 --
 ALTER TABLE `zan_tokens`
   ADD CONSTRAINT `fk_zan_tokens_zan_users1` FOREIGN KEY (`ID_User`) REFERENCES `zan_users` (`ID_User`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
