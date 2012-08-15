@@ -91,7 +91,7 @@ class Peabody_Controller extends ZP_Controller {
 		#unset($_SESSION["Success"]);
 		#die("SSS");
 		$data = $this->Peabody_Model->getWord($number);
-
+		/*
 		echo "<pre style='background-color: #FFF'>";
 		echo "ChangeBlock = ". var_dump(SESSION("ChangeBlock")) ."<br />";
 		echo "Success = ". var_dump(SESSION("Success")) ."<br />";
@@ -101,7 +101,7 @@ class Peabody_Controller extends ZP_Controller {
 		echo "First = ". var_dump(SESSION("First")) ."<br />";
 		echo "LastError = ". var_dump(SESSION("LastError")) ."<br />";
 		echo "</pre>";
-
+		*/
 		if($data) {
 			if(POST("validate")) {
 				if((int) POST("option") == (int) $data[0]["Answer"]) {
@@ -112,7 +112,9 @@ class Peabody_Controller extends ZP_Controller {
 						SESSION("Last", $number);
 						SESSION("Corrects", 1);
 					} else {
-						SESSION("Corrects", SESSION("Corrects") + 1);
+						if(SESSION("Corrects") < 8) {
+							SESSION("Corrects", SESSION("Corrects") + 1);
+						}
 
 						if(SESSION("Corrects") == 8) {
 							$newBlock = TRUE;
@@ -121,12 +123,20 @@ class Peabody_Controller extends ZP_Controller {
 				} else {
 					$data[0]["Correct"] = 0;
 					
-					if(SESSION("ChangeBlock") === 1) {
-						$data[0]["Block"]   = POST("block");
-					} else {
-						$data[0]["Block"]   = "2";
+					if($age > 4) {
+						if(SESSION("ChangeBlock") === 1) {
+							if($block == 1) {
+								SESSION("Corrects", 0);
+							}
 
-						SESSION("ChangeBlock", 1);
+							$data[0]["Block"] = POST("block");
+						} else {
+							$data[0]["Block"] = "2";
+
+							SESSION("ChangeBlock", 1);
+						}
+					} else {
+						$data[0]["Block"] = POST("block");
 					}
 				}
 
@@ -148,7 +158,9 @@ class Peabody_Controller extends ZP_Controller {
 				if(count($incorrects) == 6) {
 					redirect("peabody/finished/$age");
 				} elseif($total == 8) {
-					$block++;
+					if(SESSION("Corrects") >= 8) {
+						$block++;
+					}
 				}
 
 				if($age <= 4) {
@@ -248,8 +260,8 @@ class Peabody_Controller extends ZP_Controller {
 
 	public function finished($age) {
 		$corrects = $this->Peabody_Model->getCorrects(TRUE, TRUE);
-
-		if(isset($corrects["low"]) and $corrects["low"] > 0) {
+	
+		if($age > 4 and isset($corrects["low"]) and $corrects["low"] > 0) {
 			$j = 0;
 
 			for($i = ($corrects["low"] - 1); $i >= 1; $i--) {
@@ -257,10 +269,10 @@ class Peabody_Controller extends ZP_Controller {
 			}
 
 			$corrects = count($corrects["data"]) + $j;
-		} elseif(isset($corrects["low"]) and $corrects["low"] == 0) {
+		} elseif($age > 4 and isset($corrects["low"]) and $corrects["low"] == 0) {
 			$corrects = $this->getStart($age) - 6;
 		} else {
-			$corrects = count($corrects);
+			$corrects = count($corrects["data"]);
 		}
 
 		$score = $this->Peabody_Model->getScore($corrects);
