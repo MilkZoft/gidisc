@@ -260,7 +260,7 @@ class Peabody_Controller extends ZP_Controller {
 
 	public function finished($age) {
 		$corrects = $this->Peabody_Model->getCorrects(TRUE, TRUE);
-	
+
 		if($age > 4 and isset($corrects["low"]) and $corrects["low"] > 0) {
 			$j = 0;
 
@@ -279,7 +279,8 @@ class Peabody_Controller extends ZP_Controller {
 		
 		$this->Peabody_Model->setResult($score, $corrects);
 
-		$vars["view"] = $this->view("finished", TRUE);
+		$vars["score"] = $score;
+		$vars["view"]  = $this->view("finished", TRUE);
 
 		$this->render("content", $vars);
 		
