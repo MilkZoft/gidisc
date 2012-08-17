@@ -11,7 +11,7 @@ if(!defined("_access")) {
  *	SQL Databases
  */
 $ZP["db"]["dbController"] = "mysqli";
-$ZP["db"]["dbHost"] 	  = "127.0.0.1";
+$ZP["db"]["dbHost"] 	  = "localhost";
 $ZP["db"]["dbUser"] 	  = "root";
 $ZP["db"]["dbPwd"] 	      = "";
 $ZP["db"]["dbName"] 	  = "gidi";
