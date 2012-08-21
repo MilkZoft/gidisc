@@ -8,8 +8,6 @@ if(!defined("_access")) {
 
 class Peabody_Controller extends ZP_Controller {
 
-	static $data = NULL;
-
 	public function __construct() {
 		$this->Templates   = $this->core("Templates");
 		$this->Peabody_Model = $this->model("Peabody_Model");
@@ -86,27 +84,21 @@ class Peabody_Controller extends ZP_Controller {
 	}
 
 	public function image($number, $block = 1, $age = 0) {
-		#____(SESSION("Corrects"));
-		#SESSION("Corrects", 7);
-		#unset($_SESSION["Success"]);
-		#die("SSS");
 		$data = $this->Peabody_Model->getWord($number);
-		/*
-		echo "<pre style='background-color: #FFF'>";
-		echo "ChangeBlock = ". var_dump(SESSION("ChangeBlock")) ."<br />";
-		echo "Success = ". var_dump(SESSION("Success")) ."<br />";
-		echo "Last = ". var_dump(SESSION("Last")) ."<br />";
-		echo "Corrects = ". var_dump(SESSION("Corrects")) ."<br />";
-		echo "Error = ". var_dump(SESSION("Error")) ."<br />";
-		echo "First = ". var_dump(SESSION("First")) ."<br />";
-		echo "LastError = ". var_dump(SESSION("LastError")) ."<br />";
+
+		echo "<pre>";
+			echo "Last Errors:" . var_dump(SESSION("LastErrors"));
+			echo "Last Total:" . var_dump(SESSION("LastTotal"));
 		echo "</pre>";
-		*/
 		if($data) {
 			if(POST("validate")) {
 				if((int) POST("option") == (int) $data[0]["Answer"]) {
 					$data[0]["Correct"] = 1;
 					$data[0]["Block"]   = POST("block");
+
+					if(SESSION("Corrects") == 8 and SESSION("LastTotal") < 8) {
+						SESSION("LastTotal", SESSION("LastTotal") + 1);
+					}
 
 					if($number == $this->getStart($age)) {
 						SESSION("Last", $number);
@@ -117,19 +109,40 @@ class Peabody_Controller extends ZP_Controller {
 						}
 
 						if(SESSION("Corrects") == 8) {
-							$newBlock = TRUE;
+							if(SESSION("Complete") !== TRUE) {
+								$newBlock = TRUE;
+
+								SESSION("Complete", TRUE);
+								SESSION("ChangeBlock", 1);
+
+								SESSION("LastTotal", 0);
+								SESSION("LastErrors", 0);
+							}
 						}
 					}
 				} else {
 					$data[0]["Correct"] = 0;
 					
+					$bad = TRUE;
+
 					if($age > 4) {
 						if(SESSION("ChangeBlock") === 1) {
 							if($block == 1) {
 								SESSION("Corrects", 0);
 							}
 
-							$data[0]["Block"] = POST("block");
+							if(SESSION("Corrects") == 8 and SESSION("LastErrors") == 0) {
+								SESSION("LastErrors", 1);
+								SESSION("LastTotal", 1);
+
+								$data[0]["Block"] = POST("block") + 1;
+								$block++;
+							} elseif(SESSION("LastErrors") < 6 and SESSION("LastTotal") < 8) {
+								SESSION("LastErrors", SESSION("LastErrors") + 1);
+								SESSION("LastTotal", SESSION("LastTotal") + 1);
+
+								$data[0]["Block"] = POST("block");
+							} 
 						} else {
 							$data[0]["Block"] = "2";
 
@@ -146,21 +159,16 @@ class Peabody_Controller extends ZP_Controller {
 
 				$this->Peabody_Model->setWord($data[0]);
 
-				$corrects 	 = $this->Peabody_Model->getCorrects($block, $age);
-				$incorrects  = $this->Peabody_Model->getIncorrects($block, $age);
+				#$corrects 	= $this->Peabody_Model->getCorrects($block, $age);
+				#$incorrects = $this->Peabody_Model->getIncorrects($block, $age);
 
-				if($block == 1) {
-					$total = count($corrects);
-				} else {
-					$total = count($corrects) + count($incorrects);
-				}
+				#$total = count($corrects) + count($incorrects);
 
-				if(count($incorrects) == 6) {
+				if(SESSION("LastErrors") == 6) {
 					redirect("peabody/finished/$age");
-				} elseif($total == 8) {
-					if(SESSION("Corrects") >= 8) {
-						$block++;
-					}
+				} elseif(SESSION("LastTotal") == 8) {
+					SESSION("LastErrors", 0);
+					SESSION("LastTotal", 0);
 				}
 
 				if($age <= 4) {

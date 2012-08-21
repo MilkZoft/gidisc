@@ -76,7 +76,7 @@ class Peabody_Model extends ZP_Model {
 
 		$this->Db->insert("peabody_results", array("ID_User" => SESSION("ZanUserID"), "Result" => $score, "Corrects" => $corrects, "Start_Date" => now(4), "Attempt" => $attempt));
 
-		$this->Db->deleteBySQL("ID_User = '". SESSION("ZanUserID") ."'", "peabody_temp");
+		//$this->Db->deleteBySQL("ID_User = '". SESSION("ZanUserID") ."'", "peabody_temp");
 
 		unset($_SESSION["Last"]);
 		unset($_SESSION["Corrects"]);
@@ -86,6 +86,10 @@ class Peabody_Model extends ZP_Model {
 		unset($_SESSION["First"]);
 		unset($_SESSION["LastError"]);
 		unset($_SESSION["ChangeBlock"]);
+		unset($_SESSION["LastBad"]);
+		unset($_SESSION["IncrementBlock"]);
+		unset($_SESSION["LastErrors"]);
+		unset($_SESSION["LastTotal"]);
 
 		return TRUE;
 	}
