@@ -86,10 +86,11 @@ class Peabody_Controller extends ZP_Controller {
 	public function image($number, $block = 1, $age = 0) {
 		$data = $this->Peabody_Model->getWord($number);
 
-		echo "<pre>";
-			echo "Last Errors:" . var_dump(SESSION("LastErrors"));
-			echo "Last Total:" . var_dump(SESSION("LastTotal"));
-		echo "</pre>";
+		#echo "<pre>";
+		#	echo "Last Errors:" . var_dump(SESSION("LastErrors"));
+		#	echo "Last Total:" . var_dump(SESSION("LastTotal"));
+		#echo "</pre>";
+		
 		if($data) {
 			if(POST("validate")) {
 				if((int) POST("option") == (int) $data[0]["Answer"]) {
