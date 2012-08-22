@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-08-2012 a las 18:15:40
+-- Tiempo de generación: 22-08-2012 a las 02:09:47
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -1913,6 +1913,85 @@ INSERT INTO `zan_patients` (`ID_Patient`, `ID_Person`, `ID_Father`, `ID_Mother`,
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `zan_peabody_blocks`
+--
+
+CREATE TABLE IF NOT EXISTS `zan_peabody_blocks` (
+  `ID_User` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `ID_Word` mediumint(8) NOT NULL DEFAULT '0',
+  `Block` varchar(10) NOT NULL,
+  `Correct` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `zan_peabody_blocks`
+--
+
+INSERT INTO `zan_peabody_blocks` (`ID_User`, `ID_Word`, `Block`, `Correct`) VALUES
+(0, 30, '30-37', 0),
+(0, 31, '30-37', 1),
+(0, 32, '30-37', 1),
+(0, 33, '30-37', 1),
+(0, 34, '30-37', 1),
+(0, 35, '30-37', 1),
+(0, 36, '30-37', 1),
+(0, 37, '30-37', 1),
+(0, 45, '45-52', 0),
+(0, 46, '45-52', 1),
+(0, 47, '45-52', 1),
+(0, 48, '45-52', 1),
+(0, 49, '45-52', 1),
+(0, 50, '45-52', 1),
+(0, 51, '45-52', 0),
+(0, 51, '51-58', 0),
+(0, 52, '45-52', 1),
+(0, 52, '51-58', 1),
+(0, 53, '51-58', 1),
+(0, 54, '51-58', 0),
+(0, 54, '54-61', 0),
+(0, 55, '51-58', 0),
+(0, 55, '54-61', 0),
+(0, 55, '55-62', 0),
+(0, 56, '51-58', 1),
+(0, 56, '54-61', 1),
+(0, 56, '55-62', 1),
+(0, 57, '51-58', 0),
+(0, 57, '54-61', 0),
+(0, 57, '55-62', 0),
+(0, 57, '57-64', 0),
+(0, 58, '51-58', 1),
+(0, 58, '54-61', 1),
+(0, 58, '55-62', 1),
+(0, 58, '57-64', 1),
+(0, 59, '54-61', 0),
+(0, 59, '55-62', 0),
+(0, 59, '57-64', 0),
+(0, 59, '59-66', 0),
+(0, 60, '54-61', 1),
+(0, 60, '55-62', 1),
+(0, 60, '57-64', 1),
+(0, 60, '59-66', 1),
+(0, 61, '54-61', 1),
+(0, 61, '55-62', 1),
+(0, 61, '57-64', 1),
+(0, 61, '59-66', 1),
+(0, 62, '55-62', 0),
+(0, 62, '57-64', 0),
+(0, 62, '59-66', 1),
+(0, 62, '62-69', 0),
+(0, 63, '57-64', 0),
+(0, 63, '59-66', 0),
+(0, 63, '62-69', 0),
+(0, 63, '63-70', 0),
+(0, 64, '57-64', 0),
+(0, 64, '59-66', 0),
+(0, 64, '62-69', 0),
+(0, 64, '63-70', 0),
+(0, 64, '64-71', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `zan_peabody_results`
 --
 
@@ -1931,7 +2010,7 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_results` (
 --
 
 INSERT INTO `zan_peabody_results` (`ID_Result`, `ID_User`, `Result`, `Corrects`, `Start_Date`, `Attempt`) VALUES
-(1, 1518, '11-1', 83, 1344532271, 1);
+(1, 1518, '6-1', 44, 1345214632, 1);
 
 -- --------------------------------------------------------
 
@@ -2093,44 +2172,6 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_temp` (
   `Age` smallint(2) NOT NULL,
   `Correct` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `zan_peabody_temp`
---
-
-INSERT INTO `zan_peabody_temp` (`ID_User`, `ID_Word`, `Word`, `Answer`, `Block`, `Age`, `Correct`) VALUES
-(1518, 70, 'Carpintero', 2, 1, 10, 1),
-(1518, 71, 'Archivar', 3, 1, 10, 1),
-(1518, 72, 'Mercantil', 1, 1, 10, 1),
-(1518, 73, 'Cuarteto', 4, 1, 10, 1),
-(1518, 74, 'Marco', 1, 1, 10, 1),
-(1518, 75, 'Binocular', 3, 1, 10, 1),
-(1518, 76, 'Judicial', 2, 1, 10, 0),
-(1518, 69, 'Desilusión', 4, 1, 10, 1),
-(1518, 68, 'Ángulo', 2, 1, 10, 1),
-(1518, 77, 'Roer', 3, 2, 10, 1),
-(1518, 78, 'Morsa', 2, 2, 10, 1),
-(1518, 79, 'Confiar', 3, 2, 10, 1),
-(1518, 80, 'Terno', 4, 2, 10, 0),
-(1518, 81, 'Contemplar', 2, 2, 10, 0),
-(1518, 82, 'Ave', 3, 2, 10, 0),
-(1518, 83, 'Portátil', 2, 2, 10, 0),
-(1518, 84, 'Clasificar', 1, 2, 10, 0),
-(1518, 85, 'Carroña', 3, 3, 10, 1),
-(1518, 86, 'Brújula', 2, 3, 10, 1),
-(1518, 87, 'Esférico', 2, 3, 10, 1),
-(1518, 88, 'Felino', 4, 3, 10, 0),
-(1518, 89, 'Paraleo', 4, 3, 10, 0),
-(1518, 90, 'Sumergir', 4, 3, 10, 0),
-(1518, 91, 'Árido', 4, 3, 10, 1),
-(1518, 92, 'Frágil', 3, 3, 10, 0),
-(1518, 93, 'Instruir', 4, 4, 10, 1),
-(1518, 94, 'Arquéologo', 4, 4, 10, 0),
-(1518, 95, 'Consumir', 4, 4, 10, 0),
-(1518, 96, 'Incandescente', 4, 4, 10, 0),
-(1518, 97, 'Arrogante', 2, 4, 10, 0),
-(1518, 98, 'Utensilio', 2, 4, 10, 0),
-(1518, 99, 'Ira', 3, 4, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -5466,7 +5507,7 @@ CREATE TABLE IF NOT EXISTS `zan_tokens` (
   `Start_Date` int(11) NOT NULL,
   PRIMARY KEY (`ID_Token`),
   KEY `fk_zan_tokens_zan_users1` (`ID_User`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=82 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=84 ;
 
 --
 -- Volcado de datos para la tabla `zan_tokens`
@@ -5553,7 +5594,9 @@ INSERT INTO `zan_tokens` (`ID_Token`, `ID_User`, `Token`, `IP`, `Start_Date`) VA
 (78, 1518, 'E828FABEBE', '127.0.0.1', 1344283318),
 (79, 1518, '6CC656C0F5', '127.0.0.1', 1344351587),
 (80, 1518, 'FF0AA29CF5', '127.0.0.1', 1344467283),
-(81, 1518, '86F2487CB2', '127.0.0.1', 1344528288);
+(81, 1518, '86F2487CB2', '127.0.0.1', 1344528288),
+(82, 1518, 'C92344832B', '127.0.0.1', 1344961578),
+(83, 1518, '86536FC3FF', '127.0.0.1', 1345212890);
 
 -- --------------------------------------------------------
 
