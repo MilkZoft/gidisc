@@ -127,10 +127,23 @@ class Peabody_Model extends ZP_Model {
 		return TRUE;
 	}
 
+	public function setBlock($data) {
+		$this->Db->insert("peabody_blocks", $data);
+
+		return TRUE;	
+	}
+
 	public function getWord($ID_Word) {
 		return $this->Db->find($ID_Word, $this->table);
 	}
 	
+	public function getBlockDetails($block) {
+		$total["errors"] = $this->Db->findBySQL("Block = '$block' AND Correct = 0", "peabody_blocks");
+		$total["total"]  = $this->Db->findBySQL("Block = '$block'", "peabody_blocks");
+
+		return $total;
+	}
+
 	public function getWords($age, $limit = NULL) {
 		if($age == 3 or $age == 4) {
 			$data["Words1"] = $this->Db->findAll($this->table, NULL, "ID_Word ASC", $limit);

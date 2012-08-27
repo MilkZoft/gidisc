@@ -29,66 +29,54 @@ class Peabody_Controller extends ZP_Controller {
 
 	public function age($age) {
 		if($age == 3 or $age == 4) {
-			redirect("peabody/image/1/1/$age");
+			redirect("peabody/image/1/$age");
 		} elseif($age == 5) {
 			SESSION("Start", 10);
 
-			redirect("peabody/image/10/1/$age");
+			redirect("peabody/image/10/$age");
 		} elseif($age == 6) {
 			SESSION("Start", 26);
 
-			redirect("peabody/image/26/1/$age");
+			redirect("peabody/image/26/$age");
 		} elseif($age == 7) {
 			SESSION("Start", 38);
 
-			redirect("peabody/image/38/1/$age");
+			redirect("peabody/image/38/$age");
 		} elseif($age == 8) {
 			SESSION("Start", 50);
 
-			redirect("peabody/image/50/1/$age");
+			redirect("peabody/image/50/$age");
 		} elseif($age == 9) {
 			SESSION("Start", 60);
 
-			redirect("peabody/image/60/1/$age");
+			redirect("peabody/image/60/$age");
 		} elseif($age == 10) {
 			SESSION("Start", 70);
 
-			redirect("peabody/image/70/1/$age");
+			redirect("peabody/image/70/$age");
 		} elseif($age == 11) {
 			SESSION("Start", 77);
 
-			redirect("peabody/image/77/1/$age");
+			redirect("peabody/image/77/$age");
 		} elseif($age == 12) {
 			SESSION("Start", 82);
 
-			redirect("peabody/image/82/1/$age");
+			redirect("peabody/image/82/$age");
 		} elseif($age == 13) {
 			SESSION("Start", 86);
 
-			redirect("peabody/image/86/1/$age");
+			redirect("peabody/image/86/$age");
 		} elseif($age == 14) {
 			SESSION("Start", 90);
 
-			redirect("peabody/image/90/1/$age");
-		}
-	}
-
-	public function start() {
-		if(POST("start")) {
-			if(POST("age") >= 3 and POST("age") <= 14) {
-				SESSION("Age", POST("age"));
-
-				redirect("peabody/age/". POST("age"));
-			} else {
-				showAlert("La edad es inválida", path("peabody"));
-			}
+			redirect("peabody/image/90/$age");
 		}
 	}
 
 	public function getLimit($block) {
 		$parts = explode("-", $block);
 
-		return (count($parts) == 2) ? return $parts : FALSE;
+		return (count($parts) == 2) ? $parts : FALSE;
 	}
 
 	public function getBlock($error) {
@@ -137,7 +125,7 @@ class Peabody_Controller extends ZP_Controller {
 			case 42: return "42-49"; break;
 			case 43: return "43-50"; break;
 			case 44: return "44-51"; break;
-			case 45: return ""; break;
+			case 45: return "45-52"; break;
 			case 46: return "46-53"; break;
 			case 47: return "47-54"; break;
 			case 48: return "48-55"; break;
@@ -216,15 +204,33 @@ class Peabody_Controller extends ZP_Controller {
 		return FALSE;
 	}
 
-	public function image($number) {
+	public function start() {
+		if(POST("start")) {
+			if(POST("age") >= 3 and POST("age") <= 14) {
+				redirect("peabody/age/". POST("age"));
+			} else {
+				showAlert("La edad es inválida", path("peabody"));
+			}
+		}
+	}
+
+	public function image($number, $block = 1, $age = 0) {
 		$data = $this->Peabody_Model->getWord($number);
+
+		#echo "<pre>";
+		#	echo "Last Errors:" . var_dump(SESSION("LastErrors"));
+		#	echo "Last Total:" . var_dump(SESSION("LastTotal"));
+		#echo "</pre>";
 		
 		if($data) {
 			if(POST("validate")) {
-
-				//Correcta
 				if((int) POST("option") == (int) $data[0]["Answer"]) {
 					$data[0]["Correct"] = 1;
+					$data[0]["Block"]   = POST("block");
+
+					if(SESSION("Corrects") == 8 and SESSION("LastTotal") < 8) {
+						SESSION("LastTotal", SESSION("LastTotal") + 1);
+					}
 
 					if($number == $this->getStart($age)) {
 						SESSION("Last", $number);
@@ -239,26 +245,44 @@ class Peabody_Controller extends ZP_Controller {
 								$newBlock = TRUE;
 
 								SESSION("Complete", TRUE);
+								SESSION("ChangeBlock", 1);
+
+								SESSION("LastTotal", 0);
+								SESSION("LastErrors", 0);
 							}
 						}
 					}
 				} else {
 					$data[0]["Correct"] = 0;
+					
+					$bad = TRUE;
 
-					if($age > 4) {		
-						$block = $this->getBlock($number);
-						$limit = $this->getLimit($block);
+					if($age > 4) {
+						if(SESSION("ChangeBlock") === 1) {
+							if($block == 1) {
+								SESSION("Corrects", 0);
+							}
 
-						if(SESSION("Complete") === TRUE) {							
+							if(SESSION("Corrects") == 8 and SESSION("LastErrors") == 0) {
+								SESSION("LastErrors", 1);
+								SESSION("LastTotal", 1);
 
+								$data[0]["Block"] = POST("block") + 1;
+								$block++;
+							} elseif(SESSION("LastErrors") < 6 and SESSION("LastTotal") < 8) {
+								SESSION("LastErrors", SESSION("LastErrors") + 1);
+								SESSION("LastTotal", SESSION("LastTotal") + 1);
+
+								$data[0]["Block"] = POST("block");
+							} 
 						} else {
-							$_SESSION["$block"]["low"]   = $limit[0];
-							$_SESSION["$block"]["high"]  = $limit[1];
-							$_SESSION["$block"]["error"] =
+							$data[0]["Block"] = "2";
+
+							SESSION("ChangeBlock", 1);
 						}
+					} else {
+						$data[0]["Block"] = POST("block");
 					}
-
-
 				}
 
 				$data[0]["Word"]    = decode($data[0]["Word"]);
@@ -267,44 +291,56 @@ class Peabody_Controller extends ZP_Controller {
 
 				$this->Peabody_Model->setWord($data[0]);
 
+				#$corrects 	= $this->Peabody_Model->getCorrects($block, $age);
+				#$incorrects = $this->Peabody_Model->getIncorrects($block, $age);
+
+				#$total = count($corrects) + count($incorrects);
+
+				if(SESSION("LastErrors") == 6) {
+					redirect("peabody/finished/$age");
+				} elseif(SESSION("LastTotal") == 8) {
+					SESSION("LastErrors", 0);
+					SESSION("LastTotal", 0);
+				}
+
 				if($age <= 4) {
-					redirect("peabody/image/". ($number + 1));
+					redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
 				} else {
 					if(POST("number") == 125) {
 						redirect("peabody/finished/$age");
 					}
 					
 					if(SESSION("Success")) {
-						redirect("peabody/image/". ($number + 1));
+						redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
 					} elseif($data[0]["Correct"] == 1) { 
 						if(!SESSION("Error")) {
-							redirect("peabody/image/". ($number + 1));
-						} elseif(SESSION("Error") === TRUE and SESSION("Corrects") == 8) {
+							redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
+						} elseif(SESSION("Error") and SESSION("Corrects") == 8) {
 							SESSION("Error", FALSE);
 							SESSION("Success", TRUE);
 				
-							if(isset($newBlock)) { 
+							if($block == 1 or isset($newBlock)) { 
 								unset($newBlock);
 								
 								if(SESSION("First") === TRUE) {
-									redirect("peabody/image/". (SESSION("Last") + 1));
+									redirect("peabody/image/". (SESSION("Last") + 1) ."/$block/". POST("age"));
 								} else {
-									redirect("peabody/image/". (SESSION("LastError") + 1));
+									redirect("peabody/image/". (SESSION("LastError") + 1) ."/2/". POST("age"));
 								}
 							} else { 
-								redirect("peabody/image/". ($number + 1));
+								redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
 							}
 						} else { 
-							if(SESSION("Complete") !== TRUE) {
+							if($block == 1) {
 								SESSION("Start", SESSION("Start") - 1);
 
-								redirect("peabody/image/". SESSION("Start"));							
+								redirect("peabody/image/". SESSION("Start") ."/$block/". POST("age"));							
 							} else {
-								redirect("peabody/image/". ($number + 1));
+								redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
 							}
 						}
 					} else {  
-						if(SESSION("Complete") !== TRUE) {
+						if($block == 1) {
 							if($number == $this->getStart($age)) {
 								SESSION("Last", $number);
 								SESSION("Corrects", 0);
@@ -316,14 +352,14 @@ class Peabody_Controller extends ZP_Controller {
 							SESSION("Error", 1);
 							SESSION("Start", SESSION("Start") - 1);
 
-							redirect("peabody/image/". SESSION("Start"));
+							redirect("peabody/image/". SESSION("Start") ."/$block/". POST("age"));
 						} else {
-							redirect("peabody/image/". ($number + 1));
+							redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
 						}
 					}
 				}
 			} else {
-				$this->show($data[0]["ID_Word"], $data[0]["Word"]);
+				$this->show($data[0]["ID_Word"], $data[0]["Word"], $block, $age);
 			}
 		}
 	}
@@ -352,9 +388,11 @@ class Peabody_Controller extends ZP_Controller {
 		}
 	}
 
-	public function show($number, $word) {
+	public function show($number, $word, $block, $age) {
 		$vars["number"] = $number;
-		$vars["word"]   = $word;		
+		$vars["word"]   = $word;
+		$vars["age"]	= $age;
+		$vars["block"]  = $block;
 		$vars["view"] 	= $this->view("image", TRUE);
 
 		$this->render("content", $vars);
