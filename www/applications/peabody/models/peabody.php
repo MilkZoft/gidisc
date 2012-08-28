@@ -21,6 +21,74 @@ class Peabody_Model extends ZP_Model {
 		$this->Data->table($this->table);
 	}
 
+	public function getTotalFirstBlock() {
+		$total = $this->Db->findBySQL("Correct = 0 AND FirstBlock = 1", "peabody_answers");
+		
+		return ($total) ? count($total) : 0;
+	}
+
+	public function resetAnswers() {
+		$this->Db->updateBySQL("peabody_answers", "FirstBlock = 0 WHERE FirstBlock = 1");
+	}
+
+	public function findBlock($number, $force = FALSE) {
+		if($force) {
+			$data = $this->Db->findBySQL("Limit1 <= '$number'", "peabody_blocks", NULL, "ID_Block DESC", 1);
+
+			return $data[0]["ID_Block"];
+		} elseif(!SESSION("Block") and !SESSION("FirstBlockComplete")) {
+			$data = $this->Db->findBySQL("Limit1 <= '$number'", "peabody_blocks", NULL, "ID_Block DESC", 5);
+
+			SESSION("Block", $data[0]["ID_Block"]);
+
+			return $data;
+		} elseif(SESSION("Block") and !SESSION("FirstBlockComplete")) {
+			return SESSION("Block");
+		}
+	}
+
+	public function findAnswer($user, $block, $word, $correct, $firstBlock = 0) {
+		$data = $this->Db->findBySQL("ID_User = '$user' AND ID_Block = '$block' AND ID_Word = '$word' AND Correct = '$correct' AND FirstBlock = '$firstBlock'", "peabody_answers");
+
+		return $data;
+	}
+
+	public function setAnswer($user, $block, $word, $correct, $firstBlock = 0) {
+		$data = array(
+			"ID_User" 	 => $user,
+			"ID_Block" 	 => $block,
+			"ID_Word"	 => $word,
+			"Correct"	 => $correct,
+			"FirstBlock" => $firstBlock
+		);
+
+		return $this->Db->insert("peabody_answers", $data);
+	}
+
+	public function getAnswers($block, $firstBlock = FALSE) {
+		if(!$firstBlock) {
+			$total["total"] = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block'  AND FirstBlock = 0"));
+
+			if($total["total"] > 0) {
+				$total["corrects"] 	 = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 1 AND FirstBlock = 0"));
+				$total["incorrects"] = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 0 AND FirstBlock = 0"));
+
+				return $total;
+			}
+		} else {
+			$total["total"] = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND FirstBlock = 1"));
+
+			if($total["total"] > 0) {
+				$total["corrects"] 	 = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 1 AND FirstBlock = 1"));
+				$total["incorrects"] = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 0 AND FirstBlock = 1"));
+
+				return $total;
+			}
+		}
+
+		return FALSE;
+	}
+
 	public function getBlocks($words) {
 		if($words["Words1"]) {
 			$i = 1;

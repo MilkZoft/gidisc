@@ -214,152 +214,153 @@ class Peabody_Controller extends ZP_Controller {
 		}
 	}
 
-	public function image($number, $block = 1, $age = 0) {
+	public function image($number, $age = 0) {
 		$data = $this->Peabody_Model->getWord($number);
-
-		#echo "<pre>";
-		#	echo "Last Errors:" . var_dump(SESSION("LastErrors"));
-		#	echo "Last Total:" . var_dump(SESSION("LastTotal"));
-		#echo "</pre>";
 		
 		if($data) {
 			if(POST("validate")) {
+				$findBlock = $this->Peabody_Model->findBlock($number);
+
+				if(!is_array($findBlock)) {
+					$block = $findBlock;
+				} else {
+					$block = $findBlock[0]["ID_Block"];
+				}
+
 				if((int) POST("option") == (int) $data[0]["Answer"]) {
-					$data[0]["Correct"] = 1;
-					$data[0]["Block"]   = POST("block");
+					$correct = 1;
 
-					if(SESSION("Corrects") == 8 and SESSION("LastTotal") < 8) {
-						SESSION("LastTotal", SESSION("LastTotal") + 1);
-					}
+					if(!SESSION("FirstBlockComplete")) {
+						if($findBlock) {
+							$total = $this->Peabody_Model->getAnswers($block, TRUE);
 
-					if($number == $this->getStart($age)) {
-						SESSION("Last", $number);
-						SESSION("Corrects", 1);
-					} else {
-						if(SESSION("Corrects") < 8) {
-							SESSION("Corrects", SESSION("Corrects") + 1);
+							if($total["incorrects"] == 6) {
+								redirect("peabody/finished/$age");
+							} elseif($total["corrects"] == 8) {
+ 								SESSION("FirstBlockComplete", TRUE);
+ 								SESSION("Block", FALSE);
+							} else {
+								$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 1, 1);
+
+								if(!$findAnswer) {
+									$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 1, 1);
+
+									$total = $this->Peabody_Model->getAnswers($block, TRUE);
+
+									if($total["incorrects"] == 6) {
+										redirect("peabody/finished/$age");
+									} elseif($total["corrects"] == 8) {
+	 									SESSION("FirstBlockComplete", TRUE);
+	 									SESSION("Block", FALSE);
+	 									$newBlock = TRUE;
+									}
+								}
+							}
 						}
+					} else {
+						if($findBlock) {
+							$total = $this->Peabody_Model->getAnswers($block);
 
-						if(SESSION("Corrects") == 8) {
-							if(SESSION("Complete") !== TRUE) {
-								$newBlock = TRUE;
+							if($total["incorrects"] == 6) {
+								redirect("peabody/finished/$age");
+							} elseif($total["total"] == 8) {
+								$findBlock = array_shift($findBlock);
+							} else {
+								if(count($findBlock) > 1) {
+									for($i = 0; $i <= count($findBlock) - 1; $i++) {
+										$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 1);
 
-								SESSION("Complete", TRUE);
-								SESSION("ChangeBlock", 1);
+										if(!$findAnswer) {
+											$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 1);
+										}
+									}
+								} else {
+									$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 1);
 
-								SESSION("LastTotal", 0);
-								SESSION("LastErrors", 0);
+									if(!$findAnswer) {
+										$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 1);
+									}
+								}
 							}
 						}
 					}
 				} else {
-					$data[0]["Correct"] = 0;
-					
-					$bad = TRUE;
+					$correct = 0;
 
-					if($age > 4) {
-						if(SESSION("ChangeBlock") === 1) {
-							if($block == 1) {
-								SESSION("Corrects", 0);
+					if(!SESSION("FirstBlockComplete")) {
+						if($findBlock) {
+							$totalFirstBlock = $this->Peabody_Model->getTotalFirstBlock();
+
+							if($totalFirstBlock > 0) {
+								$this->Peabody_Model->resetAnswers();
 							}
 
-							if(SESSION("Corrects") == 8 and SESSION("LastErrors") == 0) {
-								SESSION("LastErrors", 1);
-								SESSION("LastTotal", 1);
+							$block = $this->Peabody_Model->findBlock($number, TRUE);
 
-								$data[0]["Block"] = POST("block") + 1;
-								$block++;
-							} elseif(SESSION("LastErrors") < 6 and SESSION("LastTotal") < 8) {
-								SESSION("LastErrors", SESSION("LastErrors") + 1);
-								SESSION("LastTotal", SESSION("LastTotal") + 1);
+							$total = $this->Peabody_Model->getAnswers($block, TRUE);
 
-								$data[0]["Block"] = POST("block");
-							} 
-						} else {
-							$data[0]["Block"] = "2";
+							if($total["incorrects"] == 6) {
+								redirect("peabody/finished/$age");
+							} elseif($total["corrects"] == 8) {
+ 								SESSION("FirstBlockComplete", TRUE);
+ 								SESSION("Block", FALSE);
+							} else {
+								$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 0, 1);
 
-							SESSION("ChangeBlock", 1);
+								if(!$findAnswer) {
+									$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 0, 1);
+
+									$total = $this->Peabody_Model->getAnswers($block, TRUE);
+
+									if($total["incorrects"] == 6) {
+										redirect("peabody/finished/$age");
+									} elseif($total["corrects"] == 8) {
+	 									SESSION("FirstBlockComplete", TRUE);
+	 									SESSION("Block", FALSE);
+									}
+								}
+							}
 						}
 					} else {
-						$data[0]["Block"] = POST("block");
+
 					}
 				}
 
-				$data[0]["Word"]    = decode($data[0]["Word"]);
-				$data[0]["ID_User"] = SESSION("ZanUserID");
-				$data[0]["Age"]     = POST("age");
-
-				$this->Peabody_Model->setWord($data[0]);
-
-				#$corrects 	= $this->Peabody_Model->getCorrects($block, $age);
-				#$incorrects = $this->Peabody_Model->getIncorrects($block, $age);
-
-				#$total = count($corrects) + count($incorrects);
-
-				if(SESSION("LastErrors") == 6) {
-					redirect("peabody/finished/$age");
-				} elseif(SESSION("LastTotal") == 8) {
-					SESSION("LastErrors", 0);
-					SESSION("LastTotal", 0);
-				}
-
 				if($age <= 4) {
-					redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
+					redirect("peabody/image/". ($number + 1) ."/$age");
 				} else {
 					if(POST("number") == 125) {
 						redirect("peabody/finished/$age");
 					}
-					
-					if(SESSION("Success")) {
-						redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
-					} elseif($data[0]["Correct"] == 1) { 
+
+					if(isset($newBlock)) {
+						redirect("peabody/image/". (SESSION("LastError") + 1) ."/$age");
+					} elseif(SESSION("FirstBlockComplete") !== FALSE) {
+						redirect("peabody/image/". ($number + 1) ."/$age");
+					} elseif($correct == 1) {
 						if(!SESSION("Error")) {
-							redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
-						} elseif(SESSION("Error") and SESSION("Corrects") == 8) {
-							SESSION("Error", FALSE);
-							SESSION("Success", TRUE);
-				
-							if($block == 1 or isset($newBlock)) { 
-								unset($newBlock);
-								
-								if(SESSION("First") === TRUE) {
-									redirect("peabody/image/". (SESSION("Last") + 1) ."/$block/". POST("age"));
-								} else {
-									redirect("peabody/image/". (SESSION("LastError") + 1) ."/2/". POST("age"));
-								}
-							} else { 
-								redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
-							}
-						} else { 
-							if($block == 1) {
-								SESSION("Start", SESSION("Start") - 1);
-
-								redirect("peabody/image/". SESSION("Start") ."/$block/". POST("age"));							
-							} else {
-								redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
-							}
-						}
-					} else {  
-						if($block == 1) {
-							if($number == $this->getStart($age)) {
-								SESSION("Last", $number);
-								SESSION("Corrects", 0);
-								SESSION("First", TRUE);
-							} elseif(!SESSION("Error")) {
-								SESSION("LastError", $number);
-							}
-
-							SESSION("Error", 1);
+							redirect("peabody/image/". ($number + 1) ."/$age");
+						} else {
 							SESSION("Start", SESSION("Start") - 1);
 
-							redirect("peabody/image/". SESSION("Start") ."/$block/". POST("age"));
-						} else {
-							redirect("peabody/image/". ($number + 1) ."/$block/". POST("age"));
+							redirect("peabody/image/". SESSION("Start") ."/$age");	
 						}
+					} else {
+						if($number == $this->getStart($age)) {
+							SESSION("Last", $number);
+							SESSION("First", TRUE);
+						} elseif(!SESSION("Error")) {
+							SESSION("LastError", $number);
+						}
+
+						SESSION("Error", 1);
+						SESSION("Start", SESSION("Start") - 1);
+
+						redirect("peabody/image/". SESSION("Start") ."/$age");
 					}
 				}
 			} else {
-				$this->show($data[0]["ID_Word"], $data[0]["Word"], $block, $age);
+				$this->show($data[0]["ID_Word"], $data[0]["Word"], $age);
 			}
 		}
 	}
@@ -388,11 +389,10 @@ class Peabody_Controller extends ZP_Controller {
 		}
 	}
 
-	public function show($number, $word, $block, $age) {
+	public function show($number, $word, $age) {
 		$vars["number"] = $number;
 		$vars["word"]   = $word;
 		$vars["age"]	= $age;
-		$vars["block"]  = $block;
 		$vars["view"] 	= $this->view("image", TRUE);
 
 		$this->render("content", $vars);

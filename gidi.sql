@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 27, 2012 at 04:42 AM
+-- Generation Time: Aug 28, 2012 at 05:07 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -1934,20 +1934,24 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_answers` (
   `ID_User` mediumint(8) unsigned DEFAULT '0',
   `ID_Block` int(11) unsigned DEFAULT '0',
   `ID_Word` mediumint(8) unsigned DEFAULT '0',
-  `Correct` tinyint(1) unsigned DEFAULT '0'
+  `Correct` tinyint(1) unsigned DEFAULT '0',
+  `FirstBlock` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `zan_peabody_answers`
 --
 
-INSERT INTO `zan_peabody_answers` (`ID_User`, `ID_Block`, `ID_Word`, `Correct`) VALUES
-(0, 26, 26, 1),
-(0, 26, 27, 1),
-(0, 26, 28, 1),
-(0, 26, 29, 1),
-(0, 30, 30, 0),
-(0, 26, 25, 1);
+INSERT INTO `zan_peabody_answers` (`ID_User`, `ID_Block`, `ID_Word`, `Correct`, `FirstBlock`) VALUES
+(1518, 26, 26, 1, 1),
+(1518, 26, 27, 1, 1),
+(1518, 26, 28, 1, 1),
+(1518, 26, 29, 1, 1),
+(1518, 30, 30, 0, 1),
+(1518, 26, 25, 1, 1),
+(1518, 26, 24, 1, 1),
+(1518, 26, 23, 1, 1),
+(1518, 26, 22, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -5753,7 +5757,7 @@ CREATE TABLE IF NOT EXISTS `zan_tokens` (
   `Start_Date` int(11) NOT NULL,
   PRIMARY KEY (`ID_Token`),
   KEY `fk_zan_tokens_zan_users1` (`ID_User`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=94 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=99 ;
 
 --
 -- Dumping data for table `zan_tokens`
@@ -5852,7 +5856,12 @@ INSERT INTO `zan_tokens` (`ID_Token`, `ID_User`, `Token`, `IP`, `Start_Date`) VA
 (90, 1518, '4EE0E4B6A6', '::1', 1345778000),
 (91, 1518, 'E02363BCB2', '::1', 1345779183),
 (92, 1518, '687567979F', '::1', 1345780380),
-(93, 1518, 'E69D90625F', '::1', 1346030482);
+(93, 1518, 'E69D90625F', '::1', 1346030482),
+(94, 1518, '2C8DABCEC1', '::1', 1346126156),
+(95, 1518, '0258738E6C', '::1', 1346129349),
+(96, 1518, 'D16659DBA2', '::1', 1346129551),
+(97, 1518, 'BD6AFCDAAE', '::1', 1346130205),
+(98, 1518, 'B6F492C994', '::1', 1346130376);
 
 -- --------------------------------------------------------
 
