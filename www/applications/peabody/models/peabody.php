@@ -24,6 +24,16 @@ class Peabody_Model extends ZP_Model {
 	public function getTotalFirstBlock() {
 		$total = $this->Db->findBySQL("Correct = 0 AND FirstBlock = 1", "peabody_answers");
 		
+		if($total) {
+			if(count($total) == 1) {
+				return 0;
+			} else {
+				return count($total);
+			}
+		} else {
+			return 0;
+		}
+
 		return ($total) ? count($total) : 0;
 	}
 
@@ -42,6 +52,18 @@ class Peabody_Model extends ZP_Model {
 			SESSION("Block", $data[0]["ID_Block"]);
 
 			return $data;
+		} elseif(SESSION("FirstBlockComplete") and SESSION("LastBlockError")) {
+			$total = $number - SESSION("LastBlockError");
+
+			if($total <= 7) {
+				return SESSION("LastBlockError");
+			} elseif($total >= 8) {
+				$data = $this->Db->findBySQL("Limit1 <= '$number'", "peabody_blocks", NULL, "ID_Block DESC", 5);
+
+				SESSION("LastBlockError", $data[0]["ID_Block"]);
+
+				return SESSION("LastBlockError");
+			}
 		} elseif(SESSION("Block") and !SESSION("FirstBlockComplete")) {
 			return SESSION("Block");
 		}
@@ -54,6 +76,12 @@ class Peabody_Model extends ZP_Model {
 	}
 
 	public function setAnswer($user, $block, $word, $correct, $firstBlock = 0) {
+		if($firstBlock == 1 and $correct == 0) {
+			if(!SESSION("LastBlockError")) { 
+				SESSION("LastBlockError", $block);
+			}
+		}
+		
 		$data = array(
 			"ID_User" 	 => $user,
 			"ID_Block" 	 => $block,
@@ -67,20 +95,34 @@ class Peabody_Model extends ZP_Model {
 
 	public function getAnswers($block, $firstBlock = FALSE) {
 		if(!$firstBlock) {
-			$total["total"] = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block'  AND FirstBlock = 0"));
+			$total["total"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block'  AND FirstBlock = 0");
+
+			$total["total"] = (!$total["total"]) ? 0 : count($total["total"]);
 
 			if($total["total"] > 0) {
-				$total["corrects"] 	 = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 1 AND FirstBlock = 0"));
-				$total["incorrects"] = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 0 AND FirstBlock = 0"));
+				$total["corrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 1 AND FirstBlock = 0");
+
+				$total["corrects"] = (!$total["corrects"]) ? 0 : count($total["corrects"]);
+
+				$total["incorrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 0 AND FirstBlock = 0");
+
+				$total["incorrects"] = (!$total["incorrects"]) ? 0 : count($total["incorrects"]);
 
 				return $total;
 			}
 		} else {
-			$total["total"] = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND FirstBlock = 1"));
+			$total["total"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block'  AND FirstBlock = 1");
+
+			$total["total"] = (!$total["total"]) ? 0 : count($total["total"]);
 
 			if($total["total"] > 0) {
-				$total["corrects"] 	 = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 1 AND FirstBlock = 1"));
-				$total["incorrects"] = count($this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 0 AND FirstBlock = 1"));
+				$total["corrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 1 AND FirstBlock = 1");
+
+				$total["corrects"] = (!$total["corrects"]) ? 0 : count($total["corrects"]);
+
+				$total["incorrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 0 AND FirstBlock = 1");
+
+				$total["incorrects"] = (!$total["incorrects"]) ? 0 : count($total["incorrects"]);
 
 				return $total;
 			}

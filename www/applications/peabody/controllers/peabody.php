@@ -7,6 +7,8 @@ if(!defined("_access")) {
 }
 
 class Peabody_Controller extends ZP_Controller {
+	public static $blocks = array();
+
 
 	public function __construct() {
 		$this->Templates   = $this->core("Templates");
@@ -265,6 +267,8 @@ class Peabody_Controller extends ZP_Controller {
 								redirect("peabody/finished/$age");
 							} elseif($total["total"] == 8) {
 								$findBlock = array_shift($findBlock);
+
+								SESSION("LastBlockError", FALSE);
 							} else {
 								if(count($findBlock) > 1) {
 									for($i = 0; $i <= count($findBlock) - 1; $i++) {
@@ -322,7 +326,46 @@ class Peabody_Controller extends ZP_Controller {
 							}
 						}
 					} else {
+						if($findBlock) {
+							$total = $this->Peabody_Model->getAnswers($block);
 
+							if($total["incorrects"] == 6) {
+								redirect("peabody/finished/$age");
+							} elseif($total["total"] == 8) {
+								$findBlock = array_shift($findBlock);
+
+								SESSION("LastBlockError", FALSE);
+							} else {
+								$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 0);
+
+								if(!$findAnswer) {
+									$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 0);
+
+									$total = $number - SESSION("LastBlockError");
+
+									$findBlock = $this->Peabody_Model->findBlock($number, TRUE);
+
+									$block = $findBlock;
+
+									$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 0);
+
+									if(!$findAnswer) {
+										$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 0);
+									}
+
+									if($total == 7) {
+										if(SESSION("LastBlockError1") !== FALSE) {
+											SESSION("LastBlockError", SESSION("LastBlockError1"));
+											SESSION("LastBlockError1", FALSE);
+										} else {
+											SESSION("LastBlockError", $block);
+										}
+									} else {
+										SESSION("LastBlockError1", $block);
+									}
+								}
+							}
+						}
 					}
 				}
 
