@@ -51,19 +51,7 @@ class Peabody_Model extends ZP_Model {
 
 			SESSION("Block", $data[0]["ID_Block"]);
 
-			return $data;
-		} elseif(SESSION("FirstBlockComplete") and SESSION("LastBlockError")) {
-			$total = $number - SESSION("LastBlockError");
-
-			if($total <= 7) {
-				return SESSION("LastBlockError");
-			} elseif($total >= 8) {
-				$data = $this->Db->findBySQL("Limit1 <= '$number'", "peabody_blocks", NULL, "ID_Block DESC", 5);
-
-				SESSION("LastBlockError", $data[0]["ID_Block"]);
-
-				return SESSION("LastBlockError");
-			}
+			return $data;			
 		} elseif(SESSION("Block") and !SESSION("FirstBlockComplete")) {
 			return SESSION("Block");
 		}
@@ -77,9 +65,7 @@ class Peabody_Model extends ZP_Model {
 
 	public function setAnswer($user, $block, $word, $correct, $firstBlock = 0) {
 		if($firstBlock == 1 and $correct == 0) {
-			if(!SESSION("LastBlockError")) { 
-				SESSION("LastBlockError", $block);
-			}
+			$_SESSION["LastBlockError"][0] = $block;		
 		}
 		
 		$data = array(
@@ -95,32 +81,32 @@ class Peabody_Model extends ZP_Model {
 
 	public function getAnswers($block, $firstBlock = FALSE) {
 		if(!$firstBlock) {
-			$total["total"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block'  AND FirstBlock = 0");
-
+			$total["total"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block'", "peabody_answers");
+		
 			$total["total"] = (!$total["total"]) ? 0 : count($total["total"]);
 
 			if($total["total"] > 0) {
-				$total["corrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 1 AND FirstBlock = 0");
+				$total["corrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 1", "peabody_answers");
 
 				$total["corrects"] = (!$total["corrects"]) ? 0 : count($total["corrects"]);
 
-				$total["incorrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 0 AND FirstBlock = 0");
+				$total["incorrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 0", "peabody_answers");
 
 				$total["incorrects"] = (!$total["incorrects"]) ? 0 : count($total["incorrects"]);
 
 				return $total;
 			}
 		} else {
-			$total["total"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block'  AND FirstBlock = 1");
+			$total["total"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block'  AND FirstBlock = 1", "peabody_answers");
 
 			$total["total"] = (!$total["total"]) ? 0 : count($total["total"]);
 
 			if($total["total"] > 0) {
-				$total["corrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 1 AND FirstBlock = 1");
+				$total["corrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 1 AND FirstBlock = 1", "peabody_answers");
 
 				$total["corrects"] = (!$total["corrects"]) ? 0 : count($total["corrects"]);
 
-				$total["incorrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 0 AND FirstBlock = 1");
+				$total["incorrects"] = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND ID_Block = '$block' AND Correct = 0 AND FirstBlock = 1", "peabody_answers");
 
 				$total["incorrects"] = (!$total["incorrects"]) ? 0 : count($total["incorrects"]);
 
@@ -186,20 +172,16 @@ class Peabody_Model extends ZP_Model {
 
 		$this->Db->insert("peabody_results", array("ID_User" => SESSION("ZanUserID"), "Result" => $score, "Corrects" => $corrects, "Start_Date" => now(4), "Attempt" => $attempt));
 
-		//$this->Db->deleteBySQL("ID_User = '". SESSION("ZanUserID") ."'", "peabody_temp");
+		$this->Db->deleteBySQL("ID_User = '". SESSION("ZanUserID") ."'", "peabody_answers");
 
 		unset($_SESSION["Last"]);
-		unset($_SESSION["Corrects"]);
 		unset($_SESSION["Error"]);
-		unset($_SESSION["Success"]);
 		unset($_SESSION["Start"]);
 		unset($_SESSION["First"]);
 		unset($_SESSION["LastError"]);
-		unset($_SESSION["ChangeBlock"]);
-		unset($_SESSION["LastBad"]);
-		unset($_SESSION["IncrementBlock"]);
-		unset($_SESSION["LastErrors"]);
-		unset($_SESSION["LastTotal"]);
+		unset($_SESSION["FirstBlockComplete"]);
+		unset($_SESSION["Block"]);
+		unset($_SESSION["LastBlockError"]);
 
 		return TRUE;
 	}
@@ -213,18 +195,16 @@ class Peabody_Model extends ZP_Model {
 
 	public function getCorrects($block = NULL, $age = NULL) {
 		if($block === TRUE and $age === TRUE) {			
-			$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1", "peabody_temp", NULL, "ID_Word ASC", 1);
+			$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 0 GROUP BY ID_Word", "peabody_answers", NULL, "ID_Word DESC", 1);
 			
-			$return["low"] = ($data) ? $data[0]["ID_Word"] : 0;
+			$last = $data[0]["ID_Word"];
 
-			$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 1", "peabody_temp");
-			
-			$return["data"] = ($data) ? $data : 0;
+			$data = $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Correct = 0 GROUP BY ID_Word", "peabody_answers");
 
-			return $return;
+			$errors = count($data);
+
+			return ($last - $errors);
 		} 
-		
-		return $this->Db->findBySQL("ID_User = '". SESSION("ZanUserID") ."' AND Block = '$block' AND Age = '$age' AND Correct = 1", "peabody_temp");
 	}
 
 	public function getIncorrects($block, $age) {

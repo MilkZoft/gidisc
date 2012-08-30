@@ -219,21 +219,32 @@ class Peabody_Controller extends ZP_Controller {
 	public function image($number, $age = 0) {
 		$data = $this->Peabody_Model->getWord($number);
 		
+		#$_SESSION["LastBlockError"] = array("59", "62", "63", "64", "65");
+		#die("si");
+		
+		echo "<pre>";
+
+		echo "Block: ". var_dump(SESSION("Block"));
+		echo "LastBlockError: ". var_dump(SESSION("LastBlockError"));
+		echo "FirstBlockComplete:". var_dump(SESSION("FirstBlockComplete"));
+		
+		echo "</pre>";
+
 		if($data) {
 			if(POST("validate")) {
-				$findBlock = $this->Peabody_Model->findBlock($number);
-
-				if(!is_array($findBlock)) {
-					$block = $findBlock;
-				} else {
-					$block = $findBlock[0]["ID_Block"];
-				}
-
 				if((int) POST("option") == (int) $data[0]["Answer"]) {
 					$correct = 1;
 
+					$findBlock = $this->Peabody_Model->findBlock($number);
+
+					if(!is_array($findBlock)) {
+						$block = $findBlock;
+					} else {
+						$block = $findBlock[0]["ID_Block"];
+					}
+
 					if(!SESSION("FirstBlockComplete")) {
-						if($findBlock) {
+						if($block) {
 							$total = $this->Peabody_Model->getAnswers($block, TRUE);
 
 							if($total["incorrects"] == 6) {
@@ -254,37 +265,78 @@ class Peabody_Controller extends ZP_Controller {
 									} elseif($total["corrects"] == 8) {
 	 									SESSION("FirstBlockComplete", TRUE);
 	 									SESSION("Block", FALSE);
+
 	 									$newBlock = TRUE;
 									}
 								}
 							}
 						}
-					} else {
-						if($findBlock) {
-							$total = $this->Peabody_Model->getAnswers($block);
+					} else { 
+						if(isset($_SESSION["LastBlockError"]) and is_array($_SESSION["LastBlockError"])) { 
+							foreach($_SESSION["LastBlockError"] as $block) {
+								$total = $this->Peabody_Model->getAnswers($block);
+								
+								if($total["incorrects"] == 6) {
+									redirect("peabody/finished/$age");
+								} elseif($total["total"] == 8) { 
+									array_shift($_SESSION["LastBlockError"]);
+								} else {
+									$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 1);
 
-							if($total["incorrects"] == 6) {
-								redirect("peabody/finished/$age");
-							} elseif($total["total"] == 8) {
-								$findBlock = array_shift($findBlock);
+									if(!$findAnswer) {
+										$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 1);
 
-								SESSION("LastBlockError", FALSE);
-							} else {
-								if(count($findBlock) > 1) {
-									for($i = 0; $i <= count($findBlock) - 1; $i++) {
-										$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 1);
-
-										if(!$findAnswer) {
-											$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 1);
+										$total = $this->Peabody_Model->getAnswers($block);
+										
+										if($total["incorrects"] == 6) {
+											redirect("peabody/finished/$age");
+										} elseif($total["total"] == 8) {
+											array_shift($_SESSION["LastBlockError"]);
 										}
+									}	
+								}
+							}
+						} else { 
+							$findBlock = $this->Peabody_Model->findBlock($number, TRUE);
+
+							if(!is_array($findBlock)) {
+								$block = $findBlock;
+							} else {
+								$block = $findBlock[0]["ID_Block"];
+							}
+
+							if($block) {
+								$total = $this->Peabody_Model->getAnswers($block);
+
+								if(is_array($total) and $total["incorrects"] == 6) {
+									redirect("peabody/finished/$age");
+								} elseif(is_array($total) and $total["total"] == 8) {
+									$_SESSION["LastBlockError"] = array_shift($_SESSION["LastBlockError"]);
+
+									if(!is_array($_SESSION["LastBlockError"])) {
+										$_SESSION["LastBlockError"] = FALSE;
 									}
 								} else {
 									$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 1);
 
 									if(!$findAnswer) {
 										$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 1);
-									}
-								}
+
+										$total = $this->Peabody_Model->getAnswers($block);
+										
+										if($total["incorrects"] == 6) {
+											redirect("peabody/finished/$age");
+										} elseif($total["total"] == 8) {
+											reset($_SESSION["LastBlockError"]);
+
+											array_shift($_SESSION["LastBlockError"]);
+										} elseif(!is_array($_SESSION["LastBlockError"])) { 
+											unset($_SESSION["LastBlockError"]);
+
+											$_SESSION["LastBlockError"] = array($block);
+										}
+									}	
+								}	
 							}
 						}
 					}
@@ -292,6 +344,24 @@ class Peabody_Controller extends ZP_Controller {
 					$correct = 0;
 
 					if(!SESSION("FirstBlockComplete")) {
+						$findBlock = $this->Peabody_Model->findBlock($number);
+
+						if(!is_array($findBlock)) {
+							$block = $findBlock;
+						} else {
+							$block = $findBlock[0]["ID_Block"];
+						}
+
+						if(isset($_SESSION["LastBlockError"][0])) {
+							$block = $_SESSION["LastBlockError"][0];
+
+							$_SESSION["LastBlockError"] = array_shift($_SESSION["LastBlockError"]);
+
+							if(!is_array($_SESSION["LastBlockError"])) {
+								$_SESSION["LastBlockError"] = FALSE;
+							}
+						}
+
 						if($findBlock) {
 							$totalFirstBlock = $this->Peabody_Model->getTotalFirstBlock();
 
@@ -326,44 +396,75 @@ class Peabody_Controller extends ZP_Controller {
 							}
 						}
 					} else {
-						if($findBlock) {
-							$total = $this->Peabody_Model->getAnswers($block);
+						if(isset($_SESSION["LastBlockError"]) and is_array($_SESSION["LastBlockError"])) { 
+							$block = $this->Peabody_Model->findBlock($number, TRUE);
 
-							if($total["incorrects"] == 6) {
-								redirect("peabody/finished/$age");
-							} elseif($total["total"] == 8) {
-								$findBlock = array_shift($findBlock);
+							$_SESSION["LastBlockError"][] = $block;
+							
+							$i = 0;
 
-								SESSION("LastBlockError", FALSE);
-							} else {
-								$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 0);
-
-								if(!$findAnswer) {
-									$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 0);
-
-									$total = $number - SESSION("LastBlockError");
-
-									$findBlock = $this->Peabody_Model->findBlock($number, TRUE);
-
-									$block = $findBlock;
-
+							foreach($_SESSION["LastBlockError"] as $block) {
+								$total = $this->Peabody_Model->getAnswers($block);
+								
+								if($total["incorrects"] == 6) {
+									redirect("peabody/finished/$age");
+								} elseif($total["total"] == 8) {
+									array_shift($_SESSION["LastBlockError"]);								
+								} else {
 									$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 0);
 
 									if(!$findAnswer) {
 										$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 0);
-									}
 
-									if($total == 7) {
-										if(SESSION("LastBlockError1") !== FALSE) {
-											SESSION("LastBlockError", SESSION("LastBlockError1"));
-											SESSION("LastBlockError1", FALSE);
-										} else {
-											SESSION("LastBlockError", $block);
+										$total = $number - $block;
+										
+										if($total == 7) { 											
+											array_shift($_SESSION["LastBlockError"]);
 										}
-									} else {
-										SESSION("LastBlockError1", $block);
+
+										$total = $this->Peabody_Model->getAnswers($block);
+
+										if($total["incorrects"] == 6) {
+											redirect("peabody/finished/$age");
+										} elseif($total["total"] == 8) {
+											array_shift($_SESSION["LastBlockError"]);								
+										}
 									}
 								}
+
+								$i++;
+							}
+						} else { 
+							$findBlock = $this->Peabody_Model->findBlock($number, TRUE);
+
+							if(!is_array($findBlock)) {
+								$block = $findBlock;
+							} else {
+								$block = $findBlock[0]["ID_Block"];
+							}
+
+							if($block) {
+								$total = $this->Peabody_Model->getAnswers($block);
+
+								if($total["incorrects"] == 6) {
+									redirect("peabody/finished/$age");
+								} elseif($total["total"] == 8) {
+									array_shift($_SESSION["LastBlockError"]);
+								} else {
+									$findAnswer = $this->Peabody_Model->findAnswer(SESSION("ZanUserID"), $block, $number, 0);
+
+									if(!$findAnswer) {
+										$this->Peabody_Model->setAnswer(SESSION("ZanUserID"), $block, $number, 0);
+
+										$total = $number - $block;
+
+										if($total == 7) {
+											array_shift($_SESSION["LastBlockError"]);
+										} else {
+											$_SESSION["LastBlockError"][] = $block;
+										}
+									}	
+								}	
 							}
 						}
 					}
@@ -376,8 +477,10 @@ class Peabody_Controller extends ZP_Controller {
 						redirect("peabody/finished/$age");
 					}
 
-					if(isset($newBlock)) {
+					if(isset($newBlock) and SESSION("LastError") !== FALSE) {
 						redirect("peabody/image/". (SESSION("LastError") + 1) ."/$age");
+					} elseif(isset($newBlock)) {
+						redirect("peabody/image/". ($number + 1) ."/$age");
 					} elseif(SESSION("FirstBlockComplete") !== FALSE) {
 						redirect("peabody/image/". ($number + 1) ."/$age");
 					} elseif($correct == 1) {
@@ -443,20 +546,6 @@ class Peabody_Controller extends ZP_Controller {
 
 	public function finished($age) {
 		$corrects = $this->Peabody_Model->getCorrects(TRUE, TRUE);
-
-		if($age > 4 and isset($corrects["low"]) and $corrects["low"] > 0) {
-			$j = 0;
-
-			for($i = ($corrects["low"] - 1); $i >= 1; $i--) {
-				$j++;
-			}
-
-			$corrects = count($corrects["data"]) + $j;
-		} elseif($age > 4 and isset($corrects["low"]) and $corrects["low"] == 0) {
-			$corrects = $this->getStart($age) - 6;
-		} else {
-			$corrects = count($corrects["data"]);
-		}
 
 		$score = $this->Peabody_Model->getScore($corrects);
 		
