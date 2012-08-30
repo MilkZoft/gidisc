@@ -222,13 +222,13 @@ class Peabody_Controller extends ZP_Controller {
 		#$_SESSION["LastBlockError"] = array("59", "62", "63", "64", "65");
 		#die("si");
 		
-		echo "<pre>";
+		/*echo "<pre>";
 
 		echo "Block: ". var_dump(SESSION("Block"));
 		echo "LastBlockError: ". var_dump(SESSION("LastBlockError"));
 		echo "FirstBlockComplete:". var_dump(SESSION("FirstBlockComplete"));
 		
-		echo "</pre>";
+		echo "</pre>";*/
 
 		if($data) {
 			if(POST("validate")) {
