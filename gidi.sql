@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 28, 2012 at 05:07 AM
+-- Generation Time: Aug 30, 2012 at 05:58 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -1942,16 +1942,6 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_answers` (
 -- Dumping data for table `zan_peabody_answers`
 --
 
-INSERT INTO `zan_peabody_answers` (`ID_User`, `ID_Block`, `ID_Word`, `Correct`, `FirstBlock`) VALUES
-(1518, 26, 26, 1, 1),
-(1518, 26, 27, 1, 1),
-(1518, 26, 28, 1, 1),
-(1518, 26, 29, 1, 1),
-(1518, 30, 30, 0, 1),
-(1518, 26, 25, 1, 1),
-(1518, 26, 24, 1, 1),
-(1518, 26, 23, 1, 1),
-(1518, 26, 22, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2187,6 +2177,27 @@ INSERT INTO `zan_peabody_blocks2` (`ID_User`, `ID_Word`, `Block`, `Correct`, `Bl
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `zan_peabody_complete_blocks`
+--
+
+CREATE TABLE IF NOT EXISTS `zan_peabody_complete_blocks` (
+  `ID_User` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `ID_Block` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `Complete` tinyint(1) unsigned DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `zan_peabody_complete_blocks`
+--
+
+INSERT INTO `zan_peabody_complete_blocks` (`ID_User`, `ID_Block`, `Complete`) VALUES
+(0, 26, 1),
+(0, 30, 0),
+(1518, 31, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `zan_peabody_results`
 --
 
@@ -2198,12 +2209,15 @@ CREATE TABLE IF NOT EXISTS `zan_peabody_results` (
   `Start_Date` int(11) NOT NULL DEFAULT '0',
   `Attempt` smallint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_Result`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `zan_peabody_results`
 --
 
+INSERT INTO `zan_peabody_results` (`ID_Result`, `ID_User`, `Result`, `Corrects`, `Start_Date`, `Attempt`) VALUES
+(1, 1518, '7-1', 54, 1346305608, 1),
+(2, 1518, '4-11', 32, 1346306259, 2);
 
 -- --------------------------------------------------------
 
@@ -5757,7 +5771,7 @@ CREATE TABLE IF NOT EXISTS `zan_tokens` (
   `Start_Date` int(11) NOT NULL,
   PRIMARY KEY (`ID_Token`),
   KEY `fk_zan_tokens_zan_users1` (`ID_User`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=99 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=109 ;
 
 --
 -- Dumping data for table `zan_tokens`
@@ -5861,7 +5875,17 @@ INSERT INTO `zan_tokens` (`ID_Token`, `ID_User`, `Token`, `IP`, `Start_Date`) VA
 (95, 1518, '0258738E6C', '::1', 1346129349),
 (96, 1518, 'D16659DBA2', '::1', 1346129551),
 (97, 1518, 'BD6AFCDAAE', '::1', 1346130205),
-(98, 1518, 'B6F492C994', '::1', 1346130376);
+(98, 1518, 'B6F492C994', '::1', 1346130376),
+(99, 1518, 'FE302250FA', '::1', 1346209233),
+(100, 1518, 'D6C2AAC940', '::1', 1346212779),
+(101, 1518, '95F904C879', '::1', 1346214067),
+(102, 1518, '64843B0ECD', '::1', 1346214835),
+(103, 1518, '9A1C9EEA60', '::1', 1346293798),
+(104, 1518, '08CA3CD542', '::1', 1346294272),
+(105, 1518, '34BEE01E25', '::1', 1346294671),
+(106, 1518, '90D3ED899D', '::1', 1346295163),
+(107, 1518, '1B53B8E943', '::1', 1346305427),
+(108, 1518, '2BB8A363DD', '::1', 1346305833);
 
 -- --------------------------------------------------------
 
