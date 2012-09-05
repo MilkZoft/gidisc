@@ -62,23 +62,24 @@ class ZP_Singleton {
 		if(is_null($class)) {
 			die("Missing class information");
 		}
-
+		
 		if(!array_key_exists($class, self::$instances)) {	
 			$args = NULL;
 			
 			$i = 0;
+
 			if(is_array($params)) {
 				foreach($params as $param) {
 					if($i === count($params) - 1) {
-						$args .= "$param";
+						$args .= "'$param'";
 					} else {
-						$args .= "$param, ";
+						$args .= "'$param', ";
 					}
 					
 					$i++;
 				}
 			}
-	
+			
 			if(is_null($args)) {
 				self::$instances[$class] = new $class;
 			} else {

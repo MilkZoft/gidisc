@@ -23,6 +23,10 @@ class Users_Controller extends ZP_Controller {
 	public function logout() {
 		unsetSessions();
 	}
+
+	/*public function fix() {
+		$this->Users_Model->fixUsers();
+	}*/
 		
 	public function login($from = "users") {
 		if(segment(2, isLang())) {

@@ -22,6 +22,18 @@ class Users_Model extends ZP_Model {
 		$this->application = "users";
 	}
 
+	/*public function fixUsers() {
+		$this->Db->table($this->table);
+		
+		$data = $this->Db->findAll();
+
+		foreach($data as $user) {
+			$newPwd = encrypt($user["Pwd"]);
+
+			$this->Db->updateBySQL("users", "Pwd = '$newPwd' WHERE ID_User = '". $user["ID_User"] ."'");
+		}
+	}*/
+
 	public function cpanel($action, $limit = NULL, $order = "Language DESC", $search = NULL, $field = NULL, $trash = FALSE) {
 		if($action === "edit" or $action === "save") {
 			$validation = $this->editOrSave();
@@ -83,8 +95,9 @@ class Users_Model extends ZP_Model {
 			}
 		}
 		
-		$this->RFC = $this->library("rfc", "RFC", array(POST("name"), POST("last_name"), POST("maiden_name"), POST("birthday")), "users");
-		
+		$this->RFC = $this->library("rfc", "RFC", NULL, "users");
+
+		$this->RFC->init(POST("name"), POST("last_name"), POST("maiden_name"), POST("birthday"));
 		//public function library($name, $className = NULL, $params = array(), $application = NULL)
 		
 		$username  = $this->RFC->rfc;
@@ -99,7 +112,6 @@ class Users_Model extends ZP_Model {
 			$username = POST("username");
 			$pwd      = POST("pwd");
 		}
-		
 		
 		$validations = array(
 			"email"	   => "email?",

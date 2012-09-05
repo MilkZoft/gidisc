@@ -465,13 +465,13 @@ class ZP_Load {
 				include_once _corePath . "/libraries/$application/$name.php";	
 
 				return ($className) ? ZP_Singleton::instance($className, $params) : TRUE;
-			} elseif(file_exists(_corePath . "/libraries/$lib/$name.php")) {
+			} elseif(file_exists(_corePath . "/libraries/$name/$name.php")) {
 				include_once _corePath . "/libraries/$lib/$name.php";	
 
 				return ($className) ? ZP_Singleton::instance($className, $params) : TRUE;
-			} elseif(file_exists("www/applications/$application/libraries/$name.php")) {
+			} elseif(file_exists("www/applications/$application/libraries/$name.php")) { 
 				include_once "www/applications/$application/libraries/$name.php";	
-			
+				
 				return ($className) ? ZP_Singleton::instance($className, $params) : TRUE;			
 			} else {
 				die("$name library doesn't exists");
