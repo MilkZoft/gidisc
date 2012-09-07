@@ -1,4 +1,4 @@
-<form action="http://localhost/gidisc/index.php/es/patients" method="post" class="form-results-search" enctype="multipart/form-data">
+<form action="<?php echo path("patients"); ?>" method="post" class="form-results-search" enctype="multipart/form-data">
 	<fieldset>
 		<span class="Bold">Buscar nombre: </span><input name="name" class="small-input" type="text"> <input name="seek" value="Buscar" type="submit"> 
 	</fieldset>
