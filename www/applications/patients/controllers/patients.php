@@ -24,6 +24,8 @@ class Patients_Controller extends ZP_Controller {
 	public function index() {
 		if(segment(1, isLang()) === "page" and segment(2, isLang()) > 0) {
 			$start = (segment(2, isLang()) * 25) - 25;
+		} else {
+			$start = 0;
 		}
 
 		$limit = $start .", 25";			
