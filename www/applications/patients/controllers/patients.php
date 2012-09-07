@@ -22,6 +22,14 @@ class Patients_Controller extends ZP_Controller {
 	}
 	
 	public function index() {
+		if(POST("seek")) {
+			$patients = $this->Patients_Model->search(POST("name"));			
+			$count = count($patients);
+		} else {
+			$patients = $this->Patients_Model->all($limit);
+			$count = $this->Patients_Model->count();
+		}
+
 		$start = 0;
 
 		$this->CSS("pagination");
@@ -31,13 +39,10 @@ class Patients_Controller extends ZP_Controller {
 			$start = (segment(2, isLang()) * 25) - 25;
 		}
 
-		$limit = $start .", 25";	
-		$count = $this->Patients_Model->count();
+		$limit = $start .", 25";			
 		$URL   = path("patients/page/");
 
 		$pagination = ($count > 25) ? paginate($count, 25, $start, $URL) : NULL;
-
-		$patients = $this->Patients_Model->all($limit);
 		
 		$vars["pagination"] = $pagination;
 		$vars["patients"]   = $patients;

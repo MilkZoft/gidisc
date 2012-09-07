@@ -69,18 +69,8 @@ class Patients_Model extends ZP_Model {
 	}
 	
 	public function search($search) {
-		$query = "SELECT * FROM zan_re_user_person
-					LEFT JOIN zan_patients ON
-						zan_patients.ID_Person = zan_re_user_person.ID_Person
-					LEFT JOIN zan_users ON
-						zan_users.ID_User = zan_re_user_person.ID_User 
-					LEFT JOIN zan_people ON
-						zan_people.ID_Person = zan_re_user_person.ID_Person						
-					LEFT JOIN zan_patients ON                                
-						zan_people.ID_Person= zan_patients.ID_Person	  
-					WHERE zan_people.Name LIKE '%$search%' OR  zan_people.Surname LIKE '%$search%' OR  zan_people.Email LIKE '%$search%' OR  zan_users.Username LIKE '%$search%' OR CONCAT(zan_people.Name, ' ', zan_people.Last_Name, ' ', zan_people.Maiden_Name) LIKE '%$search%'";
-					//Sustiur Surname por Lastname y poner un Maiden_Name
-		return $this->Db->query($query);
+		$query = "SELECT * FROM zan_people WHERE Name LIKE '%$search%' OR  Last_Name LIKE '%$search%' OR  Maiden_Name LIKE '%$search%'";
 		
+		return $this->Db->query($query);		
 	}
 }
