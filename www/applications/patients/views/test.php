@@ -28,140 +28,166 @@
 	.upercase { text-transform:uppercase; }
 </style>
 <div id="all">
-	
-	<div id="top">
-		<span>
-			<h2>ÁREA <?php print $area["Name"];?>:</h2>
-		</span>
+	<?php 
+	if($area < 32) {
+	?>
+		<div id="top">
+			<span>
+				<h2>ÁREA <?php print $area["Name"];?>:</h2>
+			</span>
 
-		<span class="objetivo-general">
-			<h3>OBJETIVO GENERAL: </h3>
-			<?php if($objectives) { ?>
-				<ol class="objetivo-list">
-					<?php foreach($objectives as $objective) { ?>
-						<li class="item"><a><?php print $objective["Name"];?></a></li>
-					<?php } ?>
-				</ol>
-			<?php } ?>
-		</span>
-	</div>
-	
-	<form method="POST" action="">
-		
-		<div id="section-top">
-			
-			<span class="field">
-				<?php
-				print formLabel("month", "Mes ", FALSE);
-				print formSelect(array("id" => "month", "name" => "month"), $month);	
-				?>
-			</span>
-			
-			<div class="field">
-				<?php print formLabel("terapist", "Terapeuta", FALSE);?>
-				<select name="terapist">
-					<?php foreach($therapists as $therapist) { ?>
-						<option value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]; ?></option>
-					<?php } ?>
-				</select>
-			</div>
-		</div>
-		
-		<div id="section-bottom">
-			<span class="field bold">
-				Nombre: <?php print $patient["Name"] . " " . $patient["Last_Name"] . " " . $patient["Maiden_Name"]; ?>
+			<span class="objetivo-general">
+				<h3>OBJETIVO GENERAL: </h3>
+				<?php if($objectives) { ?>
+					<ol class="objetivo-list">
+						<?php foreach($objectives as $objective) { ?>
+							<li class="item"><a><?php print $objective["Name"];?></a></li>
+						<?php } ?>
+					</ol>
+				<?php } ?>
 			</span>
 		</div>
 		
-		<div id="objetivos">
-			<div id="controls">
-				<button class="action-button" id="addObjectivo">Agregar</button>
-				<button class="action-button" id="removeObjectivo">Remover</button>
+		<form method="POST" action="">
+			
+			<div id="section-top">
+				
+				<span class="field">
+					<?php
+					print formLabel("month", "Mes ", FALSE);
+					print formSelect(array("id" => "month", "name" => "month"), $month);	
+					?>
+				</span>
+				
+				<div class="field">
+					<?php print formLabel("terapist", "Terapeuta", FALSE);?>
+					<select name="terapist">
+						<?php foreach($therapists as $therapist) { ?>
+							<option value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]; ?></option>
+						<?php } ?>
+					</select>
+				</div>
 			</div>
 			
-			<table id="goals-table">
-				<tr>
-					<th>ID</th>
-					<th>Objetivo</th>
-				</tr>
+			<div id="section-bottom">
+				<span class="field bold">
+					Nombre: <?php print $patient["Name"] . " " . $patient["Last_Name"] . " " . $patient["Maiden_Name"]; ?>
+				</span>
+			</div>
+			
+			<div id="objetivos">
+				<div id="controls">
+					<button class="action-button" id="addObjectivo">Agregar</button>
+					<button class="action-button" id="removeObjectivo">Remover</button>
+				</div>
 				
-				<tr class="molde1">
-					<td><input class="id-goal" disabled="disabled" type="text" value="1" /></td>
-					<td><input name="objective[]" type="text" value=""/></td>
-				</tr>
-				
-			</table>
+				<table id="goals-table">
+					<tr>
+						<th>ID</th>
+						<th>Objetivo</th>
+					</tr>
+					
+					<tr class="molde1">
+						<td><input class="id-goal" disabled="disabled" type="text" value="1" /></td>
+						<td><input name="objective[]" type="text" value=""/></td>
+					</tr>
+					
+				</table>
+			</div>
+			
+			<div id="goals">
+				<table id="goals-explain">
+					<tr>
+						<th>Objetivo/Día</th>
+						<th><input name="day[0]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[1]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[2]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[3]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[4]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[5]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[6]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[7]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[8]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[9]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[10]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[11]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[12]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[13]" type="text" maxlength="2" value="" /></th>
+						<th><input name="day[14]" type="text" maxlength="2" value="" /></th>
+						<th>Observaciones</th>
+					</tr>
+					
+					<tr class="molde">
+						<td><input class="goal" disabled="disabled" type="text" value="1" /></td>
+						<td><input name="days[0][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[1][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[2][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[3][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[4][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[5][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[6][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[7][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[8][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[9][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[10][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[11][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[12][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[13][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[14][]" type="text" maxlength="1" value="" /></td>
+						<td><textarea class="obsv" name="obsv[]"></textarea></td>
+					</tr>
+					
+				</table>
+			</div>
+			
+			<div id="bloque" class="claves">
+				<div class="clave"><span class="upercase">claves</span>: 0 = no puede</div>
+				<span>1 = lo realiza el 25% de las veces </span>
+				<span>2 = lo realiza el 50% de las veces </span>
+				<span>3 = lo realiza el 75% de las veces </span>
+				<span> 4 =  lo realiza el 100% de las veces</span>
+			</div>
+		
+			<p>
+				<span>Observaciones: </span><br />
+				<textarea class="obsv" name="comments"></textarea>
+			</p>
+			
+			<p>
+				<span>Trabajo en casa: </span><br />
+				<textarea class="obsv" name="work"></textarea>
+			</p>
+			
+			<p>
+				<input type="hidden" value="<?php print $patient["ID_Patient"];?>" name="IDPatient">
+				<input type="hidden" value="<?php print $area["ID_Area"];?>" name="area">
+				<input id="send" class="btn btn-success" type="submit" value="<?php print __("Send");?>" name="save">
+			</p>
+		</form>
+	<?php
+		} else {
+	?>
+		<div id="top">
+			<span>
+				<h2>ÁREA: <?php print $area["Name"];?></h2>
+			</span>
 		</div>
 		
-		<div id="goals">
-			<table id="goals-explain">
-				<tr>
-					<th>Objetivo/Día</th>
-					<th><input name="day[0]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[1]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[2]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[3]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[4]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[5]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[6]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[7]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[8]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[9]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[10]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[11]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[12]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[13]" type="text" maxlength="2" value="" /></th>
-					<th><input name="day[14]" type="text" maxlength="2" value="" /></th>
-					<th>Observaciones</th>
-				</tr>
-				
-				<tr class="molde">
-					<td><input class="goal" disabled="disabled" type="text" value="1" /></td>
-					<td><input name="days[0][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[1][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[2][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[3][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[4][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[5][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[6][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[7][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[8][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[9][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[10][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[11][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[12][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[13][]" type="text" maxlength="1" value="" /></td>
-					<td><input name="days[14][]" type="text" maxlength="1" value="" /></td>
-					<td><textarea class="obsv" name="obsv[]"></textarea></td>
-				</tr>
-				
-			</table>
-		</div>
-		
-		<div id="bloque" class="claves">
-			<div class="clave"><span class="upercase">claves</span>: 0 = no puede</div>
-			<span>1 = lo realiza el 25% de las veces </span>
-			<span>2 = lo realiza el 50% de las veces </span>
-			<span>3 = lo realiza el 75% de las veces </span>
-			<span> 4 =  lo realiza el 100% de las veces</span>
-		</div>
-	
-		<p>
-			<span>Observaciones: </span><br />
-			<textarea class="obsv" name="comments"></textarea>
-		</p>
-		
-		<p>
-			<span>Trabajo en casa: </span><br />
-			<textarea class="obsv" name="work"></textarea>
-		</p>
-		
-		<p>
-			<input type="hidden" value="<?php print $patient["ID_Patient"];?>" name="IDPatient">
-			<input type="hidden" value="<?php print $area["ID_Area"];?>" name="area">
-			<input id="send" class="btn btn-success" type="submit" value="<?php print __("Send");?>" name="save">
-		</p>
-	</form>
+		<form method="POST" action="">
+			<p>
+				<span>Observaciones: </span><br />
+				<textarea class="obsv" name="comments"></textarea>
+			</p>
+			
+			<p>
+				<input type="hidden" value="<?php print $patient["ID_Patient"];?>" name="IDPatient">
+				<input type="hidden" value="<?php print $area["ID_Area"];?>" name="area">
+				<input id="send" class="btn btn-success" type="submit" value="<?php print __("Send");?>" name="save">
+			</p>
+		</form>
+	<?php 
+		}
+	?>
 </div>
 	
 

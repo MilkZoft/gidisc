@@ -112,51 +112,64 @@ class Test_Model extends ZP_Model {
 	}
 	
 	public function save() {
-		$objectives = POST("objective");
-		$days       = POST("days");
-		$day        = POST("day");
-		$obsv       = POST("obsv");
-		
-		foreach($objectives as $objective) {
-			if($objective == "") {
-				return  getAlert("Necesita escribir los objetivos"); 
-			}
-		}
-		
-		$data = array( 
-			"ID_Therapist" => POST("terapist"),
-			"ID_Patient"   =>  POST("IDPatient"),
-			"ID_Area"      =>  POST("area"),
-			"Month_"       => POST("month"),
-			"Comments"     => POST("comments"),
-			"Work_Home"    => POST("work"),
-			"Date_Entry"   => now(4),
-			"Text_Date"   => now(2)
-		);
-		
-		$insert = $this->Db->insert("formats", $data);
-		
-		foreach($objectives as $key => $objective) {
-			$data = array( 
-				"ID_Format"  => $insert,
-				"Objetive"   => $objective,
-				"Comments"   => $obsv[$key],
-				"Date_Entry" => now(4)	
-			);
+		if(POST("area") < 32) {
+			$objectives = POST("objective");
+			$days       = POST("days");
+			$day        = POST("day");
+			$obsv       = POST("obsv");
 			
-			$IDObjective = $this->Db->insert("objectives_particular", $data);
-			
-			foreach($days as $key2 => $value) {
-				if($value[$key] != "" and $day[$key2] != "") {
-					$data = array( 
-						"ID_Objetive" => $IDObjective,
-						"Day_"        => $day[$key2],
-						"Rating"      => $value[$key]
-					);
-					
-					$answer = $this->Db->insert("objectives_answer", $data);
+			foreach($objectives as $objective) {
+				if($objective == "") {
+					return  getAlert("Necesita escribir los objetivos"); 
 				}
 			}
+			
+			$data = array( 
+				"ID_Therapist" => POST("terapist"),
+				"ID_Patient"   =>  POST("IDPatient"),
+				"ID_Area"      =>  POST("area"),
+				"Month_"       => POST("month"),
+				"Comments"     => POST("comments"),
+				"Work_Home"    => POST("work"),
+				"Date_Entry"   => now(4),
+				"Text_Date"   => now(2)
+			);
+			
+			$insert = $this->Db->insert("formats", $data);
+			
+			foreach($objectives as $key => $objective) {
+				$data = array( 
+					"ID_Format"  => $insert,
+					"Objetive"   => $objective,
+					"Comments"   => $obsv[$key],
+					"Date_Entry" => now(4)	
+				);
+				
+				$IDObjective = $this->Db->insert("objectives_particular", $data);
+				
+				foreach($days as $key2 => $value) {
+					if($value[$key] != "" and $day[$key2] != "") {
+						$data = array( 
+							"ID_Objetive" => $IDObjective,
+							"Day_"        => $day[$key2],
+							"Rating"      => $value[$key]
+						);
+						
+						$answer = $this->Db->insert("objectives_answer", $data);
+					}
+				}
+			}
+		} else {
+			$data = array( 
+				"ID_Therapist" => POST("terapist"),
+				"ID_Patient"   =>  POST("IDPatient"),
+				"ID_Area"      =>  POST("area"),
+				"Comments"     => POST("comments"),
+				"Date_Entry"   => now(4),
+				"Text_Date"    => now(2)
+			);
+			
+			$insert = $this->Db->insert("formats", $data);
 		}
 		
 		return getAlert("The test has been saved correctly", "success");

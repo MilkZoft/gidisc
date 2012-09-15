@@ -88,6 +88,7 @@ class Patients_Controller extends ZP_Controller {
 			$vars["patient"]    = $patient;
 			
 			$vars["view"]  	    = $this->view("test", TRUE);
+
 			$this->render("content", $vars);	
 		} else {
 			redirect("patients/");
