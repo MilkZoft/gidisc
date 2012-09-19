@@ -29,7 +29,8 @@
 </style>
 <div id="all">
 	<?php 
-	if($area < 32) {
+	
+	if($area["ID_Area"] < 32) {
 	?>
 		<div id="top">
 			<span>
