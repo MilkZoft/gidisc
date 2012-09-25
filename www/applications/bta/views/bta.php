@@ -1,0 +1,1 @@
+<iframe width="600" height="500" src="http://localhost/gidisc/swf/bta.html" frameborder="0" allowfullscreen></iframe>
