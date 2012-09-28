@@ -17,6 +17,8 @@
   ["_resp"]=>
   string(24) "|N|N|6|1|3|7|8|7|9|6|5|4"
 
+undefined|L||||||||||
+
 
   array(9) {
   ["var_txtPercent"]=>
