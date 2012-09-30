@@ -13,7 +13,7 @@ class Bta_Model extends ZP_Model {
 		
 		$this->helper(array("time", "alerts", "router"));
 		
-		$this->table    = "peabody_words";
+		$this->table    = "bta";
 		$this->language = whichLanguage(); 
 
 		$this->Data = $this->core("Data");
@@ -105,5 +105,19 @@ class Bta_Model extends ZP_Model {
 		} else {
 			$percentil = ">74";
 		}
+
+		$data = array(
+			"ID_User" 	=> SESSION("ZanUserID"),
+			"Age" 		=> $age,
+			"Percentil" => $percentil
+		);
+
+		$this->Db->insert($this->table, $data);
+
+		unset($_SESSION["btaCorrects"]);
+		unset($_SESSION["btaLComplete"]);
+		unset($_SESSION["btaNComplete"]);
+
+		return $percentil;
 	}
 }

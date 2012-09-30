@@ -1,0 +1,1 @@
+<p>Prueba terminada, tu percentil fue de: <strong><?php echo $percentil; ?></strong></p>
