@@ -53,8 +53,13 @@
 			<div class="nombre">
 				<span class="bold">Nombre:</span> <?php print decode($patient["Name"] . " " . $patient["Last_Name"] . " " . $patient["Maiden_Name"]); ?>
 			</div>
-			
-			<span><span class="bold">Mes:</span> <?php print month($format["Month_"]);?></span>
+			<?php
+				if($area < 32) {
+			?>
+					<span><span class="bold">Mes:</span> <?php print month($format["Month_"]);?></span>
+			<?php
+				}
+			?>
 		</div>
 		<div class="renglon">
 			<div class="nombre">
