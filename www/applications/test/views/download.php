@@ -121,10 +121,15 @@
 			<span class="bold">Observaciones: </span><br />
 			<span><?php print $format["Comments"];?></span>
 		</p>
-		
-		<p>
-			<span class="bold">Trabajo en casa: </span><br />
-			<span><?php print $format["Work_Home"];?></span>
-		</p>
+		<?php
+		if($area < 32) {
+		?>
+			<p>
+				<span class="bold">Trabajo en casa: </span><br />
+				<span><?php print $format["Work_Home"];?></span>
+			</p>
+		<?php
+		}
+		?>
 	</div>
 </div>
