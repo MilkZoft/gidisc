@@ -31,17 +31,17 @@
 								<span class="no-decoration"><?php print __("View");?></span>
 							</a>
 							
-							<a href="<?php print path("test/edit/" . $format["ID_Format"]);?>" title="Edit" onclick="return confirm('Do you want to edit the record?')">
+							<!--<a href="<?php print path("test/edit/" . $format["ID_Format"]);?>" title="Edit" onclick="return confirm('Do you want to edit the record?')">
 								<span class="tiny-image tiny-edit no-decoration">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-							</a>
+							</a>-->
 							
 							<a href="<?php print path("test/download/" . $patient["ID_Patient"] . "/" . $format["ID_Format"]);?>" title="Download">
 								<span class="no-decoration"><?php print __("Download");?></span>
 							</a>
 							
-							<a href="<?php print path("test/delete/" . $patient["ID_Patient"] . "/" . $format["ID_Format"]) . "/" . $code ;?>" title="Edit" onclick="return confirm('Do you want to delete the record?')">
+							<!--<a href="<?php print path("test/delete/" . $patient["ID_Patient"] . "/" . $format["ID_Format"]) . "/" . $code ;?>" title="Edit" onclick="return confirm('Do you want to delete the record?')">
 								<span class="tiny-image tiny-trash no-decoration">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-							</a>
+							</a>-->
 						</td>
 					</tr>
 				<?php } ?>
