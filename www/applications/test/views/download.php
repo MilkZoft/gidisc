@@ -68,46 +68,54 @@
 			<span><span class="bold">Area:</span> <?php print $format["Name"];?></span>
 		</div>
 	</div>
+
+	<?php
+	if($area < 32) {
+	?>
 	
-	<div id="objetivos">
-		<p class="bold">Objetivos:</p>
-		<?php if($objectivesp) { ?>
-			<?php foreach($objectivesp as $key => $objective) { ?>
-				<span><?php print $objective["Objetive"];?></span><br />
-			<?php } ?>
-		<?php } ?>
-	</div>
-	
-	<table>
-		<tr>
-			<th>Objetivo/D&iacute;a</th>
-			<?php foreach($answers[0] as $answer) { ?>
-				<th><?php print $answer["Day_"];?></th>
-			<?php } ?>
-			<th>Observaci&oacute;n</th>
-		</tr>
-		
-		<?php foreach($answers as $key => $answer) { ?>
-			<tr>
-				<td><?php print ($key + 1);?></td>
-				
-				<?php foreach($answer as $value) { ?>
-					<td><?php print (int) $value["Rating"];?></td>
+		<div id="objetivos">
+			<p class="bold">Objetivos:</p>
+			<?php if($objectivesp) { ?>
+				<?php foreach($objectivesp as $key => $objective) { ?>
+					<span><?php print $objective["Objetive"];?></span><br />
 				<?php } ?>
-				
-				<td class="observaciones"><?php print $objectivesp[$key]["Comments"];?></td>
-			</tr>
-		<?php } ?>			
+			<?php } ?>
+		</div>
 		
-	</table>
-	
-	<div id="bloque" class="claves">
-		<div class="clave"><span class="upercase">claves</span>: 0 = no puede</div>
-		<span>1 = lo realiza el 25% de las veces </span>
-		<span>2 = lo realiza el 50% de las veces </span>
-		<span>3 = lo realiza el 75% de las veces </span>
-		<span> 4 =  lo realiza el 100% de las veces</span>
-	</div>
+		<table>
+			<tr>
+				<th>Objetivo/D&iacute;a</th>
+				<?php foreach($answers[0] as $answer) { ?>
+					<th><?php print $answer["Day_"];?></th>
+				<?php } ?>
+				<th>Observaci&oacute;n</th>
+			</tr>
+			
+			<?php foreach($answers as $key => $answer) { ?>
+				<tr>
+					<td><?php print ($key + 1);?></td>
+					
+					<?php foreach($answer as $value) { ?>
+						<td><?php print (int) $value["Rating"];?></td>
+					<?php } ?>
+					
+					<td class="observaciones"><?php print $objectivesp[$key]["Comments"];?></td>
+				</tr>
+			<?php } ?>			
+			
+		</table>
+		
+		<div id="bloque" class="claves">
+			<div class="clave"><span class="upercase">claves</span>: 0 = no puede</div>
+			<span>1 = lo realiza el 25% de las veces </span>
+			<span>2 = lo realiza el 50% de las veces </span>
+			<span>3 = lo realiza el 75% de las veces </span>
+			<span> 4 =  lo realiza el 100% de las veces</span>
+		</div>
+	<?php
+	}
+	?>
+
 	<div id="bloque">
 		<p>
 			<span class="bold">Observaciones: </span><br />

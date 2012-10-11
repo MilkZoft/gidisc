@@ -130,6 +130,7 @@ class Test_Controller extends ZP_Controller {
 			$objectives = $this->Test_Model->getObjectives($format["format"]["ID_Area"]);
 			$therapists = $this->Patients_Model->getByType();
 			
+			$vars["area"]		 = $format["format"]["ID_Area"];			
 			$vars["format"]      = $format["format"];
 			$vars["objectives"]  = $objectives;
 			$vars["therapists"]  = $therapists;
