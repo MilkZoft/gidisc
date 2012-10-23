@@ -122,7 +122,7 @@ class Test_Controller extends ZP_Controller {
 		}
 		
 		$format = $this->Test_Model->get($IDFormat);
-		
+
 		if($format and isset($format["format"]) and $format["format"]) {
 			$this->Patients_Model = $this->model("Patients_Model");
 			

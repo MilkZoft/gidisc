@@ -58,6 +58,10 @@
 			?>
 					<span><span class="bold">Mes:</span> <?php print month($format["Month_"]);?></span>
 			<?php
+				} else {
+			?>
+					<span class="bold">Fecha:</span> <?php print decode($format["Text_Date"]);?>
+			<?php
 				}
 			?>
 		</div>
@@ -70,7 +74,7 @@
 				<?php } ?>
 			</div>
 			
-			<span><span class="bold">Area:</span> <?php print $format["Name"];?></span>
+			<span><span class="bold">Area:</span> <?php print decode($format["Name"]);?></span>
 		</div>
 	</div>
 
@@ -82,7 +86,7 @@
 			<p class="bold">Objetivos:</p>
 			<?php if($objectivesp) { ?>
 				<?php foreach($objectivesp as $key => $objective) { ?>
-					<span><?php print $objective["Objetive"];?></span><br />
+					<span><?php print decode($objective["Objetive"]);?></span><br />
 				<?php } ?>
 			<?php } ?>
 		</div>
@@ -124,14 +128,14 @@
 	<div id="bloque">
 		<p>
 			<span class="bold">Observaciones: </span><br />
-			<span><?php print $format["Comments"];?></span>
+			<span><?php print decode($format["Comments"]);?></span>
 		</p>
 		<?php
 		if($area < 32) {
 		?>
 			<p>
 				<span class="bold">Trabajo en casa: </span><br />
-				<span><?php print $format["Work_Home"];?></span>
+				<span><?php print decode($format["Work_Home"]);?></span>
 			</p>
 		<?php
 		}

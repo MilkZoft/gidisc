@@ -210,7 +210,8 @@ class Test_Model extends ZP_Model {
 		$query = "SELECT * FROM zan_formats 
 				LEFT JOIN zan_areas ON zan_areas.ID_Area = zan_formats.ID_Area 
 				WHERE zan_formats.ID_Format = {$IDFormat}";
-		$format  = $this->Db->query($query);
+
+		$format = $this->Db->query($query);
 		
 		if($format) {				
 			$objectives = $this->Db->findBy("ID_Format", $IDFormat, "objectives_particular");
@@ -222,6 +223,7 @@ class Test_Model extends ZP_Model {
 					$data["answers"][$key] = $this->Db->findBy("ID_Objetive", $objective["ID_Objetive"], "objectives_answer");
 				}
 			}
+			
 			
 			$data["format"]     = $format[0];
 			$data["objectives"] = $objectives;
