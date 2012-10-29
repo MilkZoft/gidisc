@@ -66,6 +66,21 @@ class D2_Controller extends ZP_Controller {
 			$parts13 = array_values(array_diff(explode("|", $answers13), array("")));
 			$parts14 = array_values(array_diff(explode("|", $answers14), array("")));
 
+			$last1  = end($parts1);
+			$last2  = end($parts2);
+			$last3  = end($parts3);
+			$last4  = end($parts4);
+			$last5  = end($parts5);
+			$last6  = end($parts6);
+			$last7  = end($parts7);
+			$last8  = end($parts8);
+			$last9  = end($parts9);
+			$last10 = end($parts10);
+			$last11 = end($parts11);
+			$last12 = end($parts12);
+			$last13 = end($parts13);
+			$last14 = end($parts14);
+		
 			$t1  = sizeof($parts1); 
 			$t2  = sizeof($parts2);
 			$t3  = sizeof($parts3);
@@ -199,6 +214,7 @@ class D2_Controller extends ZP_Controller {
 			$toe = $oe1 + $oe2 + $oe3 + $oe4 + $oe5 + $oe6 + $oe7 + $oe8 + $oe9 + $oe10 + $oe11 + $oe12 + $oe13 + $oe14;
 			$tce = $ce1 + $ce2 + $ce3 + $ce4 + $ce5 + $ce6 + $ce7 + $ce8 + $ce9 + $ce10 + $ce11 + $ce12 + $ce13 + $ce14;
 			$te  = $toe + $tce;
+			$tn  = $last1 + $last2 + $last3 + $last4 + $last5 + $last6 + $last7 + $last8 + $last9 + $last10 + $last11 + $last12 + $last13 + $last14;
 
 		#}
 	}
