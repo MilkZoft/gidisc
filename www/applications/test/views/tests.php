@@ -18,8 +18,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php if($formats) { ?>
-				<?php foreach($formats as $format) { ?>
+			<?php if($formats) { 				 					 
+				 	foreach($formats as $format) { ?>
 					<tr>
 						<td><?php print $format["ID_Format"];?></td>
 						<td><?php print $format["Name"];?></td>
@@ -37,6 +37,10 @@
 							
 							<a href="<?php print path("test/download/" . $patient["ID_Patient"] . "/" . $format["ID_Format"]);?>" title="Download">
 								<span class="no-decoration"><?php print __("Download");?></span>
+							</a>
+
+							<a href="<?php print path("test/download/" . $patient["ID_Patient"] . "/all"); ?>" title="Download">
+								<span class="no-decoration"><?php print __("Download All");?></span>
 							</a>
 							
 							<!--<a href="<?php print path("test/delete/" . $patient["ID_Patient"] . "/" . $format["ID_Format"]) . "/" . $code ;?>" title="Edit" onclick="return confirm('Do you want to delete the record?')">

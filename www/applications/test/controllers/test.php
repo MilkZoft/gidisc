@@ -119,30 +119,34 @@ class Test_Controller extends ZP_Controller {
 	public function download($IDPatient = 0, $IDFormat = FALSE) {
 		if(!$IDFormat) {
 			redirect(path($this->application . _sh . "get" . _sh . $IDPatient));
-		}
-		
-		$format = $this->Test_Model->get($IDFormat);
+		} elseif($IDFormat !== "all") {
+			$format = $this->Test_Model->get($IDFormat);
 
-		if($format and isset($format["format"]) and $format["format"]) {
-			$this->Patients_Model = $this->model("Patients_Model");
-			
-			$patient    = $this->Patients_Model->getPatient($format["format"]["ID_Patient"]);
-			$objectives = $this->Test_Model->getObjectives($format["format"]["ID_Area"]);
-			$therapists = $this->Patients_Model->getByType();
-			
-			$vars["area"]		 = $format["format"]["ID_Area"];			
-			$vars["format"]      = $format["format"];
-			$vars["objectives"]  = $objectives;
-			$vars["therapists"]  = $therapists;
-			$vars["objectivesp"] = $format["objectives"];
-			$vars["answers"]     = $format["answers"];
-			$vars["patient"]     = $patient;
-			$view 			     = $this->view("download", $vars, $this->application, TRUE);
-			
-			$this->setPDF($view, $patient["Name"] . '.pdf');
+			if($format and isset($format["format"]) and $format["format"]) {
+				$this->Patients_Model = $this->model("Patients_Model");
+				
+				$patient    = $this->Patients_Model->getPatient($format["format"]["ID_Patient"]);
+				$objectives = $this->Test_Model->getObjectives($format["format"]["ID_Area"]);
+				$therapists = $this->Patients_Model->getByType();
+				
+				$vars["area"]		 = $format["format"]["ID_Area"];			
+				$vars["format"]      = $format["format"];
+				$vars["objectives"]  = $objectives;
+				$vars["therapists"]  = $therapists;
+				$vars["objectivesp"] = $format["objectives"];
+				$vars["answers"]     = $format["answers"];
+				$vars["patient"]     = $patient;
+				$view 			     = $this->view("download", $vars, $this->application, TRUE);
+				
+				$this->setPDF($view, $patient["Name"] . '.pdf');
+			} else {
+				redirect(path($this->application . _sh . "get" . _sh . $IDPatient));
+			}
 		} else {
-			redirect(path($this->application . _sh . "get" . _sh . $IDPatient));
+			$formats = $this->Test_Model->get($IDPatient, "all");
 		}
+
+		
 	}
 	
 	public function get($IDPatient = FALSE) {
