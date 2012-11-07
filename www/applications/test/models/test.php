@@ -209,28 +209,44 @@ class Test_Model extends ZP_Model {
 	public function get($IDFormat) {
 		$query = "SELECT * FROM zan_formats 
 				LEFT JOIN zan_areas ON zan_areas.ID_Area = zan_formats.ID_Area 
-				WHERE zan_formats.ID_Format = {$IDFormat}";
+				WHERE zan_formats.ID_Format IN ($IDFormat)";
 
-		$format = $this->Db->query($query);
-		
-		if($format) {				
+		$formats = $this->Db->query($query);
+		$i = 0;
+
+		if(count($formats) === 1) {				
 			$objectives = $this->Db->findBy("ID_Format", $IDFormat, "objectives_particular");
 			
 			if(!$objectives) {
-				$data["answers"] = FALSE;
+				$data[$i]["answers"] = FALSE;
 			} else {
 				foreach($objectives as $key => $objective) {
-					$data["answers"][$key] = $this->Db->findBy("ID_Objetive", $objective["ID_Objetive"], "objectives_answer");
+					$data[$i]["answers"][$key] = $this->Db->findBy("ID_Objetive", $objective["ID_Objetive"], "objectives_answer");
 				}
 			}
 			
+			$data[$i]["format"]     = $formats[0];
+			$data[$i]["objectives"] = $objectives;
 			
-			$data["format"]     = $format[0];
-			$data["objectives"] = $objectives;
-			
-			return $data;
+			#return $data;
+		} else {
+			foreach($formats as $format) {
+				$objectives = $this->Db->findBy("ID_Format", $format["ID_Format"], "objectives_particular");
+				
+				if(!$objectives) {
+					$data[$i]["answers"] = FALSE;
+				} else {
+					foreach($objectives as $key => $objective) {
+						$data[$i]["answers"][$key] = $this->Db->findBy("ID_Objetive", $objective["ID_Objetive"], "objectives_answer");
+					}
+				}		
+				
+				$data[$i]["format"]     = $format;
+				$data[$i]["objectives"] = $objectives;
+				$i++;
+			}
 		}
-		
-		return FALSE;
+
+		return isset($data) ? $data : FALSE;
 	}
 }

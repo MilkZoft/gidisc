@@ -119,34 +119,45 @@ class Test_Controller extends ZP_Controller {
 	public function download($IDPatient = 0, $IDFormat = FALSE) {
 		if(!$IDFormat) {
 			redirect(path($this->application . _sh . "get" . _sh . $IDPatient));
-		} elseif($IDFormat !== "all") {
-			$format = $this->Test_Model->get($IDFormat);
-
-			if($format and isset($format["format"]) and $format["format"]) {
-				$this->Patients_Model = $this->model("Patients_Model");
-				
-				$patient    = $this->Patients_Model->getPatient($format["format"]["ID_Patient"]);
-				$objectives = $this->Test_Model->getObjectives($format["format"]["ID_Area"]);
-				$therapists = $this->Patients_Model->getByType();
-				
-				$vars["area"]		 = $format["format"]["ID_Area"];			
-				$vars["format"]      = $format["format"];
-				$vars["objectives"]  = $objectives;
-				$vars["therapists"]  = $therapists;
-				$vars["objectivesp"] = $format["objectives"];
-				$vars["answers"]     = $format["answers"];
-				$vars["patient"]     = $patient;
-				$view 			     = $this->view("download", $vars, $this->application, TRUE);
-				
-				$this->setPDF($view, $patient["Name"] . '.pdf');
-			} else {
-				redirect(path($this->application . _sh . "get" . _sh . $IDPatient));
-			}
-		} else {
-			$formats = $this->Test_Model->get($IDPatient, "all");
-		}
-
+		} 
+			
+		$formats = $this->Test_Model->get($IDFormat);
 		
+		if(!$formats) {
+			redirect(path($this->application . _sh . "get" . _sh . $IDPatient));
+		} else {
+			$this->Patients_Model = $this->model("Patients_Model");
+			$i = 0;
+			
+			ob_start();
+			foreach($formats as $format) {
+				if(isset($format["format"]) and is_array($format["format"])) {	
+					$patientData    = $this->Patients_Model->getPatient($format["format"]["ID_Patient"]);
+					$objectivesData = $this->Test_Model->getObjectives($format["format"]["ID_Area"]);
+					$therapistsData = $this->Patients_Model->getByType();
+				
+					$vars["area"]		   = $format["format"]["ID_Area"]; 			
+					$vars["format"]        = $format["format"];
+					$vars["objectives"]    = $objectivesData;
+					$vars["therapists"]    = $therapistsData;
+					$vars["objectivesesp"] = $format["objectives"];
+					$vars["answers"]       = $format["answers"];
+					$vars["patient"]       = $patientData;
+					
+					if($i == 0) {
+						$view  = $this->view("header", $vars, $this->application, TRUE);
+						$view .= $this->view("download", $vars, $this->application, TRUE);
+					} else {
+						$view .= $this->view("download", $vars, $this->application, TRUE);
+					}
+					$i++;
+				} 
+			}
+
+			$view .= '</div>';
+
+			$this->setPDF($view, $patientData["Name"] .'.pdf');
+		}
 	}
 	
 	public function get($IDPatient = FALSE) {
@@ -169,6 +180,16 @@ class Test_Controller extends ZP_Controller {
 		$formats = $this->Test_Model->getByIDPatient($IDPatient, $limit);
 		$patient = $this->Patients_Model->getPatient($IDPatient);
 		
+		$fIDs = "";
+		$i = 0;
+		$total = count($formats) - 1;
+		foreach($formats as $format) {
+			$fIDs .= ($i === $total) ? $format["ID_Format"] : $format["ID_Format"] .",";
+
+			$i++;
+		}
+
+		$vars["fIDs"]       = $fIDs;
 		$vars["pagination"] = $pagination;
 		$vars["formats"]    = $formats;
 		$vars["patient"]    = $patient;

@@ -38,10 +38,6 @@
 							<a href="<?php print path("test/download/" . $patient["ID_Patient"] . "/" . $format["ID_Format"]);?>" title="Download">
 								<span class="no-decoration"><?php print __("Download");?></span>
 							</a>
-
-							<a href="<?php print path("test/download/" . $patient["ID_Patient"] . "/all"); ?>" title="Download">
-								<span class="no-decoration"><?php print __("Download All");?></span>
-							</a>
 							
 							<!--<a href="<?php print path("test/delete/" . $patient["ID_Patient"] . "/" . $format["ID_Format"]) . "/" . $code ;?>" title="Edit" onclick="return confirm('Do you want to delete the record?')">
 								<span class="tiny-image tiny-trash no-decoration">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -62,6 +58,10 @@
 			<?php } ?>
 		</tbody>
 	</table>
+
+	<a href="<?php print path("test/download/" . $patient["ID_Patient"] . "/$fIDs"); ?>" title="Download">
+		<span class="no-decoration"><?php print __("Download All");?></span>
+	</a>
 
 	<?php print $pagination; ?>
 </div>

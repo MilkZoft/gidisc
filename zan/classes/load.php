@@ -703,7 +703,7 @@ class ZP_Load {
 				if($return) {
 					$output = ob_get_contents();
 
-					ob_end_clean();
+					ob_clean();
 
 					return $output;
 				}

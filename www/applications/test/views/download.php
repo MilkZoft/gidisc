@@ -15,68 +15,17 @@
 	$month[9]["option"] = "Octubre";    $month[9]["value"] = 10;  $month[9]["selected"] = ($format["Month_"] == 10) ? TRUE : FALSE;
 	$month[10]["option"] = "Noviembre"; $month[10]["value"] = 11; $month[10]["selected"] = ($format["Month_"] == 11) ? TRUE : FALSE;
 	$month[11]["option"] = "Diciembre"; $month[11]["value"] = 12; $month[11]["selected"] = ($format["Month_"] == 12) ? TRUE : FALSE;
+?>	
 	
-?>
-<style>
-	#download { float:left; width:100%; font-size:15px; }
-	#header { float:left; width:100%;  }
-	#header .title { float:left; margin:50px 0 0 150px; } 
-	#header .logo { float:left; margin-left:10px; }
-	#datos { width:100%; margin-top:30px; float:left; margin-left:50px; }
-	#datos .renglon { float:left; width:100% }
-	.bold { font-weight:bold; padding-right:5px; }
-	.nombre { float:left; width:450px; }
-	table { border:none; float:left; width:100%; margin:30px 0 0 50px; }
-	table .observaciones { max-width:300px; height:auto; }
-	table tr th { border:3px solid #ccc; }
-	table tr td { border:3px solid #ccc; text-align:center; }
-	#bloque { float:left; width:100%; margin:30px 0 0 50px; }
-	#bloque p { float:left; width:100%; margin-top:10px; }
-	#bloque span { width:300px; height:auto; }
-	.clave { float:left; margin-top:20px; width:100%; }
-	.claves { float:left; width:100%; }
-	.claves span { float:left; width:100% !important; margin:10px 0 0 75px; }
-	.upercase { text-transform:uppercase; }
-	img  { width:150px; height:68px; }
-	#objetivos { float:left; margin-left:50px; }
-</style>
-
-<div id="download">
-	<div id="header">
-	
-		<img class="logo" src="<?php print dirname(__FILE__) . "/css/images/logo.png" ;?>" />
-		<span class="title upercase">Tabla de seguimiento</span>
+	<div class="nombre">
+		<?php foreach($therapists as $therapist) { ?>
+			<?php if($format["ID_Therapist"] == $therapist["ID_User"]) { ?>
+				<span class="bold">Terapeuta:</span> <?php print decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]); ?>
+			<?php } ?>
+		<?php } ?>
 	</div>
-	
-	<div id="datos">
-		<div class="renglon">
-			<div class="nombre">
-				<span class="bold">Nombre:</span> <?php print decode($patient["Name"] . " " . $patient["Last_Name"] . " " . $patient["Maiden_Name"]); ?>
-			</div>
-			<?php
-				if($area < 32) {
-			?>
-					<span><span class="bold">Mes:</span> <?php print month($format["Month_"]);?></span>
-			<?php
-				} else {
-			?>
-					<span class="bold">Fecha:</span> <?php print decode($format["Text_Date"]);?>
-			<?php
-				}
-			?>
-		</div>
-		<div class="renglon">
-			<div class="nombre">
-				<?php foreach($therapists as $therapist) { ?>
-					<?php if($format["ID_Therapist"] == $therapist["ID_User"]) { ?>
-						<span class="bold">Terapeuta:</span> <?php print decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]); ?>
-					<?php } ?>
-				<?php } ?>
-			</div>
-			
-			<span><span class="bold">Area:</span> <?php print decode($format["Name"]);?></span>
-		</div>
-	</div>
+		
+	<div class="area"><span class="bold">Area:</span> <?php print decode($format["Name"]);?></div>
 
 	<?php
 	if($area < 32) {
@@ -141,4 +90,3 @@
 		}
 		?>
 	</div>
-</div>
