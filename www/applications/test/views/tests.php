@@ -59,9 +59,14 @@
 		</tbody>
 	</table>
 
-	<a href="<?php print path("test/download/" . $patient["ID_Patient"] . "/$fIDs"); ?>" title="Download">
-		<span class="no-decoration"><?php print __("Download All");?></span>
-	</a>
+	<?php
+		if(strlen($fIDs) > 1) {
+		?>
+			<a href="<?php print path("test/download/" . $patient["ID_Patient"] . "/$fIDs"); ?>" title="Download">
+				<span class="no-decoration"><?php print __("Download All");?></span>
+			</a>
+		<?php
+		}
 
-	<?php print $pagination; ?>
+		print $pagination; ?>
 </div>
