@@ -19,8 +19,8 @@
 	.claves span { float:left; width:100% !important; margin:10px 0 0 75px; }
 	.upercase { text-transform:uppercase; }
 	img  { width:150px; height:68px; }
-	#objetivos { float:left; margin-left:100px; }
-	.area {float: left; margin-left: 50px; padding-top: -10px;}
+	#objetivos { float:left;}
+	.area {float: left; margin-left: 50px;}
 	.fecha {float: left;}
 </style>
 
