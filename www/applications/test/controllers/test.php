@@ -140,7 +140,7 @@ class Test_Controller extends ZP_Controller {
 					$vars["format"]        = $format["format"];
 					$vars["objectives"]    = $objectivesData;
 					$vars["therapists"]    = $therapistsData;
-					$vars["objectivesesp"] = $format["objectives"];
+					$vars["objectivesp"]   = $format["objectives"];
 					$vars["answers"]       = $format["answers"];
 					$vars["patient"]       = $patientData;
 					
