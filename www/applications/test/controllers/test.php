@@ -183,10 +183,13 @@ class Test_Controller extends ZP_Controller {
 		$fIDs = "";
 		$i = 0;
 		$total = count($formats) - 1;
-		foreach($formats as $format) {
-			$fIDs .= ($i === $total) ? $format["ID_Format"] : $format["ID_Format"] .",";
 
-			$i++;
+		if(is_array($formats)) {
+			foreach($formats as $format) {
+				$fIDs .= ($i === $total) ? $format["ID_Format"] : $format["ID_Format"] .",";
+
+				$i++;
+			}
 		}
 
 		$vars["fIDs"]       = $fIDs;
