@@ -22,6 +22,7 @@
 	#objetivos { float:left;}
 	.area {float: left; margin-left: 50px;}
 	.fecha {float: left;}
+	.terapeuta {float:left; width:450px; margin-left: 50px;}
 </style>
 
 <div id="download">

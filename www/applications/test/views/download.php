@@ -17,7 +17,7 @@
 	$month[11]["option"] = "Diciembre"; $month[11]["value"] = 12; $month[11]["selected"] = ($format["Month_"] == 12) ? TRUE : FALSE;
 ?>	
 	
-	<div class="nombre">
+	<div class="terapeuta">
 		<?php foreach($therapists as $therapist) { ?>
 			<?php if($format["ID_Therapist"] == $therapist["ID_User"]) { ?>
 				<span class="bold">Terapeuta:</span> <?php print decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]); ?>
