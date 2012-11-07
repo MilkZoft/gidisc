@@ -11,6 +11,8 @@ session_start();
 
 define("_dir", dirname(__FILE__));
 
+date_default_timezone_set("America/Mexico_City");
+
 if(file_exists(_dir . "/config/basics.php") and file_exists(_dir . "/config/core.php")) { 
 	include "config/basics.php";
 	include "config/core.php";
