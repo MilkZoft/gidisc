@@ -11,7 +11,7 @@
 	table .observaciones { max-width:300px; height:auto; margin-left: 100px; }
 	table tr th { border:3px solid #ccc; }
 	table tr td { border:3px solid #ccc; text-align:center; }
-	#bloque { float:left; width:100%; margin:30px 0 0 50px; }
+	#bloque { float:left; width:100%; margin:10px 0 20px 50px; }
 	#bloque p { float:left; width:100%; margin-top:10px; }
 	#bloque span { width:300px; height:auto; }
 	.clave { float:left; margin-top:20px; width:100%; }
@@ -21,7 +21,7 @@
 	img  { width:150px; height:68px; }
 	#objetivos { float:left;}
 	.area {float: left; margin-left: 50px;}
-	.fecha {float: left;}
+	.fecha {float: left; margin-left: 50px;}
 	.terapeuta {float:left; width:450px; margin-left: 50px;}
 </style>
 
@@ -36,15 +36,4 @@
 		<div class="nombre">
 			<span class="bold">Nombre:</span> <?php print decode($patient["Name"] . " " . $patient["Last_Name"] . " " . $patient["Maiden_Name"]); ?>
 		</div>
-			<?php
-				if($area < 32) {
-			?>
-					<div class="fecha"><span class="bold">Mes:</span> <?php print month($format["Month_"]);?></div>
-			<?php
-				} else {
-			?>
-					<div class="fecha"><span class="bold">Fecha:</span> <?php print decode($format["Text_Date"]);?></div>
-			<?php
-				}
-			?>
 	</div>

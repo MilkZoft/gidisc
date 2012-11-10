@@ -30,7 +30,7 @@ class Patients_Controller extends ZP_Controller {
 
 		$limit = $start .", 25";			
 		$URL   = path("patients/page/");
-
+	
 		if(POST("seek")) {
 			$patients = $this->Patients_Model->search(POST("name"));			
 			$count = count($patients);

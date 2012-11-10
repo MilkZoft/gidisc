@@ -1,8 +1,14 @@
-<form action="<?php echo path("patients"); ?>" method="post" class="form-results-search" enctype="multipart/form-data">
-	<fieldset>
-		<span class="Bold">Buscar nombre: </span><input name="name" class="small-input" type="text"> <input name="seek" value="Buscar" type="submit"> 
-	</fieldset>
-</form>
+	<?php
+	if(SESSION("ZanUserTypeID") === 1) {
+	?>
+		<form action="<?php echo path("patients"); ?>" method="post" class="form-results-search" enctype="multipart/form-data">
+			<fieldset>
+				<span class="Bold">Buscar nombre: </span><input name="name" class="small-input" type="text"> <input name="seek" value="Buscar" type="submit"> 
+			</fieldset>
+		</form>
+	<?php
+	}
+	?>
         
 <div class="centers"><h2><?php print __("Patients");?></h2>
 	<table class="bordered-table zebra-striped table">

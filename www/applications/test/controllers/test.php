@@ -83,18 +83,18 @@ class Test_Controller extends ZP_Controller {
 		$this->Patients_Model = $this->model("Patients_Model");
 		
 		$format = $this->Test_Model->get($IDFormat);
-		
-		if($format and isset($format["format"]) and $format["format"]) {
-			$patient    = $this->Patients_Model->getPatient($format["format"]["ID_Patient"]);
-			$objectives = $this->Test_Model->getObjectives($format["format"]["ID_Area"]);
+
+		if(isset($format[0]["format"])) {
+			$patient    = $this->Patients_Model->getPatient($format[0]["format"]["ID_Patient"]);
+			$objectives = $this->Test_Model->getObjectives($format[0]["format"]["ID_Area"]);
 			$therapists = $this->Patients_Model->getByType();
 			
-			$vars["area"]		 = $format["format"]["ID_Area"];
-			$vars["format"]      = $format["format"];
+			$vars["area"]		 = $format[0]["format"]["ID_Area"];
+			$vars["format"]      = $format[0]["format"];
 			$vars["objectives"]  = $objectives;
 			$vars["therapists"]  = $therapists;
-			$vars["objectivesp"] = $format["objectives"];
-			$vars["answers"]     = $format["answers"];
+			$vars["objectivesp"] = $format[0]["objectives"];
+			$vars["answers"]     = $format[0]["answers"];
 			$vars["patient"]     = $patient;
 			$vars["view"] 	     = $this->view("show", TRUE);
 			

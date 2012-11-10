@@ -16,6 +16,18 @@
 	$month[10]["option"] = "Noviembre"; $month[10]["value"] = 11; $month[10]["selected"] = ($format["Month_"] == 11) ? TRUE : FALSE;
 	$month[11]["option"] = "Diciembre"; $month[11]["value"] = 12; $month[11]["selected"] = ($format["Month_"] == 12) ? TRUE : FALSE;
 ?>	
+
+	<?php
+		if($area < 32) {
+	?>
+			<div class="fecha"><span class="bold">Mes:</span> <?php print month($format["Month_"]);?></div>
+	<?php
+		} else {
+	?>
+			<div class="fecha"><span class="bold">Fecha:</span> <?php print decode($format["Text_Date"]);?></div>
+	<?php
+		}
+	?>
 	
 	<div class="terapeuta">
 		<?php foreach($therapists as $therapist) { ?>
@@ -33,10 +45,14 @@
 	
 		<div id="objetivos">
 			<p class="bold">Objetivos:</p>
-			<?php if($objectivesp) { ?>
-				<?php foreach($objectivesp as $key => $objective) { ?>
-					<span><?php print decode($objective["Objetive"]);?></span><br />
-				<?php } ?>
+			<?php if($objectivesp) { $i = 1; ?>
+				<?php 
+					foreach($objectivesp as $key => $objective) { ?>
+						<span><?php print $i .". ". decode($objective["Objetive"]);?></span><br />
+				<?php 
+						$i++;
+					} 
+				?>
 			<?php } ?>
 		</div>
 		
