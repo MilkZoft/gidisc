@@ -20,6 +20,24 @@ class Patients_Model extends ZP_Model {
 
 		$this->Data->table($this->table);
 	}
+
+	public function assignPermissions() {
+		$users = POST("users");
+		$ID_Patient = POST("ID_Patient");
+	
+		$this->Db->deleteBySQL("ID_Patient = '$ID_Patient'", "re_users_patients");
+
+		if($users) {
+			for($i = 0; $i <= count($users) - 1; $i++) {
+				$data = array(
+					"ID_User" => $users[$i],
+					"ID_Patient" => $ID_Patient
+				);
+
+				$this->Db->insert("re_users_patients", $data);
+			}
+		}
+	}
 	
 	public function getByType($IDType = 6) {
 		$query = "SELECT * FROM zan_users 
@@ -27,8 +45,14 @@ class Patients_Model extends ZP_Model {
 						zan_re_user_person.ID_User = zan_users.ID_User 
 					LEFT JOIN zan_people ON 
 						zan_people.ID_Person = zan_re_user_person.ID_Person 
-					WHERE zan_users.ID_Type_User = $IDType";
+					WHERE zan_users.ID_Type_User IN ($IDType)";
 					
+		return $this->Db->query($query);
+	}
+
+	public function getAssigned($ID_User, $ID_Patient) {
+		$query = "SELECT * FROM zan_re_users_patients WHERE ID_User = '$ID_User' AND ID_Patient = '$ID_Patient'";
+
 		return $this->Db->query($query);
 	}
 	

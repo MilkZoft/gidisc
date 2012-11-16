@@ -30,6 +30,15 @@
 					<td><?php print $patient["Maiden_Name"];?></td>
 					
 					<td>
+						<?php
+							if(SESSION("ZanUserTypeID") === 1) {
+								?>
+								<a href="<?php print path("patients/permissions/" . $patient["ID_Person"]);?>">
+									<span class="no-decoration"><?php print __("Asignar permisos");?></span>
+								</a>
+								<?php
+							}
+						?>
 						<a href="<?php print path("patients/area/" . $patient["ID_Person"]);?>" title="Edit" onclick="return confirm('Do you want to do the test?')">
 							<span class="no-decoration"><?php print __("Seguimiento");?></span>
 						</a>
