@@ -69,7 +69,7 @@
 			
 			<p>
 				<span class="bold"><?php print __(_("Password")); ?></span><br />
-				<input name="pwd" type="password" value="<?php print $username; ?>" tabindex="3" />
+				<input name="pwd" type="text" value="<?php print $username; ?>" tabindex="3" />
 			</p>
 			
 			<p>
