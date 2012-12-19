@@ -57,7 +57,7 @@ class Test_Controller extends ZP_Controller {
 				$format = $this->Test_Model->get($IDFormat);
 			}
 			
-			$patient    = $this->Patients_Model->getPatient($format["format"]["ID_Patient"]);
+			$patient    = $this->Patients_Model->getPatient($format["format"]["ID_User"]);
 			$objectives = $this->Test_Model->getObjectives($format["format"]["ID_Area"]);
 			$therapists = $this->Patients_Model->getByType();
 			
@@ -85,7 +85,7 @@ class Test_Controller extends ZP_Controller {
 		$format = $this->Test_Model->get($IDFormat);
 
 		if(isset($format[0]["format"])) {
-			$patient    = $this->Patients_Model->getPatient($format[0]["format"]["ID_Patient"]);
+			$patient    = $this->Patients_Model->getPatient($format[0]["format"]["ID_User"]);
 			$objectives = $this->Test_Model->getObjectives($format[0]["format"]["ID_Area"]);
 			$therapists = $this->Patients_Model->getByType();
 			
@@ -132,7 +132,7 @@ class Test_Controller extends ZP_Controller {
 			ob_start();
 			foreach($formats as $format) {
 				if(isset($format["format"]) and is_array($format["format"])) {	
-					$patientData    = $this->Patients_Model->getPatient($format["format"]["ID_Patient"]);
+					$patientData    = $this->Patients_Model->getPatient($format["format"]["ID_User"]);
 					$objectivesData = $this->Test_Model->getObjectives($format["format"]["ID_Area"]);
 					$therapistsData = $this->Patients_Model->getByType();
 				

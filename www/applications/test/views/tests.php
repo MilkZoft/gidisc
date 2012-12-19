@@ -35,11 +35,11 @@
 								<span class="tiny-image tiny-edit no-decoration">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 							</a>-->
 							
-							<a href="<?php print path("test/download/" . $patient["ID_Patient"] . "/" . $format["ID_Format"]);?>" title="Download">
+							<a href="<?php print path("test/download/" . $patient["ID_User"] . "/" . $format["ID_Format"]);?>" title="Download">
 								<span class="no-decoration"><?php print __("Download");?></span>
 							</a>
 							
-							<!--<a href="<?php print path("test/delete/" . $patient["ID_Patient"] . "/" . $format["ID_Format"]) . "/" . $code ;?>" title="Edit" onclick="return confirm('Do you want to delete the record?')">
+							<!--<a href="<?php print path("test/delete/" . $patient["ID_User"] . "/" . $format["ID_Format"]) . "/" . $code ;?>" title="Edit" onclick="return confirm('Do you want to delete the record?')">
 								<span class="tiny-image tiny-trash no-decoration">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 							</a>-->
 						</td>
@@ -62,7 +62,7 @@
 	<?php
 		if(strlen($fIDs) > 1) {
 		?>
-			<a href="<?php print path("test/download/" . $patient["ID_Patient"] . "/$fIDs"); ?>" title="Download">
+			<a href="<?php print path("test/download/" . $patient["ID_User"] . "/$fIDs"); ?>" title="Download">
 				<span class="no-decoration"><?php print __("Download All");?></span>
 			</a>
 		<?php

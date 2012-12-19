@@ -60,7 +60,7 @@ class Patients_Controller extends ZP_Controller {
 
 		$all = $this->Patients_Model->getByType("2, 3, 5, 6");
 		$already = array();
-
+	
 		foreach($all as $user) {
 			$assigned = $this->Patients_Model->getAssigned($user["ID_User"], $IDPatient);
 

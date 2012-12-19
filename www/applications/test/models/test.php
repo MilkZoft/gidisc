@@ -49,7 +49,7 @@ class Test_Model extends ZP_Model {
 	
 	public function getLastAreas() {
 		$data = $this->Db->findBy("Monitoring", "1", $this->table, NULL, "ID_Parent");
-		
+	
 		foreach($data as $key => $value) {
 			$record = $this->Db->find($value["ID_Parent"], $this->table);
 			$data[$key]["Parent"] = $record[0]["Name"];
@@ -126,13 +126,13 @@ class Test_Model extends ZP_Model {
 			
 			$data = array( 
 				"ID_Therapist" => POST("terapist"),
-				"ID_Patient"   =>  POST("IDPatient"),
-				"ID_Area"      =>  POST("area"),
+				"ID_User"      => POST("IDPatient"),
+				"ID_Area"      => POST("area"),
 				"Month_"       => POST("month"),
 				"Comments"     => POST("comments"),
 				"Work_Home"    => POST("work"),
 				"Date_Entry"   => now(4),
-				"Text_Date"   => now(2)
+				"Text_Date"    => now(2)
 			);
 			
 			$insert = $this->Db->insert("formats", $data);
@@ -162,8 +162,8 @@ class Test_Model extends ZP_Model {
 		} else {
 			$data = array( 
 				"ID_Therapist" => POST("terapist"),
-				"ID_Patient"   =>  POST("IDPatient"),
-				"ID_Area"      =>  POST("area"),
+				"ID_User"      => POST("IDPatient"),
+				"ID_Area"      => POST("area"),
 				"Comments"     => POST("comments"),
 				"Date_Entry"   => now(4),
 				"Text_Date"    => now(2)
@@ -177,10 +177,8 @@ class Test_Model extends ZP_Model {
 	
 	public function all($limit = 25) {
 		$query = "SELECT * FROM zan_formats 
-				LEFT JOIN zan_re_user_person ON zan_re_user_person.ID_Person = zan_patients.ID_Person 
-				LEFT JOIN zan_people ON zan_people.ID_Person = zan_patients.ID_Person 
 				LEFT JOIN zan_users ON zan_users.ID_User = zan_re_user_person.ID_User 
-				WHERE zan_patients.Situation != 'Deleted' ORDER BY ID_Format DESC LIMIT {$limit}";
+				WHERE zan_users.Situation != 'Deleted' ORDER BY ID_Format DESC LIMIT {$limit}";
 		
 		$data = $this->Db->query($query);
 		
@@ -190,7 +188,7 @@ class Test_Model extends ZP_Model {
 	public function count($IDPatient) {
 		$query = "SELECT count(*) as count FROM zan_formats 
 				LEFT JOIN zan_areas ON zan_areas.ID_Area = zan_formats.ID_Area 
-				WHERE zan_formats.ID_Patient = {$IDPatient}";
+				WHERE zan_formats.ID_User = {$IDPatient}";
 		$data  = $this->Db->query($query);
 		
 		return $data[0]["count"];
@@ -200,7 +198,8 @@ class Test_Model extends ZP_Model {
 	public function getByIDPatient($IDPatient, $limit = 25) {
 		$query = "SELECT * FROM zan_formats 
 				LEFT JOIN zan_areas ON zan_areas.ID_Area = zan_formats.ID_Area 
-				WHERE zan_formats.ID_Patient = {$IDPatient} ORDER BY ID_Format DESC LIMIT {$limit}";
+				WHERE zan_formats.ID_User = {$IDPatient} ORDER BY ID_Format DESC LIMIT {$limit}";
+
 		$data  = $this->Db->query($query);
 		
 		return $data;

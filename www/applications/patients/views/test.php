@@ -160,7 +160,7 @@
 			</p>
 			
 			<p>
-				<input type="hidden" value="<?php print $patient["ID_Patient"];?>" name="IDPatient">
+				<input type="hidden" value="<?php print $patient["ID_User"];?>" name="IDPatient">
 				<input type="hidden" value="<?php print $area["ID_Area"];?>" name="area">
 				<input id="send" class="btn btn-success" type="submit" value="<?php print __("Send");?>" name="save">
 			</p>
@@ -181,7 +181,7 @@
 			</p>
 			
 			<p>
-				<input type="hidden" value="<?php print $patient["ID_Patient"];?>" name="IDPatient">
+				<input type="hidden" value="<?php print $patient["ID_User"];?>" name="IDPatient">
 				<input type="hidden" value="<?php print $area["ID_Area"];?>" name="area">
 				<input id="send" class="btn btn-success" type="submit" value="<?php print __("Send");?>" name="save">
 			</p>
