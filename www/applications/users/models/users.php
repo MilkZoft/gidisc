@@ -88,29 +88,24 @@ class Users_Model extends ZP_Model {
 		if($this->photo["name"] != "") {
 			$dir = "www/lib/files/images/users/photos/";
 
-			$this->photo = $this->Files->uploadimage($dir, "photo");
+			$this->photo = $this->Files->uploadimage($dir, "photo", "resize", FALSE, TRUE, FALSE);
 			
 			if(isset($this->photo["alert"])) {
 				return $this->photo["alert"];
 			}
 		}
-		
-		$this->RFC = $this->library("rfc", "RFC", NULL, "users");
-
-		$this->RFC->init(POST("name"), POST("last_name"), POST("maiden_name"), POST("birthday"));
-		//public function library($name, $className = NULL, $params = array(), $application = NULL)
-		
-		$username  = $this->RFC->rfc;
+				
+		$username  = POST("username");
 	
 		if(is_null($username)) {
 			return getAlert("An error occurred :("); 
 		}
 		
 		if(POST("save")) {
-			$pwd      = $username;
+			$pwd      = POST("pwd", "encrypt");
 		} else {
 			$username = POST("username");
-			$pwd      = POST("pwd");
+			$pwd      = POST("pwd", "encrypt");
 		}
 		
 		$validations = array(
@@ -124,11 +119,27 @@ class Users_Model extends ZP_Model {
 		);
 
 		$data = array(
-			"Username" => $username,
-			"Pwd" 	   => encrypt(encode($pwd)),
-			"ID_Type_User" => POST("type")
+			"Username" 	   => $username,
+			"Pwd" 	   	   => $pwd,
+			"ID_Type_User" => POST("type"),
+			"ID_Center"    => POST("center"),
+			"Name"         => POST("name"),
+			"Last_Name"    => POST("last_name"),
+			"Maiden_Name"  => POST("maiden_name"),
+			"Email"        => POST("email"),
+			"Address"  	   => POST("address"),
+			"Phone"        => POST("phone"),
+			"Father_Name"  => POST("fname"),
+			"Mother_Name"  => POST("mname"),
+			"Profession"   => POST("profession"),
+			"Birthday"     => POST("birthday"),
+			"Date_Entry"   => now(4),
+			"ID_Therapist" => POST("therapist"),
+			"Background"   => POST("background"),
+			"Photo" 	   => $this->photo["medium"],
+			"Situation"    => (POST("situation") == 1) ? "Active" : "Inactive"
 		);
-
+		
 		$this->Data->ignore(array("username", "father", "mother", "last_name", "maiden_name", "center", "type", "pwd", "name", "surname", "background", "therapist", "situation", "address", "phone", "grade", "profession", "birthday","photo"));
 		
 		$this->data = $this->Data->proccess($data, $validations);
@@ -139,74 +150,8 @@ class Users_Model extends ZP_Model {
 	}
 	
 	private function save() {
-		$insertID = $this->Db->insert($this->table, $this->data);
-		
-		$data = array( 
-			"Name"           => POST("name"),
-			"Last_Name"      => POST("last_name"),
-			"Maiden_Name"    => POST("maiden_name"),
-			"Email"      	 => POST("email"),
-			"Address"    	 => POST("address"),
-			"Phone"      	 => POST("phone"),
-			"Profession" 	 => POST("profession"),
-			"Birthday"   	 => POST("birthday"),
-			"Date_Entry"     => now(4)			
-		);
-		
-		$insertPerson = $this->Db->insert("people", $data);
-		
-		$data = array(
-			"ID_User"   => $insertID,
-			"ID_Person" => $insertPerson
-		);
-		
-		$insertRel = $this->Db->insert("re_user_person", $data);
-		
-		//Add patient
-		if(POST("type") == 4) {
-			$data = array(
-				"ID_Person"    => $insertPerson,
-				"ID_Father"    => POST("father"),
-				"ID_Mother"    => POST("mother"),
-				"ID_Therapist" => POST("therapist"),
-				"Background"   => POST("background"),
-				"Situation"    => (POST("situation") == 1) ? "Active" : "Inactive"
-			);		
-		
-			$insertPatient = $this->Db->insert("patients", $data);
-			
-			$data = array(
-				"ID_Patient" => $insertPatient,
-				"ID_Center"  => POST("center")
-			);
-			
-			$insertRelCenter = $this->Db->insert("re_patients_centers", $data);
-			
-			if(isset($this->photo["small"])) {
-				$data = array(
-					0 => array(
-						"ID_Type_Photo" => 1,
-						"ID_Person"     => $insertPerson,
-						"URL"           => $this->photo["small"]
-					),
-
-					1 => array(
-						"ID_Type_Photo" => 2,
-						"ID_Person"     => $insertPerson,
-						"URL"           => $this->photo["medium"]
-					),
-
-					2 => array(
-						"ID_Type_Photo" => 3,
-						"ID_Person"     => $insertPerson,
-						"URL"           => $this->photo["original"]
-					)
-				);
-
-				$insertPhoto = $this->Db->insertBatch("people_photos", $data);
-			}
-		}
-		
+		$this->Db->insert($this->table, $this->data);
+				
 		return getAlert("The user has been saved correctly", "success");	
 	}
 

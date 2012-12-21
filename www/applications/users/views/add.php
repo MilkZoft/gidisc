@@ -9,6 +9,8 @@
 		$pwd        = recoverPOST("pwd");
 		$email      = recoverPOST("email");
 		$name       = recoverPOST("name");
+		$fname      = recoverPOST("fname");
+		$mname      = recoverPOST("mname");
 		$lastName   = recoverPOST("last_name");
 		$maidenName = recoverPOST("maiden_name");
 		$address    = recoverPOST("address");
@@ -27,6 +29,8 @@
 		$pwd  	    = recoverPOST("pwd", $userPerson["Pwd"]);
 		$email      = recoverPOST("email", $userPerson["Email"]);
 		$name 	    = recoverPOST("name", $userPerson["Name"]);
+		$fname      = recoverPOST("fname", $userPerson["Father_Name"]);
+		$mname      = recoverPOST("mname", $userPerson["Mother_Name"]);
 		$lastName   = recoverPOST("last_name", $userPerson["Last_Name"]);
 		$maidenName = recoverPOST("maiden_name", $userPerson["Maiden_Name"]);
 		$address 	= recoverPOST("address", $userPerson["Address"]);
@@ -64,6 +68,16 @@
 		
 		<!-- General inputs -->
 		<div class="optiongeneral">
+			<p>
+				<span class="bold"><?php print __(_("Username")); ?></span><br />
+				<input name="username" type="text" value="<?php print $username; ?>" tabindex="1" />
+			</p>
+
+			<p>
+				<span class="bold"><?php print __(_("Password")); ?></span><br />
+				<input name="pwd" type="password" value="<?php print $pwd; ?>" tabindex="2" />
+			</p>
+
 			<p>
 				<span class="bold"><?php print __(_("Email")); ?></span><br />
 				<input name="email" type="text" value="<?php print $email; ?>" tabindex="3" />
@@ -143,31 +157,15 @@
 				<?php } ?>
 				<span class="bold addtherapist blue"><?php print __(_("Add")); ?></span>
 			</p>
-			
-			
+						
 			<p>
-				<span class="bold"><?php print __(_("Father")); ?></span><br />
-				<?php if($fathers) { ?>
-					<select name="father" tabindex="14" id="father">
-						<?php foreach($fathers as $father) { ?>
-							<option value="<?php print $father["ID_Person"];?>"><?php print $father["Name"] . " " . $father["Last_Name"] . " " . $father["Maiden_Name"];?></option>
-						<?php } ?>
-					</select>
-				<?php } ?>
-				<span class="bold addparent blue"><?php print __(_("Add")); ?></span>
+				<span class="bold"><?php print __(_("Father's Name")); ?></span><br />
+				<input name="fname" type="text" value="<?php echo $fname; ?>" />
 			</p>
 			
-			
 			<p>
-				<span class="bold"><?php print __(_("Mother")); ?></span><br />
-				<?php if($fathers) { ?>
-					<select name="mother" tabindex="14" id="mother">
-						<?php foreach($fathers as $mother) { ?>
-							<option value="<?php print $mother["ID_Person"];?>"><?php print $mother["Name"] . " " . $mother["Last_Name"] . " " . $father["Maiden_Name"];?></option>
-						<?php } ?>
-					</select>
-				<?php } ?>
-				<span class="bold addparent blue"><?php print __(_("Add")); ?></span>
+				<span class="bold"><?php print __(_("Mother's Name")); ?></span><br />
+				<input name="mname" type="text" value="<?php echo $mname; ?>" />
 			</p>
 			
 			<p>
