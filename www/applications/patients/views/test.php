@@ -120,21 +120,21 @@
 					
 					<tr class="molde">
 						<td><input class="goal" disabled="disabled" type="text" value="1" /></td>
-						<td><input name="days[0][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[1][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[2][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[3][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[4][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[5][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[6][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[7][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[8][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[9][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[10][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[11][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[12][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[13][]" type="text" maxlength="1" value="" /></td>
-						<td><input name="days[14][]" type="text" maxlength="1" value="" /></td>
+						<td><input name="days[0][]" type="text" value="" /></td>
+						<td><input name="days[1][]" type="text" value="" /></td>
+						<td><input name="days[2][]" type="text" value="" /></td>
+						<td><input name="days[3][]" type="text" value="" /></td>
+						<td><input name="days[4][]" type="text" value="" /></td>
+						<td><input name="days[5][]" type="text" value="" /></td>
+						<td><input name="days[6][]" type="text" value="" /></td>
+						<td><input name="days[7][]" type="text" value="" /></td>
+						<td><input name="days[8][]" type="text" value="" /></td>
+						<td><input name="days[9][]" type="text" value="" /></td>
+						<td><input name="days[10][]" type="text" value="" /></td>
+						<td><input name="days[11][]" type="text" value="" /></td>
+						<td><input name="days[12][]" type="text" value="" /></td>
+						<td><input name="days[13][]" type="text" value="" /></td>
+						<td><input name="days[14][]" type="text" value="" /></td>
 						<td><textarea class="obsv" name="obsv[]"></textarea></td>
 					</tr>
 					
