@@ -100,7 +100,7 @@ class Patients_Controller extends ZP_Controller {
 			$objectives = $this->Test_Model->getObjectives(POST("area"));
 			$therapists = $this->Patients_Model->getByType();
 			$patient    = $this->Patients_Model->getPatient(POST("IDPatient"));
-			
+			die(var_dump($therapists));
 			if(POST("save")) {
 				$save = $this->Test_Model->save();
 				$vars["alert"] = $save;
