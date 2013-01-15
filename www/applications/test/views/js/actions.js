@@ -20,12 +20,7 @@ $(document).ready(function(){
 	});
 	
 	$('#goals-explain tbody tr.molde td input').bind('blur keyup keydown', function() {
-		var digit = parseInt($(this).val());
-		
-		if(isNaN(digit) || digit > 4) {
-			$(this).val("");
-		}
-		
+		var digit = parseInt($(this).val());		
 	});
 	
 	$('#goals-explain tbody tr.molde td input').keypress(function(e) {
