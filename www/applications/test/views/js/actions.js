@@ -18,23 +18,5 @@ $(document).ready(function(){
 		}
 		return false;
 	});
-	
-	$('#goals-explain tbody tr.molde td input').bind('blur keyup keydown', function() {
-		var digit = parseInt($(this).val());		
-	});
-	
-	$('#goals-explain tbody tr.molde td input').keypress(function(e) {
-		if(e.keyCode == 13) {
-			e.preventDefault();
-			return false;
-		}
-    });
-    
-    $('#goals-table tbody tr.molde1 td input').keypress(function(e) {
-		if(e.keyCode == 13) {
-			e.preventDefault();
-			return false;
-		}
-    });
 
 });
