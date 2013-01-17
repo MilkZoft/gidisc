@@ -129,6 +129,7 @@ class Test_Model extends ZP_Model {
 				"ID_User"      => POST("IDPatient"),
 				"ID_Area"      => POST("area"),
 				"Month_"       => POST("month"),
+				"Year"		   => POST("year"),
 				"Comments"     => POST("comments"),
 				"Work_Home"    => POST("work"),
 				"Date_Entry"   => now(4),
