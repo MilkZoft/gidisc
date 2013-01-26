@@ -112,6 +112,14 @@
 				</div>
 				
 				<div id="goals">
+					<p>
+						A - Falto pero si Aviso <br />
+						V - Vacaciones <br />
+						E - Enfermo <br />
+						F - Falto <br />
+						R - Reposición <br />
+						X - No se trabajo ese objetivo
+					</p>
 					<table id="goals-explain">
 						<?php if($answers) { ?>
 							<tr>
