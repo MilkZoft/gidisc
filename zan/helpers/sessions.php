@@ -67,14 +67,6 @@ function createCookie($cookie = NULL, $value, $time = 604800, $redirect = FALSE,
 	}
 }
 
-function COOKIE($cookie) {
-	if(isset($_COOKIE[$cookie])) {
-		return $_COOKIE[$cookie];
-	}
-
-	return FALSE;
-}
-
 /**
  * SESSION
  *
