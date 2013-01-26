@@ -59,7 +59,7 @@ function COOKIE($cookie) {
  * @param int    $time     = 604800
  * @return void
  */ 
-function createCookie($cookie = NULL, $value, $time = 604800, $redirect = FALSE, $URL = _webBase) {		
+function createCookie($cookie = NULL, $value, $time = 604800, $redirect = FALSE, $URL = NULL) {		
 	setcookie($cookie, $value, time() + $time, "/");
 	
 	if($redirect) {
@@ -100,12 +100,6 @@ function SESSION($session, $value = FALSE) {
  */ 
 function unsetCookie($cookie, $URL = FALSE) {
 	setcookie($cookie);	
-	
-	if($URL) {
-		redirect($URL);
-	} else {
-		redirect();
-	}
 }
 
 /**

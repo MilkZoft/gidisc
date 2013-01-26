@@ -21,6 +21,11 @@ class Users_Controller extends ZP_Controller {
 	}
 	
 	public function logout() {
+		unsetCookie("ZanUser");
+		unsetCookie("ZanUserPwd");
+		unsetCookie("ZanUserID");
+		unsetCookie("ZanUserType");
+		unsetCookie("ZanUserTypeID");
 		unsetSessions();
 	}
 
@@ -51,10 +56,10 @@ class Users_Controller extends ZP_Controller {
 				SESSION("ZanUserTypeID", $user[0]["ID_Type_User"]);
 
 				createCookie("ZanUser", $user[0]["Username"]);
-				createCookie("ZanUserPwd", $user[0]["Username"]);
-				createCookie("ZanUserID", $user[0]["Username"]);
-				createCookie("ZanUserType", $user[0]["Username"]);
-				createCookie("ZanUserTypeID", $user[0]["Username"]);
+				createCookie("ZanUserPwd", $user[0]["Password"]);
+				createCookie("ZanUserID", $user[0]["ID_User"]);
+				createCookie("ZanUserType", $user[0]["Type"]);
+				createCookie("ZanUserTypeID", $user[0]["ID_Type_User"]);
 
 				$token = $this->Users_Model->setToken($user[0]["ID_User"]);
 				
