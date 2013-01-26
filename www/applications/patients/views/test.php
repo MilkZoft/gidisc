@@ -65,7 +65,7 @@
 					<?php print formLabel("terapist", "Terapeuta", FALSE);?>
 					<select name="terapist">
 						<?php foreach($therapists as $therapist) { ?>
-							<option value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]; ?></option>
+							<option value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Username"]; ?></option>
 						<?php } ?>
 					</select>
 				</div>

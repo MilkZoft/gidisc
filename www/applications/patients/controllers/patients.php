@@ -100,6 +100,9 @@ class Patients_Controller extends ZP_Controller {
 			$objectives = $this->Test_Model->getObjectives(POST("area"));
 			
 			if(SESSION("ZanUserTypeID") == 6) {
+				$therapist["ID_User"] = SESSION("ZanUserID");
+				$therapist["Username"] = SESSION("ZanUser");
+				
 				$therapists = $this->Patients_Model->getAssigned(SESSION("ZanUserID"), POST("IDPatient")); die(var_dump($therapists));
 			} else {
 				$therapists = $this->Patients_Model->getByType();

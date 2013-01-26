@@ -55,13 +55,7 @@
 					<div class="field">
 						<?php print formLabel("terapist", "Terapeuta", FALSE);?>
 						<select name="terapist" disabled="disabled">
-							<?php foreach($therapists as $therapist) { ?>
-								<?php if($format["ID_Therapist"] == $therapist["ID_User"]) { ?>
-									<option selected="selected" value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]; ?></option>
-								<?php } else { ?>
-									<option value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]; ?></option>
-								<?php } ?>
-							<?php } ?>
+							<option value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]; ?></option>
 						</select>
 					</div>
 				</div>
