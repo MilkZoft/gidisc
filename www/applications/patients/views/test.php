@@ -111,6 +111,15 @@
 			</div>
 			
 			<div id="goals">
+				<p>
+					V - Vacaciones <br />
+					E - Enfermo <br />
+					N - No Aviso <br />
+					F - Falto <br />
+					R - Reposición <br />
+					X - No se trabajo ese objetivo
+				</p>
+
 				<table id="goals-explain">
 					<tr>
 						<th>Objetivo/Día</th>
