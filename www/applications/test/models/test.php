@@ -197,7 +197,7 @@ class Test_Model extends ZP_Model {
 
 		$formats = $this->Db->query($query);
 		$i = 0;
-
+		die(var_dump($formats));
 		if(count($formats) === 1) {				
 			$objectives = $this->Db->findBy("ID_Format", $IDFormat, "objectives_particular");
 			
