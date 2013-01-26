@@ -103,7 +103,7 @@ class Patients_Controller extends ZP_Controller {
 				$therapists["ID_User"] = SESSION("ZanUserID");
 				$therapists["Username"] = SESSION("ZanUser");
 
-				$therapists = $this->Patients_Model->getAssigned(SESSION("ZanUserID"), POST("IDPatient")); die(var_dump($therapists));
+				$therapists = $this->Patients_Model->getAssigned(SESSION("ZanUserID"), POST("IDPatient")); 
 			} else {
 				$therapists = $this->Patients_Model->getByType();
 			}
