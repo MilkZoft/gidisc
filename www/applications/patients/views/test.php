@@ -65,11 +65,9 @@
 					<?php print formLabel("terapist", "Terapeuta", FALSE);?>
 					<select name="terapist">
 						<?php 
-							if(SESSION("ZanUserTypeID") == 6) {
+							if(SESSION("ZanUserTypeID") == 6) { die("si");
 							?>
-								<select name="terapist" disabled="disabled">
-									<option value="<?php print SESSION("ZanUserID");?>"><?php print SESSION("ZanUser"); ?></option>
-								</select>
+								<option value="<?php print SESSION("ZanUserID");?>"><?php print SESSION("ZanUser"); ?></option>
 							<?php
 							} else { 
 								foreach($therapists as $therapist) { ?>
