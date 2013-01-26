@@ -57,13 +57,14 @@
 						<select name="terapist" disabled="disabled">
 
 							<?php 
+							 	die(var_dump(SESSION("ZanUserTypeID")));
 								if(SESSION("ZanUserTypeID") == 6) {
 								?>
 									<select name="terapist" disabled="disabled">
 										<option value="<?php print SESSION("ZanUserID");?>"><?php print SESSION("ZanUser"); ?></option>
 									</select>
 								<?php
-								} else {
+								} else { die("si");
 									foreach($therapists as $therapist) { ?>
 									<?php if($format["ID_Therapist"] == $therapist["ID_User"]) { ?>
 										<option selected="selected" value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]; ?></option>
