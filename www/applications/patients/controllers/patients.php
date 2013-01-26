@@ -94,28 +94,53 @@ class Patients_Controller extends ZP_Controller {
 			$this->CSS("styles", "test");
 			$this->js("actions", "test");
 			
-			$this->Test_Model = $this->model("Test_Model");
-			
-			$area 		= $this->Test_Model->getArea(POST("area"));
-			$objectives = $this->Test_Model->getObjectives(POST("area"));
-			
-			$therapists = $this->Patients_Model->getByType();
+			if(POST("IDPatient") and POST("area")) {
+				$this->Patients_Model = $this->model("Patients_Model");
+				
+				$format = $this->Test_Model->getFormat(POST("IDPatient"), POST("area"));
 
-			$patient    = $this->Patients_Model->getPatient(POST("IDPatient"));
-			
-			if(POST("save")) {
-				$save = $this->Test_Model->save();
-				$vars["alert"] = $save;
+				if(isset($format[0]["format"])) {
+					$patient    = $this->Patients_Model->getPatient($format[0]["format"]["ID_User"]);
+					$objectives = $this->Test_Model->getObjectives($format[0]["format"]["ID_Area"]);
+					$therapists = $this->Patients_Model->getByType();
+					
+					$vars["area"]		 = $format[0]["format"]["ID_Area"];
+					$vars["format"]      = $format[0]["format"];
+					$vars["objectives"]  = $objectives;
+					$vars["therapists"]  = $therapists;
+					$vars["objectivesp"] = $format[0]["objectives"];
+					$vars["answers"]     = $format[0]["answers"];
+					$vars["patient"]     = $patient;
+					$vars["view"] 	     = $this->view("show", TRUE);
+					
+					$this->render("content", $vars);	
+				} else {
+					redirect("patients");
+				}
+			} else {
+				$this->Test_Model = $this->model("Test_Model");
+				
+				$area 		= $this->Test_Model->getArea(POST("area"));
+				$objectives = $this->Test_Model->getObjectives(POST("area"));
+				
+				$therapists = $this->Patients_Model->getByType();
+
+				$patient    = $this->Patients_Model->getPatient(POST("IDPatient"));
+				
+				if(POST("save")) {
+					$save = $this->Test_Model->save();
+					$vars["alert"] = $save;
+				}
+
+				$vars["area"] 	    = $area;
+				$vars["objectives"] = $objectives;
+				$vars["therapists"] = $therapists;
+				$vars["patient"]    = $patient;
+				
+				$vars["view"]  	    = $this->view("test", TRUE);
+
+				$this->render("content", $vars);	
 			}
-
-			$vars["area"] 	    = $area;
-			$vars["objectives"] = $objectives;
-			$vars["therapists"] = $therapists;
-			$vars["patient"]    = $patient;
-			
-			$vars["view"]  	    = $this->view("test", TRUE);
-
-			$this->render("content", $vars);	
 		} else {
 			redirect("patients/");
 		}
