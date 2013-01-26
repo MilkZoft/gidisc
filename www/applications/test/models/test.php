@@ -67,12 +67,6 @@ class Test_Model extends ZP_Model {
 		$days       = POST("days");
 		$obsv       = POST("obsv");
 		
-		foreach($objectives as $objective) {
-			if($objective == "") {
-				return  getAlert("Necesita escribir los objetivos"); 
-			}
-		}
-		
 		$data = array( 
 			"ID_Therapist" => POST("terapist"),
 			"ID_Area"      => POST("area"),
@@ -141,15 +135,13 @@ class Test_Model extends ZP_Model {
 				$IDObjective = $this->Db->insert("objectives_particular", $data);
 				
 				foreach($days as $key2 => $value) {
-					if($value[$key] != "" and $day[$key2] != "") {
-						$data = array( 
-							"ID_Objetive" => $IDObjective,
-							"Day_"        => $day[$key2],
-							"Rating"      => $value[$key]
-						);
-						
-						$answer = $this->Db->insert("objectives_answer", $data);
-					}
+					$data = array( 
+						"ID_Objetive" => $IDObjective,
+						"Day_"        => $day[$key2],
+						"Rating"      => $value[$key]
+					);
+					
+					$answer = $this->Db->insert("objectives_answer", $data);
 				}
 			}
 		} else {
