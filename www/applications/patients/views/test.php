@@ -112,9 +112,9 @@
 			
 			<div id="goals">
 				<p>
+					A - Falto pero si Aviso <br />
 					V - Vacaciones <br />
 					E - Enfermo <br />
-					N - No Aviso <br />
 					F - Falto <br />
 					R - Reposición <br />
 					X - No se trabajo ese objetivo
