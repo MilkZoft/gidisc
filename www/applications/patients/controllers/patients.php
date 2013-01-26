@@ -94,6 +94,8 @@ class Patients_Controller extends ZP_Controller {
 			$this->CSS("styles", "test");
 			$this->js("actions", "test");
 			
+			$this->Test_Model = $this->model("Test_Model");
+			
 			if(POST("IDPatient") and POST("area")) {
 				$this->Patients_Model = $this->model("Patients_Model");
 				
@@ -118,8 +120,6 @@ class Patients_Controller extends ZP_Controller {
 					redirect("patients");
 				}
 			} else {
-				$this->Test_Model = $this->model("Test_Model");
-				
 				$area 		= $this->Test_Model->getArea(POST("area"));
 				$objectives = $this->Test_Model->getObjectives(POST("area"));
 				
