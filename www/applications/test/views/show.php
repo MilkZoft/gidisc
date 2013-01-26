@@ -59,9 +59,7 @@
 							<?php 
 								if(SESSION("ZanUserTypeID") == 6) {
 								?>
-									<select name="terapist" disabled="disabled">
-										<option value="<?php print SESSION("ZanUserID");?>"><?php print SESSION("ZanUser"); ?></option>
-									</select>
+									<option value="<?php print SESSION("ZanUserID");?>"><?php print SESSION("ZanUser"); ?></option>	
 								<?php
 								} else { 
 									foreach($therapists as $therapist) { ?>
@@ -135,7 +133,7 @@
 								<?php 
 									foreach($answer as $key2 => $value) {
 										$var  = "day". ($key2 + 1);
-										$$var = (int) $value["Rating"]; 
+										$$var = $value["Rating"]; 
 									}
 								?>
 								<tr class="molde">
