@@ -55,7 +55,25 @@
 					<div class="field">
 						<?php print formLabel("terapist", "Terapeuta", FALSE);?>
 						<select name="terapist" disabled="disabled">
-							<option value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]; ?></option>
+
+							<?php 
+								if(SESSION("ZanUserTypeID") == 6) {
+								?>
+									<select name="terapist" disabled="disabled">
+										<option value="<?php print $therapists["ID_User"];?>"><?php print $therapists["Username"]; ?></option>
+									</select>
+								<?php
+								} else {
+									foreach($therapists as $therapist) { ?>
+									<?php if($format["ID_Therapist"] == $therapist["ID_User"]) { ?>
+										<option selected="selected" value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]; ?></option>
+									<?php } else { ?>
+										<option value="<?php print $therapist["ID_User"]?>"><?php print $therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]; ?></option>
+									<?php } ?>
+								<?php 
+									} 
+								} ?>
+
 						</select>
 					</div>
 				</div>
