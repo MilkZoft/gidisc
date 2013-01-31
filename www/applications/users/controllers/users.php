@@ -21,11 +21,11 @@ class Users_Controller extends ZP_Controller {
 	}
 	
 	public function logout() {
-		unsetCookie("ZanUser");
-		unsetCookie("ZanUserPwd");
-		unsetCookie("ZanUserID");
-		unsetCookie("ZanUserType");
-		unsetCookie("ZanUserTypeID");
+		setcookie("ZanUser");
+		setcookie("ZanUserPwd");
+		setcookie("ZanUserID");
+		setcookie("ZanUserType");
+		setcookie("ZanUserTypeID");
 		unsetSessions();
 	}
 
