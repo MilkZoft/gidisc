@@ -141,5 +141,6 @@ class Patients_Controller extends ZP_Controller {
 			} else {
 				redirect("patients/");
 			}
+		}
 	}
 }
