@@ -62,7 +62,7 @@ error_reporting(E_ALL);
 if(!version_compare(PHP_VERSION, "5.1.0", ">=")) {
 	die("ZanPHP needs PHP 5.1.X or higher to run.");
 }
-die(var_dump(COOKIE("ZanUser")));
+
 if(COOKIE("ZanUser")) {
 	SESSION("ZanUser", 		 COOKIE("ZanUser"));
 	SESSION("ZanUserPwd",    COOKIE("ZanUserPwd"));
