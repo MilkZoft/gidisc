@@ -63,11 +63,13 @@ if(!version_compare(PHP_VERSION, "5.1.0", ">=")) {
 	die("ZanPHP needs PHP 5.1.X or higher to run.");
 }
 
-SESSION("ZanUser", 		 COOKIE("ZanUser"));
-SESSION("ZanUserPwd",    COOKIE("ZanUserPwd"));
-SESSION("ZanUserID",     COOKIE("ZanUserID"));
-SESSION("ZanUserType",   COOKIE("ZanUserType"));
-SESSION("ZanUserTypeID", COOKIE("ZanUserTypeID"));
+if(COOKIE("ZanUser")) {
+	SESSION("ZanUser", 		 COOKIE("ZanUser"));
+	SESSION("ZanUserPwd",    COOKIE("ZanUserPwd"));
+	SESSION("ZanUserID",     COOKIE("ZanUserID"));
+	SESSION("ZanUserType",   COOKIE("ZanUserType"));
+	SESSION("ZanUserTypeID", COOKIE("ZanUserTypeID"));
+}
 
 execute();
 
