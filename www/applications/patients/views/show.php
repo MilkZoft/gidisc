@@ -49,7 +49,7 @@
 				<div id="section-top">
 					<p>
 						¿Quieres actualizar el formato o crear uno nuevo? <br />
-						<input name="action" value="Update" type="radio" /> Actualizar
+						<input checked="checked" name="action" value="Update" type="radio" /> Actualizar
 						<input name="action" value="Save" type="radio" /> Crear uno nuevo
 					</p>
 					<span class="field">
