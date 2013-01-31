@@ -117,32 +117,29 @@ class Patients_Controller extends ZP_Controller {
 					
 					$this->render("content", $vars);	
 				} else {
-					redirect("patients");
+					$area 		= $this->Test_Model->getArea(POST("area"));
+					$objectives = $this->Test_Model->getObjectives(POST("area"));
+					
+					$therapists = $this->Patients_Model->getByType();
+
+					$patient    = $this->Patients_Model->getPatient(POST("IDPatient"));
+					
+					if(POST("save")) {
+						$save = $this->Test_Model->save();
+						$vars["alert"] = $save;
+					}
+
+					$vars["area"] 	    = $area;
+					$vars["objectives"] = $objectives;
+					$vars["therapists"] = $therapists;
+					$vars["patient"]    = $patient;
+					
+					$vars["view"]  	    = $this->view("test", TRUE);
+
+					$this->render("content", $vars);	
 				}
 			} else {
-				$area 		= $this->Test_Model->getArea(POST("area"));
-				$objectives = $this->Test_Model->getObjectives(POST("area"));
-				
-				$therapists = $this->Patients_Model->getByType();
-
-				$patient    = $this->Patients_Model->getPatient(POST("IDPatient"));
-				
-				if(POST("save")) {
-					$save = $this->Test_Model->save();
-					$vars["alert"] = $save;
-				}
-
-				$vars["area"] 	    = $area;
-				$vars["objectives"] = $objectives;
-				$vars["therapists"] = $therapists;
-				$vars["patient"]    = $patient;
-				
-				$vars["view"]  	    = $this->view("test", TRUE);
-
-				$this->render("content", $vars);	
+				redirect("patients/");
 			}
-		} else {
-			redirect("patients/");
-		}
 	}
 }
