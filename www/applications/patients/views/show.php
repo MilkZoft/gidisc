@@ -54,7 +54,7 @@
 					
 					<div class="field">
 						<?php print formLabel("terapist", "Terapeuta", FALSE);?>
-						<select name="terapist" disabled="disabled">
+						<select name="terapist">
 
 							<?php 
 								if(SESSION("ZanUserTypeID") == 6) {
@@ -96,13 +96,13 @@
 						<?php if($objectivesp) { ?>
 							<?php foreach($objectivesp as $key => $objective) { ?>
 								<tr class="molde1">
-									<td><input class="id-goal" disabled="disabled" type="text" value="<?php print $key + 1;?>" /></td>
+									<td><input class="id-goal" type="text" value="<?php print $key + 1;?>" /></td>
 									<td><input name="objective[]" type="text" value="<?php print $objective["Objetive"];?>"/></td>
 								</tr>
 							<?php } ?>
 						<?php } else { ?>
 							<tr class="molde1">
-								<td><input class="id-goal" disabled="disabled" type="text" value="1" /></td>
+								<td><input class="id-goal" type="text" value="1" /></td>
 								<td><input name="objective[]" type="text" value=""/></td>
 							</tr>
 						<?php } ?>
@@ -137,7 +137,7 @@
 									}
 								?>
 								<tr class="molde">
-									<td><input class="goal" disabled="disabled" type="text" value="<?php print $key + 1;?>" /></td>
+									<td><input class="goal" type="text" value="<?php print $key + 1;?>" /></td>
 									<td><input name="days[0][]" type="text" maxlength="1" value="<?php print (isset($day1)) ? $day1 : NULL; ?>" /></td>
 									<td><input name="days[1][]" type="text" maxlength="1" value="<?php print (isset($day2)) ? $day2 : NULL; ?>" /></td>
 									<td><input name="days[2][]" type="text" maxlength="1" value="<?php print (isset($day3)) ? $day3 : NULL; ?>" /></td>
@@ -178,7 +178,7 @@
 							</tr>
 						
 							<tr class="molde">
-								<td><input class="goal" disabled="disabled" type="text" value="1" /></td>
+								<td><input class="goal" type="text" value="1" /></td>
 								<td><input name="days[0][]" type="text" maxlength="1" value="" /></td>
 								<td><input name="days[1][]" type="text" maxlength="1" value="" /></td>
 								<td><input name="days[2][]" type="text" maxlength="1" value="" /></td>
@@ -201,12 +201,12 @@
 				</div>
 				<p>
 					<span>Observaciones: </span><br />
-					<textarea class="obsv" disabled="disabled" name="comments"><?php print $format["Comments"];?></textarea>
+					<textarea class="obsv" name="comments"><?php print $format["Comments"];?></textarea>
 				</p>
 				
 				<p>
 					<span>Trabajo en casa: </span><br />
-					<textarea class="obsv" disabled="disabled" name="work"><?php print $format["Work_Home"];?></textarea>
+					<textarea class="obsv" name="work"><?php print $format["Work_Home"];?></textarea>
 				</p>
 			</form>
 	<?php
@@ -221,7 +221,7 @@
 			<form method="POST" action="">
 				<p>
 					<span>Observaciones: </span><br />
-					<textarea class="obsv" disabled="disabled" name="comments"><?php print $format["Comments"];?></textarea>
+					<textarea class="obsv" name="comments"><?php print $format["Comments"];?></textarea>
 				</p>
 			</form>
 	<?php
