@@ -50,7 +50,7 @@
 					<p>
 						¿Quieres actualizar el formato o crear uno nuevo? <br />
 						<input checked="checked" name="action" value="Update" type="radio" /> Actualizar
-						<input name="action" value="Save" type="radio" /> Crear uno nuevo
+						<input id="save" name="action" value="Save" type="radio" /> Crear uno nuevo
 					</p>
 					<span class="field">
 					Año: <input name="year" class="span1" maxlength="4" value="<?php echo date("Y"); ?>" /> 
@@ -188,7 +188,11 @@
 										foreach($answer as $key2 => $value) {
 											$var  = "day". ($key2 + 1);
 											$$var = $value["Rating"]; 
+											$last = $key2 + 1;
 										}
+									} else {
+										$var = "day". $last + 1;
+										$$var = "";
 									}
 								?>
 								<tr class="molde">
