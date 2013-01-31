@@ -132,9 +132,11 @@
 							
 							<?php foreach($answers as $key => $answer) { ?>
 								<?php 
-									foreach($answer as $key2 => $value) {
-										$var  = "day". ($key2 + 1);
-										$$var = $value["Rating"]; 
+									if(is_array($answer)) {
+										foreach($answer as $key2 => $value) {
+											$var  = "day". ($key2 + 1);
+											$$var = $value["Rating"]; 
+										}
 									}
 								?>
 								<tr class="molde">
