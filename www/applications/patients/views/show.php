@@ -86,7 +86,6 @@
 				
 				<div id="objetivos">
 					<div id="controls">
-						<button class="action-button" id="addObjectivo">Agregar</button>
 						<button class="action-button" id="removeObjectivo">Remover</button>
 					</div>
 					
