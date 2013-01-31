@@ -2,6 +2,10 @@
 	if(!defined("_access")) {
 		die("Error: You don't have permission to access here..."); 
 	}
+
+	if($format["Month_"] === TRUE) {
+		$format["Month_"] = 1;
+	}
 	
 	$month[0]["option"] = "Enero";      $month[0]["value"] = 1;   $month[0]["selected"] = ($format["Month_"] == 1) ? TRUE : FALSE;
 	$month[1]["option"] = "Febrero";    $month[1]["value"] = 2;   $month[1]["selected"] = ($format["Month_"] == 2) ? TRUE : FALSE;
