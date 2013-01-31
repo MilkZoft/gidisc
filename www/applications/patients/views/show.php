@@ -47,7 +47,11 @@
 			<form method="POST" action="">
 				
 				<div id="section-top">
-					
+					<p>
+						¿Quieres actualizar el formato o crear uno nuevo? <br />
+						<input name="action" value="Update" type="radio" /> Actualizar
+						<input name="action" value="Save" type="radio" /> Crear uno nuevo
+					</p>
 					<span class="field">
 					Año: <input name="year" class="span1" maxlength="4" value="<?php echo date("Y"); ?>" /> 
 					Mes:
