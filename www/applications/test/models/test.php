@@ -102,6 +102,131 @@ class Test_Model extends ZP_Model {
 		
 		return getAlert("The test has been edited correctly", "success");
 	}
+
+	public function editTest() {
+		if(POST("action") === "Update") { 
+			if(POST("area") < 32) {
+				$objectives = POST("objective");
+				$days       = POST("days");
+				$day 		= POST("day");
+				$obsv		= POST("obsv");
+				$formatID	= POST("ID_Format");
+			
+				$data = array( 
+					"ID_Therapist" => POST("terapist"),
+					"ID_User"      => POST("IDPatient"),
+					"ID_Area"      => POST("area"),
+					"Month_"       => POST("month"),
+					"Year"		   => POST("year"),
+					"Comments"     => POST("comments"),
+					"Work_Home"    => POST("work"),
+					"Date_Entry"   => now(4),
+					"Text_Date"    => now(2)
+				);
+
+				$update = $this->Db->update("formats", $data, $formatID);
+
+				$this->Db->deleteBySQL("ID_Format = '$formatID'", "objectives_particular");
+
+				foreach($objectives as $key => $objective) {
+					$data = array( 
+						"ID_Format"  => $formatID,
+						"Objetive"   => $objective,
+						"Comments"   => isset($obsv[$key]) ? $obsv[$key] : NULL,
+						"Date_Entry" => now(4)	
+					);
+					
+					$IDObjective = $this->Db->insert("objectives_particular", $data);
+
+					$this->Db->deleteBySQL("ID_Format = '$formatID'", "objectives_answer");
+					
+					foreach($days as $key2 => $value) {
+						if(isset($day[$key2])) {
+							$data = array( 
+								"ID_Format"   => $formatID,
+								"ID_Objetive" => $IDObjective,
+								"Day_"        => isset($day[$key2])  ? $day[$key2] : NULL,
+								"Rating"      => isset($value[$key]) ? $value[$key] : NULL 
+							);
+							
+							$answer = $this->Db->insert("objectives_answer", $data);
+						}
+					}
+				}
+			} else {
+				$data = array( 
+					"ID_Therapist" => POST("terapist"),
+					"ID_User"      => POST("IDPatient"),
+					"ID_Area"      => POST("area"),
+					"Comments"     => POST("comments"),
+					"Date_Entry"   => now(4),
+					"Text_Date"    => now(2)
+				);
+					
+				$this->Db->update("formats", $data, POST("ID_Format"));
+			}
+
+			showAlert("El formato fue actualizado con éxito", path("patients"));
+		} else {
+			if(POST("area") < 32) {
+				$objectives = POST("objective");
+				$days       = POST("days");
+				$day        = POST("day");
+				$obsv       = POST("obsv");
+				
+				$data = array( 
+					"ID_Therapist" => POST("terapist"),
+					"ID_User"      => POST("IDPatient"),
+					"ID_Area"      => POST("area"),
+					"Month_"       => POST("month"),
+					"Year"		   => POST("year"),
+					"Comments"     => POST("comments"),
+					"Work_Home"    => POST("work"),
+					"Date_Entry"   => now(4),
+					"Text_Date"    => now(2)
+				);
+				
+				$insert = $this->Db->insert("formats", $data);
+				
+				foreach($objectives as $key => $objective) {
+					$data = array( 
+						"ID_Format"  => $insert,
+						"Objetive"   => $objective,
+						"Comments"   => $obsv[$key],
+						"Date_Entry" => now(4)	
+					);
+					
+					$IDObjective = $this->Db->insert("objectives_particular", $data);
+					
+					foreach($days as $key2 => $value) {
+						if(isset($day[$key2])) {
+							$data = array( 
+								"ID_Format"   => $insert,
+								"ID_Objetive" => $IDObjective,
+								"Day_"        => $day[$key2],
+								"Rating"      => $value[$key]
+							);
+							
+							$answer = $this->Db->insert("objectives_answer", $data);
+						}
+					}
+				}
+			} else {
+				$data = array( 
+					"ID_Therapist" => POST("terapist"),
+					"ID_User"      => POST("IDPatient"),
+					"ID_Area"      => POST("area"),
+					"Comments"     => POST("comments"),
+					"Date_Entry"   => now(4),
+					"Text_Date"    => now(2)
+				);
+				
+				$insert = $this->Db->insert("formats", $data);
+			}
+
+			showAlert("Nuevo formato guardado con éxito", path("patients"));
+		}
+	}
 	
 	public function save() {
 		if(POST("area") < 32) {
@@ -109,7 +234,7 @@ class Test_Model extends ZP_Model {
 			$days       = POST("days");
 			$day        = POST("day");
 			$obsv       = POST("obsv");
-						
+			
 			$data = array( 
 				"ID_Therapist" => POST("terapist"),
 				"ID_User"      => POST("IDPatient"),
@@ -135,13 +260,16 @@ class Test_Model extends ZP_Model {
 				$IDObjective = $this->Db->insert("objectives_particular", $data);
 				
 				foreach($days as $key2 => $value) {
-					$data = array( 
-						"ID_Objetive" => $IDObjective,
-						"Day_"        => $day[$key2],
-						"Rating"      => $value[$key]
-					);
-					
-					$answer = $this->Db->insert("objectives_answer", $data);
+					if(isset($day[$key2])) {
+						$data = array( 
+							"ID_Format"   => $insert,
+							"ID_Objetive" => $IDObjective,
+							"Day_"        => $day[$key2],
+							"Rating"      => $value[$key]
+						);
+						
+						$answer = $this->Db->insert("objectives_answer", $data);
+					}
 				}
 			}
 		} else {
@@ -157,7 +285,7 @@ class Test_Model extends ZP_Model {
 			$insert = $this->Db->insert("formats", $data);
 		}
 		
-		return getAlert("The test has been saved correctly", "success");
+		showAlert("Nuevo formato guardado con éxito", path("patients"));
 	}
 	
 	public function all($limit = 25) {

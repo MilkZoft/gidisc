@@ -44,7 +44,7 @@
 				</span>
 			</div>
 			
-			<form method="POST" action="">
+			<form method="POST" action="<?php echo path("patients/test/". segment(2, isLang())); ?>">
 				
 				<div id="section-top">
 					<p>
@@ -93,12 +93,11 @@
 				
 				<div id="objetivos">
 					<div id="controls">
-						<button class="action-button" id="removeObjectivo">Remover</button>
+						<!--<button class="action-button" id="removeObjectivo">Remover</button>-->
 					</div>
 					
 					<table id="goals-table">
 						<tr>
-							<th>ID</th>
 							<th>Objetivo</th>
 						</tr>
 						<?php if($objectivesp) { ?>
@@ -106,7 +105,6 @@
 								$i = 0;
 								foreach($objectivesp as $key => $objective) { ?>
 									<tr class="molde1">
-										<td><input class="id-goal" type="text" value="<?php print $key + 1;?>" /></td>
 										<td><input name="objective[]" type="text" value="<?php print $objective["Objetive"];?>"/></td>
 									</tr>
 							<?php 
@@ -117,36 +115,30 @@
 									if($i == 4) {
 									?>
 										<tr class="molde1">
-											<td><input class="id-goal" type="text" value="" /></td>
 											<td><input name="objective[]" type="text" value=""/></td>
 										</tr>
 									<?php
 									} elseif($i == 3) {
 									?>
 										<tr class="molde1">
-											<td><input class="id-goal" type="text" value="" /></td>
 											<td><input name="objective[]" type="text" value=""/></td>
 										</tr>
 
 										<tr class="molde1">
-											<td><input class="id-goal" type="text" value="" /></td>
 											<td><input name="objective[]" type="text" value=""/></td>
 										</tr>										
 									<?php
 									} elseif($i == 2) {
 									?>
 										<tr class="molde1">
-											<td><input class="id-goal" type="text" value="" /></td>
 											<td><input name="objective[]" type="text" value=""/></td>
 										</tr>
 
 										<tr class="molde1">
-											<td><input class="id-goal" type="text" value="" /></td>
 											<td><input name="objective[]" type="text" value=""/></td>
 										</tr>
 
 										<tr class="molde1">
-											<td><input class="id-goal" type="text" value="" /></td>
 											<td><input name="objective[]" type="text" value=""/></td>
 										</tr>
 									<?php
@@ -176,7 +168,7 @@
 							<tr>
 								<th>Objetivo/Día</th>
 								<?php for($i = 0; $i <= 14; $i++) { ?>
-									<th><input name="day[0]" type="text" maxlength="2" value="<?php print (isset($answers[0][$i])) ? $answers[0][$i]["Day_"] : '';?>" /></th>
+									<th><input name="day[<?php echo $i; ?>]" type="text" maxlength="2" value="<?php print (isset($answers[0][$i])) ? $answers[0][$i]["Day_"] : '';?>" /></th>
 								<?php } ?>
 								
 								<th>Observaciones</th>
@@ -268,7 +260,7 @@
 					<span>Trabajo en casa: </span><br />
 					<textarea class="obsv" name="work"><?php print $format["Work_Home"];?></textarea>
 				</p>
-			</form>
+			
 	<?php
 		} else {
 	?>
@@ -288,10 +280,12 @@
 		}
 	?>
 	<p>
+		<input type="hidden" value="<?php print $format["ID_Format"];?>" name="ID_Format">
 		<input type="hidden" value="<?php print $patient["ID_User"];?>" name="IDPatient">
-		<input type="hidden" value="<?php print $area["ID_Area"];?>" name="area">
-		<input id="send" class="btn btn-success" type="submit" value="<?php print __("Save");?>" name="edit">
+		<input type="hidden" value="<?php print $format["ID_Area"];?>" name="area">
+		<input id="send" class="btn btn-success" type="submit" value="<?php print __("Edit");?>" name="edit">
 	</p>
+	</form>
 </div>
 	
 

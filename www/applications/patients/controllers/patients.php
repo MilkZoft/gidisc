@@ -89,22 +89,29 @@ class Patients_Controller extends ZP_Controller {
 	}
 	
 	public function test() {
-		if(POST("send") or POST("save")) {
+		if(POST("send") or POST("save") or POST("edit")) {
 			$this->title("Form");
 			$this->CSS("styles", "test");
 			$this->js("actions", "test");
 			
 			$this->Test_Model = $this->model("Test_Model");
 			
-			if(POST("IDPatient") and POST("area")) {
-				$this->Patients_Model = $this->model("Patients_Model");
-				
+			if(POST("IDPatient") and POST("area")) { 	
 				$format = $this->Test_Model->getFormat(POST("IDPatient"), POST("area"));
-
+				
 				if(isset($format[0]["format"])) {
-					$patient    = $this->Patients_Model->getPatient($format[0]["format"]["ID_User"]);
-					$objectives = $this->Test_Model->getObjectives($format[0]["format"]["ID_Area"]);
-					$therapists = $this->Patients_Model->getByType();
+					if(POST("edit")) { 
+						$edit = $this->Test_Model->editTest();
+						$vars["alert"] = $edit;
+
+						$patient    = $this->Patients_Model->getPatient($format[0]["format"]["ID_User"]);
+						$objectives = $this->Test_Model->getObjectives($format[0]["format"]["ID_Area"]);
+						$therapists = $this->Patients_Model->getByType();
+					} else {
+						$patient    = $this->Patients_Model->getPatient($format[0]["format"]["ID_User"]);
+						$objectives = $this->Test_Model->getObjectives($format[0]["format"]["ID_Area"]);
+						$therapists = $this->Patients_Model->getByType();
+					}
 					
 					$vars["area"]		 = $format[0]["format"]["ID_Area"];
 					$vars["format"]      = $format[0]["format"];
@@ -123,7 +130,7 @@ class Patients_Controller extends ZP_Controller {
 					$therapists = $this->Patients_Model->getByType();
 
 					$patient    = $this->Patients_Model->getPatient(POST("IDPatient"));
-					
+				
 					if(POST("save")) {
 						$save = $this->Test_Model->save();
 						$vars["alert"] = $save;
