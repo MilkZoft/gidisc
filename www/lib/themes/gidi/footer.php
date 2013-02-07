@@ -26,8 +26,15 @@
         		</div>
         	</div>
    		</div>
-   		
-   		<?php print getScript("jquery");?>
+      <script>
+        $(document).on("ready", function() {
+          $("#action2").on("click", function(){
+            $(".day-input").val('');
+            $(".days-input").val('');
+            $(".obsv").val('');
+          });
+        });
+      </script>
    		<?php print getScript("www/lib/scripts/js/check.js");?>
    		<?php print getScript("www/lib/scripts/js/jquery-ui-1.8.17.custom.min.js");?>
    		

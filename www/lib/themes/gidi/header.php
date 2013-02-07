@@ -10,6 +10,7 @@
 		<title><?php print $this->getTitle(); ?></title>
 		
 		<link href="<?php print path("www/lib/css/frameworks/bootstrap/bootstrap.min.css", TRUE); ?>" rel="stylesheet">
+		<script tyle="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<link href="<?php print path("www/lib/css/ui-lightness/jquery-ui-1.8.17.custom.css", TRUE); ?>" rel="stylesheet">
 		<link href="<?php print $this->themePath; ?>/css/style.css" rel="stylesheet">
 		<?php print $this->getCSS(); ?>
