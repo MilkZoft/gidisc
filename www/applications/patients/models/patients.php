@@ -59,8 +59,8 @@ class Patients_Model extends ZP_Model {
 		return ($data) ? $data[0] : FALSE; 
 	}
 	
-	public function all($limit = 25) {
-		if(SESSION("ZanUserTypeID") === 1) {
+	public function all($limit = 25) { 
+		if(SESSION("ZanUserTypeID") == 1) { 
 			$query = "SELECT * FROM zan_users WHERE ID_Type_User = '4' AND Situation != 'Deleted' ORDER BY ID_User DESC LIMIT {$limit}";
 		} else {
 			$userID = SESSION("ZanUserID");

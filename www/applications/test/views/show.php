@@ -46,8 +46,9 @@
 				<div id="section-top">
 					
 					<span class="field">
-						<?php
-						print formLabel("month", "Mes ", FALSE);
+						Año: <input name="year" class="span1" maxlength="4" value="<?php echo $format["Year"]; ?>" /> 
+						Mes:
+						<?php 
 						print formSelect(array("id" => "month", "name" => "month", "disabled" => "disabled"), $month);	
 						?>
 					</span>

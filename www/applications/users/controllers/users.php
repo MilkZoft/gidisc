@@ -48,18 +48,12 @@ class Users_Controller extends ZP_Controller {
 				$user = FALSE;
 			}
 			
-			if($user) {
+			if($user) { 
 				SESSION("ZanUser", 		 $user[0]["Username"]);
 				SESSION("ZanUserPwd",    $user[0]["Password"]);
 				SESSION("ZanUserID",     $user[0]["ID_User"]);
 				SESSION("ZanUserType",   $user[0]["Type"]);
 				SESSION("ZanUserTypeID", $user[0]["ID_Type_User"]);
-
-				createCookie("ZanUser", $user[0]["Username"]);
-				createCookie("ZanUserPwd", $user[0]["Password"]);
-				createCookie("ZanUserID", $user[0]["ID_User"]);
-				createCookie("ZanUserType", $user[0]["Type"]);
-				createCookie("ZanUserTypeID", $user[0]["ID_Type_User"]);
 
 				$token = $this->Users_Model->setToken($user[0]["ID_User"]);
 				
@@ -68,7 +62,6 @@ class Users_Controller extends ZP_Controller {
 				}
 				
 				SESSION("ZanUserToken", $token);
-				createCookie("ZanUserToken", $token);
 
 				redirect(POST("URL"));
 			} elseif($from === "cpanel") {

@@ -59,7 +59,7 @@ function COOKIE($cookie) {
  * @param int    $time     = 604800
  * @return void
  */ 
-function createCookie($cookie = NULL, $value, $time = 604800, $redirect = FALSE, $URL = NULL) {		
+function createCookie2($cookie = NULL, $value, $time = 604800, $redirect = FALSE, $URL = NULL) {		
 	setcookie($cookie, $value, time() + $time, "/");
 	
 	if($redirect) {
@@ -77,13 +77,13 @@ function createCookie($cookie = NULL, $value, $time = 604800, $redirect = FALSE,
  */ 
 function SESSION($session, $value = FALSE) {
 	if($value === FALSE) {
-		if(isset($_SESSION[$session])) {
-			return $_SESSION[$session];
+		if(isset($_COOKIE[$session])) {
+			return $_COOKIE[$session];
 		} else {
 			return FALSE;
 		}
 	} else {
-		$_SESSION[$session] = $value;
+		setcookie($session, $value, time() + 10000, "/");
 	}
 	
 	return TRUE;
@@ -113,6 +113,12 @@ function unsetCookie($cookie, $URL = FALSE) {
 function unsetSessions($URL = FALSE) {
 	session_unset(); 
 	session_destroy();	
+	setcookie("ZanUser", NULL, 0, "/");
+	setcookie("ZanUserPwd", NULL, 0, "/");		
+	setcookie("ZanUserID", NULL, 0, "/");
+	setcookie("ZanUserType", NULL, 0, "/");
+	setcookie("ZanUserTypeID", NULL, 0, "/");
+	setcookie("ZanUserToken", NULL, 0, "/");
 	
 	if($URL) {
 		redirect($URL);

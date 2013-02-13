@@ -106,12 +106,31 @@ class Test_Model extends ZP_Model {
 	public function editTest() {
 		if(POST("action") === "Update") { 
 			if(POST("area") < 32) {
-				$objectives = POST("objective");
-				$days       = POST("days");
-				$day 		= POST("day");
+				$objectives = array_values(array_diff(POST("objective"), array('')));
+				$values     = POST("days");
+				$days 		= array_values(array_diff(POST("day"), array('')));
 				$obsv		= POST("obsv");
 				$formatID	= POST("ID_Format");
-			
+
+				for($h = 0; $h <= count($objectives) - 1; $h++) {
+					for($k = 0; $k <= count($values) - 1; $k++) {
+						for($l = 0; $l <= count($values[$k]) - 1; $l++) {
+							if($values[$k][$l] != "") {			
+								if(!isset($results[$h][$k][0])) {
+									$results[$h][$k][0] = $values[$k][$l];
+								} else {
+									if(!isset($results[$h+1][$k][0])) {
+										$results[$h+1][$k][0] = $values[$k][$l];
+									}
+								}
+							}
+						}
+					}
+				}
+
+				array_pop($results);
+				$values = $results;
+
 				$data = array( 
 					"ID_Therapist" => POST("terapist"),
 					"ID_User"      => POST("IDPatient"),
@@ -127,32 +146,29 @@ class Test_Model extends ZP_Model {
 				$update = $this->Db->update("formats", $data, $formatID);
 
 				$this->Db->deleteBySQL("ID_Format = '$formatID'", "objectives_particular");
-
-				foreach($objectives as $key => $objective) {
+						
+				for($o = 0; $o <= count($values) - 1; $o++) {
 					$data = array( 
 						"ID_Format"  => $formatID,
-						"Objetive"   => $objective,
-						"Comments"   => isset($obsv[$key]) ? $obsv[$key] : NULL,
+						"Objetive"   => $objectives[$o],
+						"Comments"   => isset($obsv[$o]) ? $obsv[$o] : NULL,
 						"Date_Entry" => now(4)	
 					);
-					
+									
 					$IDObjective = $this->Db->insert("objectives_particular", $data);
-
 					$this->Db->deleteBySQL("ID_Format = '$formatID'", "objectives_answer");
-					
-					foreach($days as $key2 => $value) {
-						if(isset($day[$key2])) {
-							$data = array( 
-								"ID_Format"   => $formatID,
-								"ID_Objetive" => $IDObjective,
-								"Day_"        => isset($day[$key2])  ? $day[$key2] : NULL,
-								"Rating"      => isset($value[$key]) ? $value[$key] : NULL 
-							);
-							
-							$answer = $this->Db->insert("objectives_answer", $data);
-						}
+
+					for($d = 0; $d <= count($values[$o]) - 1; $d++) {
+						$data2[] = array( 
+							"ID_Format"   => $formatID,
+							"ID_Objetive" => $IDObjective,
+							"Day_"        => $days[$d],
+							"Rating"      => $values[$o][$d][0] 
+						);
 					}
 				}
+
+				$this->Db->insertBatch("objectives_answer", $data2);
 			} else {
 				$data = array( 
 					"ID_Therapist" => POST("terapist"),
@@ -169,10 +185,30 @@ class Test_Model extends ZP_Model {
 			showAlert("El formato fue actualizado con éxito", path("patients"));
 		} else {
 			if(POST("area") < 32) {
-				$objectives = POST("objective");
-				$days       = POST("days");
-				$day        = POST("day");
-				$obsv       = POST("obsv");
+				$objectives = array_values(array_diff(POST("objective"), array('')));
+				$values     = POST("days");
+				$days 		= array_values(array_diff(POST("day"), array('')));
+				$obsv		= POST("obsv");
+				$formatID	= POST("ID_Format");
+
+				for($h = 0; $h <= count($objectives) - 1; $h++) {
+					for($k = 0; $k <= count($values) - 1; $k++) {
+						for($l = 0; $l <= count($values[$k]) - 1; $l++) {
+							if($values[$k][$l] != "") {			
+								if(!isset($results[$h][$k][0])) {
+									$results[$h][$k][0] = $values[$k][$l];
+								} else {
+									if(!isset($results[$h+1][$k][0])) {
+										$results[$h+1][$k][0] = $values[$k][$l];
+									}
+								}
+							}
+						}
+					}
+				}
+
+				array_pop($results);
+				$values = $results;
 				
 				$data = array( 
 					"ID_Therapist" => POST("terapist"),
@@ -186,31 +222,29 @@ class Test_Model extends ZP_Model {
 					"Text_Date"    => now(2)
 				);
 				
-				$insert = $this->Db->insert("formats", $data);
+				$formatID = $this->Db->insert("formats", $data);
 				
-				foreach($objectives as $key => $objective) {
+				for($o = 0; $o <= count($values) - 1; $o++) {
 					$data = array( 
-						"ID_Format"  => $insert,
-						"Objetive"   => $objective,
-						"Comments"   => $obsv[$key],
+						"ID_Format"  => $formatID,
+						"Objetive"   => $objectives[$o],
+						"Comments"   => isset($obsv[$o]) ? $obsv[$o] : NULL,
 						"Date_Entry" => now(4)	
 					);
-					
+									
 					$IDObjective = $this->Db->insert("objectives_particular", $data);
-					
-					foreach($days as $key2 => $value) {
-						if(isset($day[$key2])) {
-							$data = array( 
-								"ID_Format"   => $insert,
-								"ID_Objetive" => $IDObjective,
-								"Day_"        => $day[$key2],
-								"Rating"      => $value[$key]
-							);
-							
-							$answer = $this->Db->insert("objectives_answer", $data);
-						}
+
+					for($d = 0; $d <= count($values[$o]) - 1; $d++) {
+						$data2[] = array( 
+							"ID_Format"   => $formatID,
+							"ID_Objetive" => $IDObjective,
+							"Day_"        => $days[$d],
+							"Rating"      => $values[$o][$d][0] 
+						);
 					}
 				}
+
+				$this->Db->insertBatch("objectives_answer", $data2);
 			} else {
 				$data = array( 
 					"ID_Therapist" => POST("terapist"),
@@ -230,11 +264,31 @@ class Test_Model extends ZP_Model {
 	
 	public function save() {
 		if(POST("area") < 32) {
-			$objectives = POST("objective");
-			$days       = POST("days");
-			$day        = POST("day");
-			$obsv       = POST("obsv");
-			
+			$objectives = array_values(array_diff(POST("objective"), array('')));
+			$values     = POST("days");
+			$days 		= array_values(array_diff(POST("day"), array('')));
+			$obsv		= POST("obsv");
+			$formatID	= POST("ID_Format");
+
+			for($h = 0; $h <= count($objectives) - 1; $h++) {
+				for($k = 0; $k <= count($values) - 1; $k++) {
+					for($l = 0; $l <= count($values[$k]) - 1; $l++) {
+						if($values[$k][$l] != "") {			
+							if(!isset($results[$h][$k][0])) {
+								$results[$h][$k][0] = $values[$k][$l];
+							} else {
+								if(!isset($results[$h+1][$k][0])) {
+									$results[$h+1][$k][0] = $values[$k][$l];
+								}
+							}
+						}
+					}
+				}
+			}
+
+			array_pop($results);
+			$values = $results;
+		
 			$data = array( 
 				"ID_Therapist" => POST("terapist"),
 				"ID_User"      => POST("IDPatient"),
@@ -247,31 +301,29 @@ class Test_Model extends ZP_Model {
 				"Text_Date"    => now(2)
 			);
 			
-			$insert = $this->Db->insert("formats", $data);
-			
-			foreach($objectives as $key => $objective) {
+			$formatID = $this->Db->insert("formats", $data);
+				
+			for($o = 0; $o <= count($values) - 1; $o++) {
 				$data = array( 
-					"ID_Format"  => $insert,
-					"Objetive"   => $objective,
-					"Comments"   => $obsv[$key],
+					"ID_Format"  => $formatID,
+					"Objetive"   => $objectives[$o],
+					"Comments"   => isset($obsv[$o]) ? $obsv[$o] : NULL,
 					"Date_Entry" => now(4)	
 				);
-				
+								
 				$IDObjective = $this->Db->insert("objectives_particular", $data);
-				
-				foreach($days as $key2 => $value) {
-					if(isset($day[$key2])) {
-						$data = array( 
-							"ID_Format"   => $insert,
-							"ID_Objetive" => $IDObjective,
-							"Day_"        => $day[$key2],
-							"Rating"      => $value[$key]
-						);
-						
-						$answer = $this->Db->insert("objectives_answer", $data);
-					}
+
+				for($d = 0; $d <= count($values[$o]) - 1; $d++) {
+					$data2[] = array( 
+						"ID_Format"   => $formatID,
+						"ID_Objetive" => $IDObjective,
+						"Day_"        => $days[$d],
+						"Rating"      => $values[$o][$d][0] 
+					);
 				}
 			}
+
+			$this->Db->insertBatch("objectives_answer", $data2);
 		} else {
 			$data = array( 
 				"ID_Therapist" => POST("terapist"),

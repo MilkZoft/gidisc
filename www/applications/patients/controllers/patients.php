@@ -34,7 +34,7 @@ class Patients_Controller extends ZP_Controller {
 		if(POST("seek")) {
 			$patients = $this->Patients_Model->search(POST("name"));			
 			$count = count($patients);
-		} else {
+		} else { 
 			$patients = $this->Patients_Model->all($limit);
 			$count = $this->Patients_Model->count();
 		}
