@@ -1,5 +1,5 @@
 	<?php
-	if(SESSION("ZanUserTypeID") === 1) {
+	if(SESSION("ZanUserTypeID") == 1) {
 	?>
 		<form action="<?php echo path("patients"); ?>" method="post" class="form-results-search" enctype="multipart/form-data">
 			<fieldset>
