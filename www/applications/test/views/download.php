@@ -78,14 +78,6 @@
 			<?php } ?>			
 			
 		</table>
-		
-		<div id="bloque" class="claves">
-			<div class="clave"><span class="upercase">claves</span>: 0 = no puede</div>
-			<span>1 = lo realiza el 25% de las veces </span>
-			<span>2 = lo realiza el 50% de las veces </span>
-			<span>3 = lo realiza el 75% de las veces </span>
-			<span> 4 =  lo realiza el 100% de las veces</span>
-		</div>
 	<?php
 	}
 	?>
@@ -105,4 +97,23 @@
 		<?php
 		}
 		?>
+	</div>
+
+	<div id="bloque" class="claves">
+		<p>
+			<div class="clave"><span class="upercase">claves</span>: 0 = no puede</div>
+			<span>1 = lo realiza el 25% de las veces </span>
+			<span>2 = lo realiza el 50% de las veces </span>
+			<span>3 = lo realiza el 75% de las veces </span>
+			<span>4 =  lo realiza el 100% de las veces</span>
+		</p>
+		
+		<p>
+			A - Falto pero si Aviso <br />
+			V - Vacaciones <br />
+			E - Enfermo <br />
+			F - Falto <br />
+			R - Reposición <br />
+			X - No se trabajo ese objetivo
+		</p>
 	</div>
