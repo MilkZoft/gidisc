@@ -9,7 +9,7 @@
 					<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
 				<?php 
 					break;
-				} else {
+				} elseif (SESSION("ZanUserTypeID") != 3) {
 				?>
 					<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
 				<?php
