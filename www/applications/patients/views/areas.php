@@ -3,9 +3,18 @@
 		<span><?php print __("Select area");?></span><br />
 		
 		<select name="area">
-			<?php foreach($areas as $area) { ?>
-				<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
-			<?php } ?>
+			<?php foreach($areas as $area) { 
+				if($area["ID_Area"] == 32 and SESSION("ZanUserTypeID") == 3) {
+				?>
+					<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
+				<?php 
+					break;
+				} else {
+				?>
+					<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
+				<?php
+				} 
+				?>
 		</select>
 	</p>
 	
