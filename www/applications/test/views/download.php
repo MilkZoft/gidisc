@@ -70,7 +70,7 @@
 					<td><?php print ($key + 1);?></td>
 					
 					<?php foreach($answer as $value) { ?>
-						<td><?php print (int) $value["Rating"];?></td>
+						<td><?php print $value["Rating"];?></td>
 					<?php } ?>
 					
 					<td class="observaciones"><?php print $objectivesp[$key]["Comments"];?></td>
