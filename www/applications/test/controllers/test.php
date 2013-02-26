@@ -157,6 +157,8 @@ class Test_Controller extends ZP_Controller {
 			$view .= '</div>';
 
 			$this->setPDF($view, $patientData["Name"] .'.pdf');
+
+			unset($_SESSION["downloaded"]);
 		}
 	}
 	
