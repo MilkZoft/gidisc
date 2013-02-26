@@ -109,7 +109,7 @@
 					1 = lo realiza el 25% de las veces<br />
 					2 = lo realiza el 50% de las veces<br />
 					3 = lo realiza el 75% de las veces <br />
-					4 =  lo realiza el 100% de las veces<br />
+					4 =  lo realiza el 100% de las veces
 				</p>
 				
 				<p>
