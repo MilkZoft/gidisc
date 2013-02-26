@@ -36,7 +36,6 @@
 						<td>
 							<?php
 								if(SESSION("ZanUserTypeID") == 1) {
-									die("si");
 									?>
 									<a href="<?php print path("patients/permissions/" . $patient["ID_User"]);?>">
 										<span class="no-decoration"><?php print __("Asignar permisos");?></span>
