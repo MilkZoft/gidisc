@@ -13,7 +13,8 @@
 				?>
 					<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
 				<?php
-				} 
+				}
+			}
 				?>
 		</select>
 	</p>
