@@ -21,7 +21,7 @@
 			<?php if($formats) { 				 					 
 				 	foreach($formats as $format) { ?>
 					<tr>
-						<td><?php print $format["ID_Format"];?></td>
+						<td><input name="ids[]" type="checkbox" value="<?php print $format["ID_Format"];?>" checked="checked" /> <?php print $format["ID_Format"];?></td>
 						<td><?php print $format["Name"];?></td>
 						<td><?php print month($format["Month_"]);?></td>
 						<td><?php print $format["Text_Date"];?></td>
@@ -58,15 +58,22 @@
 			<?php } ?>
 		</tbody>
 	</table>
-
-	<?php
-		if(strlen($fIDs) > 1) {
-		?>
-			<a href="<?php print path("test/download/" . $patient["ID_User"] . "/$fIDs"); ?>" title="Download">
-				<span class="no-decoration"><?php print __("Download All");?></span>
-			</a>
-		<?php
-		}
-
-		print $pagination; ?>
+	
+	<button onclick="downloadFormats();" class="btn info">Descargar Seleccionados</button>
+	
+	<?php print $pagination; ?>
 </div>
+
+<script>
+	function downloadFormats() {
+		var ids = '';
+
+		$("input[name='ids[]']:checked").each(function() {
+    		ids = ids + $(this).val() + ',';
+		});
+
+		var url = ids.substring(0, ids.length - 1);
+
+		window.location = '<?php print path("test/download/" . $patient["ID_User"] . "/"); ?>' + url
+	}
+</script>
