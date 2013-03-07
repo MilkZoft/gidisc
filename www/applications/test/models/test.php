@@ -128,7 +128,10 @@ class Test_Model extends ZP_Model {
 					}
 				}
 
-				array_pop($results);
+				if(count($results) > 1) {
+					array_pop($results);
+				}
+				
 				$values = $results;
 
 				$data = array( 
@@ -207,7 +210,10 @@ class Test_Model extends ZP_Model {
 					}
 				}
 
-				array_pop($results);
+				if(count($results) > 1) {
+					array_pop($results);
+				}
+		
 				$values = $results;
 				
 				$data = array( 
