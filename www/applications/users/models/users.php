@@ -122,7 +122,6 @@ class Users_Model extends ZP_Model {
 			"Username" 	   => $username,
 			"Pwd" 	   	   => $pwd,
 			"ID_Type_User" => POST("type"),
-			"ID_Center"    => POST("center"),
 			"Name"         => POST("name"),
 			"Last_Name"    => POST("last_name"),
 			"Maiden_Name"  => POST("maiden_name"),

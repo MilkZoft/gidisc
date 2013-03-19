@@ -787,7 +787,7 @@ class ZP_Db extends ZP_Load {
 		} else {
 			return FALSE;
 		}	
-		die(var_dump($query));
+
 		$this->Rs = $this->Database->query($query);
 
 		if($this->Rs) {
