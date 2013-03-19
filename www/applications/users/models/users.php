@@ -136,7 +136,7 @@ class Users_Model extends ZP_Model {
 			"Date_Entry"   => now(4),
 			"ID_Therapist" => POST("therapist"),
 			"Background"   => POST("background"),
-			"Photo" 	   => $this->photo["medium"],
+			"Photo" 	   => isset($this->photo["medium"]) ? $this->photo["medium"] : null,
 			"Situation"    => (POST("situation") == 1) ? "Active" : "Inactive"
 		);
 		
