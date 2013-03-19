@@ -130,7 +130,7 @@ class Users_Model extends ZP_Model {
 			"Phone"        => POST("phone"),
 			"Father_Name"  => POST("fname"),
 			"Mother_Name"  => POST("mname"),
-			"Profession"   => POST("profession"),
+			"Father_Profession" => POST("profession"),
 			"Birthday"     => POST("birthday"),
 			"Date_Entry"   => now(4),
 			"ID_Therapist" => POST("therapist"),
