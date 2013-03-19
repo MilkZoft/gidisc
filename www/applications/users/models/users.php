@@ -140,7 +140,7 @@ class Users_Model extends ZP_Model {
 			"Situation"    => (POST("situation") == 1) ? "Active" : "Inactive"
 		);
 		
-		$this->Data->ignore(array("username", "father", "mother", "last_name", "maiden_name", "center", "type", "pwd", "name", "surname", "background", "therapist", "situation", "address", "phone", "grade", "profession", "birthday","photo"));
+		$this->Data->ignore(array("fname", "mname", "username", "father", "mother", "last_name", "maiden_name", "center", "type", "pwd", "name", "surname", "background", "therapist", "situation", "address", "phone", "grade", "profession", "birthday","photo"));
 		
 		$this->data = $this->Data->proccess($data, $validations);
 
@@ -150,9 +150,8 @@ class Users_Model extends ZP_Model {
 	}
 	
 	private function save() {
-		____($this->data);
-		$this->Db->insert($this->table, $this->data);
-				
+		$id = $this->Db->insert($this->table, $this->data);
+		____($id);	
 		return getAlert("The user has been saved correctly", "success");	
 	}
 
