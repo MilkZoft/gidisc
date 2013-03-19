@@ -51,13 +51,13 @@
 		<table>
 			<tr>
 				<th>Objetivo/D&iacute;a</th>
-				<?php if (isset($answers[0])) foreach($answers[0] as $answer) { ?>
+				<?php if (isset($answers[0]) and is_array($answers[0])) foreach($answers[0] as $answer) { ?>
 					<th><?php print $answer["Day_"];?></th>
 				<?php } ?>
 				<th>Observaci&oacute;n</th>
 			</tr>
 			
-			<?php if (isset($answers)) foreach($answers as $key => $answer) { ?>
+			<?php if (isset($answers) and is_array($answers)) foreach($answers as $key => $answer) { ?>
 				<tr>
 					<td><?php print ($key + 1);?></td>
 					

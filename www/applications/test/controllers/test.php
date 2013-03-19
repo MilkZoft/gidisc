@@ -128,6 +128,7 @@ class Test_Controller extends ZP_Controller {
 		} else {
 			$this->Patients_Model = $this->model("Patients_Model");
 			$i = 0;
+			$j = 0;
 			
 			ob_start();
 			foreach($formats as $format) {
@@ -147,28 +148,35 @@ class Test_Controller extends ZP_Controller {
 					if($i == 0) {
 						$view  = $this->view("header", $vars, $this->application, TRUE);
 
-						$view .= '<div class="terapeuta">';
-						
-						foreach($therapistsData as $therapist) { 
-							if($format["format"]["ID_Therapist"] == $therapist["ID_User"]) { 
-								$view .= '<span class="bold">Terapeuta:</span> '. decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]);
-							} 
-						}
+						if($j == 0) {
+							$view .= '<div class="terapeuta">';
+							
+							foreach($therapistsData as $therapist) { 
+								if($format["format"]["ID_Therapist"] == $therapist["ID_User"]) { 
+									$view .= '<span class="bold">Terapeuta:</span> '. decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]);
+								} 
+							}
 
-						$view .= '</div>';
+							$view .= '</div>';
+
+							$j++;
+						}
 
 						$view .= $this->view("download", $vars, $this->application, TRUE);
 					} else {
+						if($j == 0) {
+							$view .= '<div class="terapeuta">';
+							
+							foreach($therapistsData as $therapist) { 
+								if($format["format"]["ID_Therapist"] == $therapist["ID_User"]) { 
+									$view .= '<span class="bold">Terapeuta:</span> '. decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]);
+								} 
+							}
 
-						$view .= '<div class="terapeuta">';
-						
-						foreach($therapistsData as $therapist) { 
-							if($format["format"]["ID_Therapist"] == $therapist["ID_User"]) { 
-								$view .= '<span class="bold">Terapeuta:</span> '. decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]);
-							} 
+							$view .= '</div>';
+
+							$j++;
 						}
-
-						$view .= '</div>';
 						
 						$view .= $this->view("download", $vars, $this->application, TRUE);
 					}
