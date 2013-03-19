@@ -146,8 +146,30 @@ class Test_Controller extends ZP_Controller {
 					
 					if($i == 0) {
 						$view  = $this->view("header", $vars, $this->application, TRUE);
+
+						$view .= '<div class="terapeuta">';
+						
+						foreach($therapistsData as $therapist) { 
+							if($format["format"]["ID_Therapist"] == $therapist["ID_User"]) { 
+								$view .= '<span class="bold">Terapeuta:</span> '. decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]);
+							} 
+						}
+
+						$view .= '</div>';
+
 						$view .= $this->view("download", $vars, $this->application, TRUE);
 					} else {
+
+						$view .= '<div class="terapeuta">';
+						
+						foreach($therapistsData as $therapist) { 
+							if($format["format"]["ID_Therapist"] == $therapist["ID_User"]) { 
+								$view .= '<span class="bold">Terapeuta:</span> '. decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]);
+							} 
+						}
+
+						$view .= '</div>';
+						
 						$view .= $this->view("download", $vars, $this->application, TRUE);
 					}
 					$i++;

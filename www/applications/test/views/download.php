@@ -28,14 +28,6 @@
 	<?php
 		}
 	?>
-	
-	<div class="terapeuta">
-		<?php foreach($therapists as $therapist) { ?>
-			<?php if($format["ID_Therapist"] == $therapist["ID_User"]) { ?>
-				<span class="bold">Terapeuta:</span> <?php print decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]); ?>
-			<?php } ?>
-		<?php } ?>
-	</div>
 		
 	<div class="area"><span class="bold">Area:</span> <?php print decode($format["Name"]);?></div>
 
@@ -59,13 +51,13 @@
 		<table>
 			<tr>
 				<th>Objetivo/D&iacute;a</th>
-				<?php foreach($answers[0] as $answer) { ?>
+				<?php if (isset($answers[0])) foreach($answers[0] as $answer) { ?>
 					<th><?php print $answer["Day_"];?></th>
 				<?php } ?>
 				<th>Observaci&oacute;n</th>
 			</tr>
 			
-			<?php foreach($answers as $key => $answer) { ?>
+			<?php if (isset($answers)) foreach($answers as $key => $answer) { ?>
 				<tr>
 					<td><?php print ($key + 1);?></td>
 					
