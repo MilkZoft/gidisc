@@ -149,7 +149,7 @@ class Users_Model extends ZP_Model {
 	
 	private function save() {
 		$id = $this->Db->insert($this->table, $this->data);
-		____($id);	
+	
 		return getAlert("The user has been saved correctly", "success");	
 	}
 
