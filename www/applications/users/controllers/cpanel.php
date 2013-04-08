@@ -70,8 +70,8 @@ class CPanel_Controller extends ZP_Controller {
 				} elseif(POST("type") == 3) {
 					$vars["view"] = $this->view("add_teacher", TRUE, $this->application);
 				} elseif(POST("type") == 4) {
-					$vars["fathers"] 	= $this->$Model->getByType(5);
-					$vars["therapists"] = $this->$Model->getByType(6);
+					$vars["fathers"] 	= $this->$Model->getByUsersType(5);
+					$vars["therapists"] = $this->$Model->getByUsersType(6);
 					$vars["view"] 		= $this->view("add_patient", TRUE, $this->application);
 				} elseif(POST("type") == 5) {
 					$vars["view"] = $this->view("add_parent", TRUE, $this->application);

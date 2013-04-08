@@ -465,4 +465,12 @@ class Users_Model extends ZP_Model {
 					
 		return $this->Db->query($query);
 	}
+
+	public function getByUsersType($IDType = 5) {
+		$this->Db->table("people");
+		
+		$query = "SELECT * FROM zan_users WHERE ID_Type_User = $IDType";
+					
+		return $this->Db->query($query);
+	}
 }
