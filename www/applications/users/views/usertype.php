@@ -14,16 +14,16 @@
 	
 		<div>
 			<p>
-				<span class="bold"><?php print __(_("Select type user")); ?></span><br />
+				<span class="bold">Selecciona el tipo de usuario que quieres crear</span><br />
 				<select name="type">
-					<option value="" selected="selected"><?php print __(_("Select type"));?></option>
-					<option value="2"><?php print __(_("Center"));?></option>
-					<option value="3"><?php print __(_("Teacher"));?></option>
-					<option value="4"><?php print __(_("Patient"));?></option>
-					<option value="5"><?php print __(_("Parent"));?></option>
-					<option value="6"><?php print __(_("Therapist"));?></option>
-					<option value="7"><?php print __(_("Psychologist"));?></option>
-					<option value="8"><?php print __(_("Doctor"));?></option>
+					<option value="" selected="selected">Tipo de usuairo</option>
+					<option value="2">Centro</option>
+					<option value="3">Maestro</option>
+					<option value="4">Paciente</option>
+					<option value="5">Familiar</option>
+					<option value="6">Terapeuta</option>
+					<option value="7">Psicógolo</option>
+					<option value="8">Médico</option>
 				</select>
 			</p>
 
