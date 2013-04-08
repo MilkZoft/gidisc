@@ -121,24 +121,28 @@ class Users_Model extends ZP_Model {
 		$data = array(
 			"Username" 	   => $username,
 			"Pwd" 	   	   => $pwd,
-			"ID_Type_User" => POST("type"),
-			"Name"         => POST("name"),
-			"Last_Name"    => POST("last_name"),
-			"Maiden_Name"  => POST("maiden_name"),
-			"Email"        => POST("email"),
-			"Address"  	   => POST("address"),
-			"Phone"        => POST("phone"),
-			"Father_Name"  => POST("fname"),
-			"Mother_Name"  => POST("mname"),
-			"Father_Profession" => POST("profession"),
-			"Birthday"     => POST("birthday"),
+			"ID_Type_User" => (string) POST("id_type_user"),
+			"Name"         => (string) POST("name"),
+			"Last_Name"    => (string) POST("last_name"),
+			"Maiden_Name"  => (string) POST("maiden_name"),
+			"Email"        => (string) POST("email"),
+			"Address"  	   => (string) POST("address"),
+			"Phone"        => (string) POST("phone"),
+			"Father_Name"  => (string) POST("fname"),
+			"Mother_Name"  => (string) POST("mname"),
+			"Father_Profession" => (string) POST("profession"),
+			"Birthday"     => (string) POST("birthday"),
 			"Date_Entry"   => now(4),
-			"Background"   => POST("background"),
+			"Background"   => (string) POST("background"),
 			"Photo" 	   => isset($this->photo["medium"]) ? $this->photo["medium"] : null,
-			"Situation"    => (POST("situation") == 1) ? "Active" : "Inactive"
+			"Levels"       => (string) POST("levels"),
+			"CEO"          => (string) POST("ceo"),
+			"Levels_Directors" => (string) POST("levels_directors"),
+			"Coordinator"  => (string) POST("coordinator"),
+			"Contact"      => (string) POST("contact")
 		);
 		
-		$this->Data->ignore(array("fname", "mname", "username", "father", "mother", "last_name", "maiden_name", "center", "type", "pwd", "name", "surname", "background", "therapist", "situation", "address", "phone", "grade", "profession", "birthday","photo"));
+		$this->Data->ignore(array("ceo", "id_type_user", "fname", "mname", "username", "father", "mother", "last_name", "maiden_name", "center", "type", "pwd", "name", "surname", "background", "therapist", "situation", "address", "phone", "grade", "profession", "birthday","photo"));
 		
 		$this->data = $this->Data->proccess($data, $validations);
 
@@ -150,7 +154,7 @@ class Users_Model extends ZP_Model {
 	private function save() {
 		$id = $this->Db->insert($this->table, $this->data);
 	
-		return getAlert("The user has been saved correctly", "success");	
+		showAlert("The user has been saved correctly", path("users/cpanel/add"));	
 	}
 
 	private function saveUser() {

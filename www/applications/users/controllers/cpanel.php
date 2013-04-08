@@ -58,17 +58,39 @@ class CPanel_Controller extends ZP_Controller {
 				$save = $this->$Model->cpanel("save");
 
 				$vars["alert"] = $save;
+				$vars["view"] = $this->view("add_success", TRUE, $this->application);
 			} elseif(POST("cancel")) {
 				redirect("cpanel");
+			} elseif(POST("continue")) {
+				$vars["type"] = POST("type");
+				
+				if(POST("type") == 2) {
+					$vars["centers"] = $this->Centers_Model->all();
+					$vars["view"] 	 = $this->view("add_center", TRUE, $this->application);
+				} elseif(POST("type") == 3) {
+					$vars["view"] = $this->view("add_teacher", TRUE, $this->application);
+				} elseif(POST("type") == 4) {
+					$vars["fathers"] 	= $this->$Model->getByType(5);
+					$vars["therapists"] = $this->$Model->getByType(6);
+					$vars["view"] 		= $this->view("add_patient", TRUE, $this->application);
+				} elseif(POST("type") == 5) {
+					$vars["view"] = $this->view("add_parent", TRUE, $this->application);
+				} elseif(POST("type") == 6) {
+					$vars["view"] = $this->view("add_therapist", TRUE, $this->application);
+				} elseif(POST("type") == 7) {
+					$vars["view"] = $this->view("add_psychologist", TRUE, $this->application);
+				} elseif(POST("type") == 8) {
+					$vars["view"] = $this->view("add_doctor", TRUE, $this->application);
+				}
+				
+				$vars["typeUsers"]  = $this->$Model->getTypesUsers();
+				
+				
+			} else {
+				$vars["view"] = $this->view("usertype", TRUE, $this->application);
 			}
 			
-			$vars["centers"]    = $this->Centers_Model->all();
-			$vars["typeUsers"]  = $this->$Model->getTypesUsers();
-			$vars["fathers"]    = $this->$Model->getByType(5);
-			$vars["therapists"] = $this->$Model->getByType(6);
-			
 			$vars["edit"] = FALSE;		
-			$vars["view"] = $this->view("add", TRUE, $this->application);
 			
 			$this->render("content", $vars);
 		} else {

@@ -52,13 +52,17 @@
 	<fieldset>		
 		<!-- General inputs -->
 		<div class="optiongeneral">
+			<h3>Agregar un usuario tipo paciente</h3>
+
+			<input name="id_type_user" value="<?php echo $type; ?>" type="hidden" />
+
 			<p>
-				<span class="bold"><?php print __(_("Username")); ?></span><br />
+				<span class="bold">Nombre de usuario</span><br />
 				<input name="username" type="text" value="<?php print $username; ?>" tabindex="1" />
 			</p>
 
 			<p>
-				<span class="bold"><?php print __(_("Password")); ?></span><br />
+				<span class="bold">Contraseña</span><br />
 				<input name="pwd" type="password" value="<?php print $pwd; ?>" tabindex="2" />
 			</p>
 
@@ -68,70 +72,59 @@
 			</p>
 
 			<p>
-				<span class="bold"><?php print __(_("Name")); ?></span><br />
+				<span class="bold">Nombre</span><br />
 				<input name="name" type="text" value="<?php print $name; ?>" tabindex="4" />
 			</p>
 
 			<p>
-				<span class="bold"><?php print __(_("Last name")); ?></span><br />
+				<span class="bold">Apellido Paterno</span><br />
 				<input name="last_name" type="text" value="<?php print $lastName; ?>" tabindex="5" />
 			</p>
 			
 			<p>
-				<span class="bold"><?php print __(_("Maiden name")); ?></span><br />
+				<span class="bold">Apellido Materno</span><br />
 				<input name="maiden_name" type="text" value="<?php print $maidenName; ?>" tabindex="5" />
 			</p>
 
 			<p>
-				<span class="bold"><?php print __(_("Address")); ?></span><br />
+				<span class="bold">Dirección</span><br />
 				<input name="address" type="text" value="<?php print $address; ?>" tabindex="6" />
 			</p>
 
 			<p>
-				<span class="bold"><?php print __(_("Phone")); ?></span><br />
+				<span class="bold">Teléfono</span><br />
 				<input name="phone" type="text" value="<?php print $phone; ?>" tabindex="7" />
 			</p>
 
 			<p>
-				<span class="bold"><?php print __(_("Grade")); ?></span><br />
+				<span class="bold">Grado</span><br />
 				<input name="grade" type="text" value="<?php print $grade; ?>" tabindex="9" />
 			</p>
 
 			<p>
-				<span class="bold"><?php print __(_("Profession")); ?></span><br />
+				<span class="bold">Profesión</span><br />
 				<input name="profession" type="text" value="<?php print $profession; ?>" tabindex="10" />
 			</p>
 
 			<p>
-				<span class="bold"><?php print __(_("Birthday")); ?></span><br />
+				<span class="bold">Cumpleaños</span><br />
 				<input name="birthday" type="text" value="" tabindex="11" class="datepicker"/>
 			</p>
 			
 			<p>
-				<span class="bold"><?php print __(_("Photo")); ?></span><br />
+				<span class="bold">Foto</span><br />
 				<input type="file" name="photo" />
 			</p>
 		</div>
-		<!-- End general inputs -->
-		
-		<!-- Option 4 - Patients -->
+
 		<div class="option4">
 			<p>
-				<span class="bold"><?php print __(_("Background")); ?></span><br />
+				<span class="bold">Historial</span><br />
 				<textarea name="background" cols="10" rows="10"><?php print $background; ?></textarea tabindex="12" />
-			</p>
-
-			<p>
-				<span class="bold"><?php print __(_("Center")); ?></span><br />
-				<select name="center" tabindex="14" id="center">
-					<?php foreach($centers as $center) { ?>
-						<option value="<?php print $center["ID_Center"];?>"><?php print $center["Name"];?></option>
-					<?php } ?>
-				</select>
 			</p>
 			
 			<p>
-				<span class="bold"><?php print __(_("Therapist")); ?></span><br />
+				<span class="bold">Terapista</span><br />
 				<?php if($therapists) { ?>
 					<select name="therapist" tabindex="14" id="v">
 						<?php foreach($therapists as $therapist) { ?>
@@ -139,55 +132,23 @@
 						<?php } ?>
 					</select>
 				<?php } ?>
-				<span class="bold addtherapist blue"><?php print __(_("Add")); ?></span>
 			</p>
 						
 			<p>
-				<span class="bold"><?php print __(_("Father's Name")); ?></span><br />
+				<span class="bold">Nombre del papa</span><br />
 				<input name="fname" type="text" value="<?php echo $fname; ?>" />
 			</p>
 			
 			<p>
-				<span class="bold"><?php print __(_("Mother's Name")); ?></span><br />
+				<span class="bold">Nombre de la mamá</span><br />
 				<input name="mname" type="text" value="<?php echo $mname; ?>" />
 			</p>
 			
 			<p>
-				<span class="bold"><?php print __(_("Situation")); ?></span><br />
-				<select name="situation" tabindex="14" id="name">
-					<option value="0">Seleccione la situación</option>
-					<option value="1" selected="selected">Activo</option>
-					<option value="2">Inactivo</option>
-				</select>
-			</p>
-			
-			<p>
 				<?php print formSave($action, FALSE); 
 				print formInput(array("name" => "ID", "type" => "hidden", "value" => $ID)); 
 				?>
 			</p>
 		</div>
-		<!-- End option 4 - Patients -->
-		
-		
-		<!-- Option 2,3,4,5,6 -->
-		<div class="option2 option3 option5 option6">
-			<p>
-				<span class="bold"><?php print __(_("Situation")); ?></span><br />
-				<select name="situation" tabindex="14" id="name">
-					<option value="0">Seleccione la situación</option>
-					<option value="1" selected="selected">Activo</option>
-					<option value="2">Inactivo</option>
-				</select>
-			</p>
-			
-			<p>
-				<?php print formSave($action, FALSE); 
-				print formInput(array("name" => "ID", "type" => "hidden", "value" => $ID)); 
-				?>
-			</p>
-		</div>
-		<!-- End option 2,3,4,5,6 -->
-		
 	</fieldset>	
 </form>
