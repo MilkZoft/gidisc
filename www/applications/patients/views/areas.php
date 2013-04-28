@@ -25,6 +25,10 @@
 				?>
 					<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
 				<?php
+				} elseif (SESSION("ZanUserTypeID") == 1) {
+				?>
+					<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
+				<?php
 				}
 			}
 				?>

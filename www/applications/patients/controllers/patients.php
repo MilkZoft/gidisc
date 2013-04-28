@@ -58,7 +58,7 @@ class Patients_Controller extends ZP_Controller {
 			$this->Patients_Model->assignPermissions();
 		}
 
-		$all = $this->Patients_Model->getByType("2, 3, 5, 6");
+		$all = $this->Patients_Model->getByType("2, 3, 5, 6, 7, 8");
 		$already = array();
 	
 		foreach($all as $user) {
