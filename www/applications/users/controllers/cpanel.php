@@ -127,9 +127,9 @@ class CPanel_Controller extends ZP_Controller {
 			
 			$this->$Model = $this->model($Model);
 			
-			$users = $this->$Model->getByID("users", $ID);
+			$data = $this->$Model->getByID("users", $ID);
 
-			if(!$users) {
+			if(!$data) {
 				redirect("users/cpanel");
 			}
 			
@@ -139,58 +139,12 @@ class CPanel_Controller extends ZP_Controller {
 			} elseif(POST("cancel")) {
 				redirect("cpanel");
 			}
-
-			$reUserPerson = $this->$Model->getReUserPerson($ID);			
-
-			$vars["reUserPerson"] = $reUserPerson[0];
-
-			$ID_User 	= segment(4);
-			$ID_Person  = $reUserPerson[0]["ID_Person"];
-			$userPerson = $this->$Model->getUserPerson($ID_User);
-
-			$vars["userPerson"]    = $userPerson[0];
-
-			if($users[0]["Situation"] === "Active") {
-				$vars["situations"][] = array(
-					"option"   => __("Active"),
-					"value"    => "Active",
-					"selected" => TRUE
-				);
-				
-				$vars["situations"][] = array(
-					"option" => __("Inactive"),
-					"value"  => "Inactive"
-				);
-			} else {
-				$vars["situations"][] = array(
-					"option"   => __("Active"),
-					"value"    => "Active"
-				);
-				
-				$vars["situations"][] = array(
-					"option"   => __("Inactive"),
-					"value"    => "Inactive",
-					"selected" => TRUE
-				);
-			}
-			
-			$users = $this->$Model->getTypesUsers();
-
-			if(!$users) {
-				redirect("users" . _sh . "cpanel");
-			}
-
-			foreach($users as $user) {
-				$vars["users"][] = array(
-					"option" => $user["Type"],
-					"value"  => $user["ID_Type_User"]
-				);
-			}
-			
+		
 			$vars["edit"] = TRUE;
-			
-			if($vars["userPerson"]["ID_Type_User"] === 4) {
-				$vars["view"] = $this->view("editpatient", TRUE, "users");
+	
+			if($data[0]["ID_Type_User"] == 2) {
+				$vars["data"] = $data[0];
+				$vars["view"] = $this->view("edit_center", TRUE, "users");
 			} else {		
 				$vars["view"] = $this->view("edit", TRUE, "users");
 			}
