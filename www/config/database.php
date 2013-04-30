@@ -13,8 +13,8 @@ if(!defined("_access")) {
 $ZP["db"]["dbController"] = "mysqli";
 $ZP["db"]["dbHost"] 	  = "localhost";
 $ZP["db"]["dbUser"] 	  = "root";
-$ZP["db"]["dbPwd"] 	      = "";
-$ZP["db"]["dbName"] 	  = "gidi";
+$ZP["db"]["dbPwd"] 	      = "jesusamor";
+$ZP["db"]["dbName"] 	  = "gidisc";
 $ZP["db"]["dbPort"] 	  = 3306;
 $ZP["db"]["dbPfx"] 	      = "zan_";
 $ZP["db"]["dbSocket"]     = NULL;
