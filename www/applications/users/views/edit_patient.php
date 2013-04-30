@@ -16,10 +16,8 @@
 		$address 	= recoverPOST("address", $data["Address"]);
 		$phone 	    = recoverPOST("phone", $data["Phone"]);
 		$grade 	    = recoverPOST("grade", $data["Grade"]);
-		$profession = recoverPOST("profession", $data["Profession"]);
 		$birthday 	= recoverPOST("birthday", $data["Birthday"]);
 		$background = recoverPOST("background", $data["Background"]);
-		$therapist  = recoverPOST("therapist", $data["Therapist"]);
 		$situation  = recoverPOST("situation", $data["Situation"]);
 		$action	    = "edit";
 		$href	    = path("users/cpanel/edit/". $ID);
@@ -79,11 +77,6 @@
 			<p>
 				<span class="bold">Grado</span><br />
 				<input name="grade" type="text" value="<?php print $grade; ?>" tabindex="9" />
-			</p>
-
-			<p>
-				<span class="bold">Profesión</span><br />
-				<input name="profession" type="text" value="<?php print $profession; ?>" tabindex="10" />
 			</p>
 
 			<p>
