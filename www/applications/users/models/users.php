@@ -456,13 +456,8 @@ class Users_Model extends ZP_Model {
 	public function getByType($IDType = 5) {
 		$this->Db->table("people");
 		
-		$query = "SELECT * FROM zan_users 
-					LEFT JOIN zan_re_user_person ON 
-						zan_re_user_person.ID_User = zan_users.ID_User 
-					LEFT JOIN zan_people ON 
-						zan_people.ID_Person = zan_re_user_person.ID_Person 
-					WHERE zan_users.ID_Type_User = $IDType";
-					
+		$query = "SELECT * FROM zan_users WHERE ID_Type_User = $IDType";
+							
 		return $this->Db->query($query);
 	}
 

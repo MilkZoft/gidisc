@@ -139,7 +139,9 @@ class CPanel_Controller extends ZP_Controller {
 			} elseif(POST("cancel")) {
 				redirect("cpanel");
 			}
-		
+
+			$vars["therapists"] = $this->$Model->getByType(6);
+			
 			$vars["edit"] = TRUE;
 			
 			$vars["data"] = $data[0];
