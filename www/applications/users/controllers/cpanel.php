@@ -141,10 +141,23 @@ class CPanel_Controller extends ZP_Controller {
 			}
 		
 			$vars["edit"] = TRUE;
-	
+			
+			$vars["data"] = $data[0];
+
 			if($data[0]["ID_Type_User"] == 2) {
-				$vars["data"] = $data[0];
 				$vars["view"] = $this->view("edit_center", TRUE, "users");
+			} elseif($data[0]["ID_Type_User"] == 3) {
+				$vars["view"] = $this->view("edit_teacher", TRUE, "users");
+			} elseif($data[0]["ID_Type_User"] == 4) {
+				$vars["view"] = $this->view("edit_patient", TRUE, "users");
+			} elseif($data[0]["ID_Type_User"] == 5) {
+				$vars["view"] = $this->view("edit_parent", TRUE, "users");
+			} elseif($data[0]["ID_Type_User"] == 6) {
+				$vars["view"] = $this->view("edit_therapist", TRUE, "users");
+			} elseif($data[0]["ID_Type_User"] == 7) {
+				$vars["view"] = $this->view("edit_psychologist", TRUE, "users");
+			} elseif($data[0]["ID_Type_User"] == 8) {
+				$vars["view"] = $this->view("edit_doctor", TRUE, "users");
 			} else {		
 				$vars["view"] = $this->view("edit", TRUE, "users");
 			}
