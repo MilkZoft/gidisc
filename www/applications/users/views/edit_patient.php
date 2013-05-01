@@ -81,7 +81,7 @@
 
 			<p>
 				<span class="bold">Cumpleaños</span><br />
-				<input name="birthday" type="text" value="" tabindex="11" class="datepicker"/>
+				<input name="birthday" type="text" value="<?php print $birthday; ?>" tabindex="11" class="datepicker"/>
 			</p>
 			
 			<p>

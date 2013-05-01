@@ -120,7 +120,6 @@ class Users_Model extends ZP_Model {
 
 		$data = array(
 			"Username" 	   => $username,
-			"Pwd" 	   	   => $pwd,
 			"ID_Type_User" => (string) POST("id_type_user"),
 			"Name"         => (string) POST("name"),
 			"Last_Name"    => (string) POST("last_name"),
@@ -141,11 +140,15 @@ class Users_Model extends ZP_Model {
 			"Coordinator"  => (string) POST("coordinator"),
 			"Contact"      => (string) POST("contact")
 		);
+
+		if(!is_null($pwd)) {
+			$data["Pwd"] = $pwd;
+		}
 		
 		$this->Data->ignore(array("ceo", "id_type_user", "fname", "mname", "username", "father", "mother", "last_name", "maiden_name", "center", "type", "pwd", "name", "surname", "background", "therapist", "situation", "address", "phone", "grade", "profession", "birthday","photo"));
 		
 		$this->data = $this->Data->proccess($data, $validations);
-
+		
 		if(isset($this->data["error"])) {
 			return $this->data["error"];
 		}
@@ -153,17 +156,8 @@ class Users_Model extends ZP_Model {
 	
 	private function save() {
 		$id = $this->Db->insert($this->table, $this->data);
-	
 		showAlert("The user has been saved correctly", path("users/cpanel/add"));	
 	}
-
-	private function saveUser() {
-			
-	}
-
-	private function savePerson() {
-		
-	}	
 	
 	private function dataExits($ID, $data) {
 		$data = $this->Db->query("SELECT * FROM zan_users WHERE Email = '". $data["Email"] ."' OR Username = '". $data["Username"] ."' AND ID_User != $ID");
@@ -176,74 +170,10 @@ class Users_Model extends ZP_Model {
 	}
 
 	private function edit() {
-		$results = $this->dataExits(POST("ID"), $this->data);
+		$editUser = $this->Db->update($this->table, $this->data, POST("ID"));
 		
-		if($results) {
-			$editUser = $this->Db->update($this->table, $this->data, POST("ID"));
-			
-			$findIDPerson = $this->getReUserPerson(POST("ID"));
-			
-			$data = array( 
-				"Name"           => POST("name"),
-				"Last_Name"      => POST("last_name"),
-				"Maiden_Name"    => POST("maiden_name"),
-				"Email"      	 => POST("email"),
-				"Address"    	 => POST("address"),
-				"Phone"      	 => POST("phone"),
-				"Grade"      	 => POST("grade"),
-				"Profession" 	 => POST("profession"),
-				"Birthday"   	 => POST("birthday"),
-				"Date_Entry"     => now(4)			
-			);
-
-			$IDPerson = $findIDPerson[0]["ID_Person"];
-
-			$edit = $this->Db->update("people", $data, $IDPerson);
-			
-			if(POST("type") == 4) {
-				$data = array(
-					"ID_Father"  => 11,
-					"ID_Mother"  => 12,
-					"Background" => POST("background"),
-					"Therapist"  => POST("therapist"),
-					"Situation"  => POST("situation")
-				);
-
-				$edit = $this->Db->updateBySQL("patients", $data, $IDPerson, "ID_Person");
-
-				$patients = $this->getIDPatient($IDPerson);
-
-				$IDPatient = $patients[0]['ID_Patient'];
-
-				if(isset($this->photo["small"])) {
-					$this->deletePhotos($IDPatient);
-
-					$data = array(
-						0 => array(
-							"ID_Patient" => $IDPatient,
-							"URL"        => $this->photo["small"]
-						),
-
-						1 => array(
-							"ID_Patient" => $IDPatient,
-							"URL"        => $this->photo["medium"]
-						),
-
-						2 => array(
-							"ID_Patient" => $IDPatient,
-							"URL"        => $this->photo["original"]
-						)
-					);
-
-					$insertPhoto = $this->Db->insertBatch("patients_photos", $data);
-				}
-			}									    
-			
-			if($edit) {
-				return getAlert("The user has been edit correctly", "success");
-			} else {
-				return getAlert("An error occurred :(");
-			}
+		if($editUser) {
+			echo showAlert("The user has been edit correctly", path("users/cpanel/results"));
 		} else {
 			return getAlert("An error occurred :(");
 		}

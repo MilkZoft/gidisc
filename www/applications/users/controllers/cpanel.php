@@ -143,8 +143,8 @@ class CPanel_Controller extends ZP_Controller {
 			$vars["therapists"] = $this->$Model->getByType(6);
 			
 			$vars["edit"] = TRUE;
-			
 			$vars["data"] = $data[0];
+			$vars["type"] = $data[0]["ID_Type_User"];
 
 			if($data[0]["ID_Type_User"] == 2) {
 				$vars["view"] = $this->view("edit_center", TRUE, "users");
