@@ -219,11 +219,9 @@
 				</span>
 
 				<span class="field">
+					<?php die(var_dump($format)); ?>
 					Año: <?php echo $format["Year"]; ?>
-					Mes:
-					<?php 
-					print formSelect(array("id" => "month", "name" => "month", "disabled" => "disabled"), $month);	
-					?>
+					Mes: <?php echo $format["Month_"]; ?>
 				</span>
 			</div>
 			
