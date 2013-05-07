@@ -98,8 +98,8 @@ class Patients_Controller extends ZP_Controller {
 			
 			if(POST("IDPatient") and POST("area")) { 	
 				$format = $this->Test_Model->getFormat(POST("IDPatient"), POST("area"));
-				____($format);
-				if(isset($format[0]["format"])) {
+				
+				if(isset($format[0]["format"]) and $format[0]["format"]["ID_Area"] < 32) {
 					if(POST("edit")) { 
 						$edit = $this->Test_Model->editTest();
 						$vars["alert"] = $edit;
