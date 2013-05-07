@@ -12,7 +12,7 @@
  			} elseif($user["ID_Type_User"] == 6) {
  				$type = "Terapeuta";
  			} elseif($user["ID_Type_User"] == 7) {
- 				$type = "Psicólogo"
+ 				$type = "Psicólogo";
  			} elseif($user["ID_Type_User"] == 8) {
  				$type = "Médico";
  			}
