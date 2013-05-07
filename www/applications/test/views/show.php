@@ -216,14 +216,14 @@
 			<div id="top">
 				<span>
 					<h2>ÁREA: <?php print $format["Name"];?></h2>
-				
-					<p>
-						<?php echo $format["Text_Date"]; ?>
-					</p>
 				</span>
 			</div>
 			
 			<form method="POST" action="">
+				<p>
+					<?php echo $format["Text_Date"]; ?>
+				</p>
+				
 				<p>
 					<span>Observaciones: </span><br />
 					<textarea class="obsv" disabled="disabled" name="comments"><?php print $format["Comments"];?></textarea>
