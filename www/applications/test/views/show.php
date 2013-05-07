@@ -216,12 +216,10 @@
 			<div id="top">
 				<span>
 					<h2>ÁREA: <?php print $format["Name"];?></h2>
-				</span>
-
-				<span class="field">
-					<?php die(var_dump($format)); ?>
-					Año: <?php echo $format["Year"]; ?>
-					Mes: <?php echo $format["Month_"]; ?>
+				
+					<p>
+						<?php echo $format["Text_Date"]; ?>
+					</p>
 				</span>
 			</div>
 			
