@@ -98,7 +98,7 @@ class Patients_Controller extends ZP_Controller {
 			
 			if(POST("IDPatient") and POST("area")) { 	
 				$format = $this->Test_Model->getFormat(POST("IDPatient"), POST("area"));
-				
+				____($format);
 				if(isset($format[0]["format"])) {
 					if(POST("edit")) { 
 						$edit = $this->Test_Model->editTest();
