@@ -184,24 +184,26 @@ class Test_Controller extends ZP_Controller {
 				} 
 			}
 
-			$view .= '<div id="bloque" class="claves">
-				<p>
-					0 = no puede<br />
-					1 = lo realiza el 25% de las veces<br />
-					2 = lo realiza el 50% de las veces<br />
-					3 = lo realiza el 75% de las veces <br />
-					4 =  lo realiza el 100% de las veces
-				</p>
-				
-				<p>
-					A - Falto pero si Aviso <br />
-					V - Vacaciones <br />
-					E - Enfermo <br />
-					F - Falto <br />
-					R - Reposición <br />
-					X - No se trabajo ese objetivo
-				</p>
-			</div></div>';
+			if($format["format"]["ID_Area"] < 32) {
+				$view .= '<div id="bloque" class="claves">
+					<p>
+						0 = no puede<br />
+						1 = lo realiza el 25% de las veces<br />
+						2 = lo realiza el 50% de las veces<br />
+						3 = lo realiza el 75% de las veces <br />
+						4 = lo realiza el 100% de las veces
+					</p>
+					
+					<p>
+						A - Falto pero si Aviso <br />
+						V - Vacaciones <br />
+						E - Enfermo <br />
+						F - Falto <br />
+						R - Reposicion <br />
+						X - No se trabajo ese objetivo
+					</p>
+				</div></div>';
+			}
 
 			$this->setPDF($view, $patientData["Name"] .'.pdf');
 		}
