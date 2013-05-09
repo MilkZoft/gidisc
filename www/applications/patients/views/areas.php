@@ -9,6 +9,10 @@
 					<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
 				<?php 
 					break;
+				} elseif (SESSION("ZanUserTypeID") == 5 and $area["ID_Area"] == 35) {
+				?>
+					<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
+				<?php
 				} elseif (SESSION("ZanUserTypeID") == 6 and $area["ID_Area"] < 32) {
 				?>
 					<option value="<?php print $area["ID_Area"];?>"><?php print ucfirst(strtolower($area["Name"]));?> - <?php print ucfirst(strtolower($area["Parent"]));?></option>
