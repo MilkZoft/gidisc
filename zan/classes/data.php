@@ -106,12 +106,27 @@ class ZP_Data extends ZP_Load {
 					if(strlen(POST($field)) < $count) {
 						return array("error" => getAlert("$field must have at least $count characters"));
 					}
-				} elseif(isset($field["exists"]) and isset($this->table) and POST("save")) {
-					if(is_array($validation)) {
-						$exists = $this->Db->findBy($validation);
-						
-						if($exists) {
-							return array("error" => getAlert("The record already exists"));
+				} elseif (isset($field["exists"]) and isset($this->table)) {
+					if (is_array($validation)) {
+						if (isset($validation["or"]) and count($validation) > 2) {
+							unset($validation["or"]);
+
+							$fields = array_keys($validation);
+							
+							for ($i = 0; $i <= count($fields) - 1; $i++) {
+								$exists = $this->Db->findBy($fields[$i], $validation[$fields[$i]]);
+			
+								if ($exists) {
+									return array("error" => getAlert(__("The ". strtolower($fields[$i]) ." already exists")));
+								}			
+							}
+						} else {
+							$field = array_keys($validation);
+							$exists = $this->Db->findBy($field[0], $validation[$field[0]]);
+
+							if ($exists) {
+								return array("error" => getAlert(__("The ". strtolower($field[0]) ." already exists")));
+							}
 						}
 					}
 				}

@@ -16,13 +16,13 @@
 			<p>
 				<span class="bold">Selecciona el tipo de usuario que quieres crear</span><br />
 				<select name="type">
-					<option value="" selected="selected">Tipo de usuairo</option>
+					<option value="" selected="selected">Tipo de usuario</option>
 					<option value="2">Centro</option>
 					<option value="3">Maestro</option>
 					<option value="4">Paciente</option>
 					<option value="5">Familiar</option>
 					<option value="6">Terapeuta</option>
-					<option value="7">Psicógolo</option>
+					<option value="7">Psicólogo</option>
 					<option value="8">Médico</option>
 				</select>
 			</p>
