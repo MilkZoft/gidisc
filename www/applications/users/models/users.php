@@ -150,13 +150,17 @@ class Users_Model extends ZP_Model {
 		$this->data = $this->Data->proccess($data, $validations);
 		
 		if(isset($this->data["error"])) {
-			return $this->data["error"];
+			if(isset($this->data["field"])) {
+				showAlert("Error: el ". $this->data["field"] ." ya existe", path("users/cpanel/add/"));
+			} else {
+				return $this->data["error"];
+			}	
 		}
 	}
 	
 	private function save() {
 		$id = $this->Db->insert($this->table, $this->data);
-		showAlert("The user has been saved correctly", path("users/cpanel/add"));	
+		showAlert("The user has been saved correctly", path("users/"));	
 	}
 	
 	private function dataExits($ID, $data) {
