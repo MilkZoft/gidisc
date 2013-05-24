@@ -112,12 +112,12 @@ class ZP_Data extends ZP_Load {
 							unset($validation["or"]);
 
 							$fields = array_keys($validation);
-							die(var_dump($fields));
+				
 							for ($i = 0; $i <= count($fields) - 1; $i++) {
-								$exists = $this->Db->findBy($fields[$i], $validation[$fields[$i]]);
+								$exists = $this->Db->findBy($fields[$i], $validation[$fields[$i]], $this->table($this->table));
 			
 								if ($exists) {
-									return array("error" => getAlert(__("The ". strtolower($fields[$i]) ." already exists")));
+									return array("field" => strtolower($field[0]), "error" => getAlert(__("The ". strtolower($fields[$i]) ." already exists")));
 								}			
 							}
 						} else {
