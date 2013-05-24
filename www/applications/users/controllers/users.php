@@ -19,6 +19,10 @@ class Users_Controller extends ZP_Controller {
 		
 		$this->Templates->theme();
 	}
+
+	public function index() {
+		redirect(path("users/cpanel/add/"));
+	}
 	
 	public function logout() {
 		setcookie("ZanUser");
