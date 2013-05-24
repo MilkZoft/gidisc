@@ -111,11 +111,10 @@ class Users_Model extends ZP_Model {
 		$validations = array(
 			"email"	   => "email?",
 			"exists"   => array(
-				"Username" => $username,
-			),
-			"exists"   => array(
-				"Email" => POST("email"),
-			)						  						  
+				"Username" 	=> $username,
+				"or" 	   	=> true,
+				"Email" 	=> POST("email")
+			)					  
 		);
 
 		$data = array(
