@@ -134,7 +134,12 @@
 								<?php 
 									foreach($answer as $key2 => $value) {
 										$var  = "day". ($key2 + 1);
-										$$var = $value["Rating"]; 
+
+										if ($value["Rating"] == false) {
+											$$var = "0";
+										} else {
+											$$var = $value["Rating"];
+										}
 									}
 								?>
 								<tr class="molde">
