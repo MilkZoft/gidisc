@@ -152,8 +152,8 @@
 									<td><input name="days[3][]" type="text" maxlength="1" value="<?php print (isset($day4)) ? $day4 : NULL; ?>" /></td>
 									<td><input name="days[4][]" type="text" maxlength="1" value="<?php print (isset($day5)) ? $day5 : NULL; ?>" /></td>
 									<td><input name="days[5][]" type="text" maxlength="1" value="<?php print (isset($day6)) ? $day6 : NULL; ?>" /></td>
-									<td><input name="days[6][]" type="text" maxlength="1" value="<?php print (isset($day7)) ? $day8 : NULL; ?>" /></td>
-									<td><input name="days[7][]" type="text" maxlength="1" value="<?php print (isset($day8)) ? $day9 : NULL; ?>" /></td>
+									<td><input name="days[6][]" type="text" maxlength="1" value="<?php print (isset($day7)) ? $day7 : NULL; ?>" /></td>
+									<td><input name="days[7][]" type="text" maxlength="1" value="<?php print (isset($day8)) ? $day8 : NULL; ?>" /></td>
 									<td><input name="days[8][]" type="text" maxlength="1" value="<?php print (isset($day9)) ? $day9 : NULL; ?>" /></td>
 									<td><input name="days[9][]" type="text" maxlength="1" value="<?php print (isset($day10)) ? $day10 : NULL; ?>" /></td>
 									<td><input name="days[10][]" type="text" maxlength="1" value="<?php print (isset($day11)) ? $day11 : NULL; ?>" /></td>
