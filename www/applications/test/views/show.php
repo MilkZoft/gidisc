@@ -137,8 +137,10 @@
 
 										if ($value["Rating"] == false) {
 											$$var = "0";
-										} else {
+										} elseif(isset($value["Rating"])) {
 											$$var = $value["Rating"];
+										} else {
+											$$var = "";
 										}
 									}
 								?>
