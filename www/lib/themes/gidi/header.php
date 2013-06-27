@@ -20,6 +20,13 @@
 			
 			var URL  = "<?php print get('webURL'); ?>";
 		</script>
+
+		<link rel="stylesheet" href="<?php echo path("www/lib/scripts/js/nivo/themes/default/default.css"; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo path("www/lib/scripts/js/nivo/themes/light/light.css"; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo path("www/lib/scripts/js/nivo/themes/dark/dark.css"; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo path("www/lib/scripts/js/nivo/themes/bar/bar.css"; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo path("www/lib/scripts/js/nivo/nivo-slider.css"; ?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo path("www/lib/scripts/js/nivo/style.css"; ?>" type="text/css" media="screen" />
 	</head>
 
 	<body>
