@@ -9,7 +9,7 @@ if(!defined("_access")) {
 /**
  * Website
  */
-$ZP["webURL"] 		= "http://localhost/gidisc";
+$ZP["webURL"] 		= "http://muucms.com/gidisc";
 $ZP["webName"] 		= "Gidi";
 $ZP["webTheme"] 	= "gidi";
 $ZP["webSituation"] = "Active";
