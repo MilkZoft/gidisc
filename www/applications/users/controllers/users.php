@@ -14,6 +14,9 @@ class Users_Controller extends ZP_Controller {
 		
 		$helpers = array("alerts", "router", "security", "sessions");
 		$this->helper($helpers);
+
+		$this->Email = $this->core("Email");
+		$this->Email->setLibrary("PHPMailer");
 		
 		$this->application = $this->app("users");
 		
@@ -22,6 +25,19 @@ class Users_Controller extends ZP_Controller {
 
 	public function index() {
 		redirect(path("users/cpanel/add/"));
+	}
+
+	public function sendEmail() {
+		$email   = POST("email");
+		$subject = POST("subject");
+		$message = POST("message");
+
+		$this->Email->email = $email;
+		$this->Email->fromEmail = "contacto@gidisc.org";
+		$this->Email->subject = $subject;
+		$this->Email->message = $message;
+		$a = $this->Email->send();
+		var_dump($a);
 	}
 	
 	public function logout() {

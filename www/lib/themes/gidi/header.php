@@ -21,6 +21,49 @@
 			var URL  = "<?php print get('webURL'); ?>";
 
 			$(document).on("ready", function(){
+				$('#send-message').on("click", function(){
+					var name = $('#name').val();
+					var subject = $('#subject').val();
+					var email = $('#email').val();
+					var message = $('#message').val();
+					var error = false;
+
+					if (message == '') {
+						error = true;
+						$('#email-alert').html('<h3 style="color: red">Necesitas escribir el mensaje</h3>');	
+					}
+
+					if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+						error = true;
+						$('#email-alert').html('<h3 style="color: red">Necesitas escribir un e-mail válido</h3>');	
+					}
+
+					if (subject == '') {
+						error = true;
+						$('#email-alert').html('<h3 style="color: red">Necesitas especificar un asunto</h3>');
+					}
+
+					if (name == '') {
+						error = true;
+						$('#email-alert').html('<h3 style="color: red">Necesitas escribir tu nombre</h3>');
+					}
+
+					if (error == false) {
+						$.ajax({
+							type: 'POST',
+							url: PATH + '/users/sendemail',
+							data: 'subject=' + subject + '&email=' + email + '&message=' + message,
+							success: function(response) {
+								$('#email-alert').html('<h3 style="color: #0096ff;">Mensaje enviado con éxito</h3>');
+								$('#name').val('');
+								$('#subject').val('');
+								$('#email').val('');
+								$('#message').val('');
+							}
+						});
+					}
+				});
+
 				$('#send-email').on("click", function(){
 					$('#email-form').slideToggle('slow');
 				});
@@ -120,15 +163,22 @@
 
     <div id="email-form" class="email-form">
     	<h2>Enviar correo electrónico</h2>
+		
+		<div id="email-alert"></div>
+
+		<p>
+			Su Nombre: <br />
+			<input id="name" type="text" />
+		</p>
 
     	<p>
 			Asunto: <br />
-			<input id="subject" name="subject" type="text" placeholder="Escribe el asunto del correo electrónico" />
+			<input id="subject" name="subject" type="text" />
     	</p>
 
     	<p>
     		Email: <br />
-    		<input id="email" name="email" type="text" placeholder="Email al que deseas enviar el mensaje" />
+    		<input id="email" name="email" type="email" />
     	</p>
 
     	<p>
