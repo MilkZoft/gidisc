@@ -12,10 +12,6 @@
             <img src="<?php echo path("www/lib/files/images/slider/image07.png", true); ?>" data-thumb="<?php echo path("www/lib/files/images/slider/image01.png", true); ?>" />
             <img src="<?php echo path("www/lib/files/images/slider/image08.png", true); ?>" data-thumb="<?php echo path("www/lib/files/images/slider/image01.png", true); ?>" />
         </div>
-        
-        <div id="htmlcaption" class="nivo-html-caption">
-            <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. 
-        </div>
     </div>
 </div>
 

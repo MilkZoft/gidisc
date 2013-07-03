@@ -19,7 +19,27 @@
 			var PATH = "<?php print path(); ?>";
 			
 			var URL  = "<?php print get('webURL'); ?>";
+
+			$(document).on("ready", function(){
+				$('#send-email').on("click", function(){
+					$('#email-form').slideToggle('slow');
+				});
+
+				$('#cancel-email').on("click", function(){
+					$('#email-form').slideToggle('slow');
+				});
+			});
 		</script>
+
+		<style>
+			.email-form 
+			{
+				display: none;
+				padding: 30px;
+				background-color: #EEE;
+				color: #333;
+			}
+		</style>
 
 		<link rel="stylesheet" href="<?php echo path("www/lib/scripts/js/nivo/themes/default/default.css", true); ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php echo path("www/lib/scripts/js/nivo/themes/light/light.css", true); ?>" type="text/css" media="screen" />
@@ -93,6 +113,34 @@
     			<li><span class="bold">Medicamentos:</span> <a href="#">0</a></li>
    				<li><span class="bold">Pacientes:</span> <a href="#"><?php print $this->execute("Users_Model", "count", array(4), "model"); ?></a></li> 
       		<li><span class="bold">Último Paciente:</span> <?php print $this->execute("Users_Model", "lastPacient", NULL, "model"); ?></li>
+      		<li><span class="bold"><a id="send-email" href="#">Enviar Correo</a></span></li>
       		<li><span class="bold"><a href="<?php print path("cpanel/logout"); ?>">Desconectar</a></span></li>
       </ul>
+    </div>
+
+    <div id="email-form" class="email-form">
+    	<h2>Enviar correo electrónico</h2>
+
+    	<p>
+			Asunto: <br />
+			<input id="subject" name="subject" type="text" placeholder="Escribe el asunto del correo electrónico" />
+    	</p>
+
+    	<p>
+    		Email: <br />
+    		<input id="email" name="email" type="text" placeholder="Email al que deseas enviar el mensaje" />
+    	</p>
+
+    	<p>
+    		Mensaje: <br />
+    		<textarea id="message" name="message"></textarea>
+    	</p>
+
+    	<p>
+			<button id="send-message" class="btn btn-info">Enviar mensaje</button>
+    	</p>
+
+    	<p>
+			<a id="cancel-email" href="#">Cancelar envío</a>
+    	</p>
     </div>
