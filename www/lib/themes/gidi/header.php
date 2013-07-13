@@ -52,7 +52,7 @@
 						$.ajax({
 							type: 'POST',
 							url: PATH + '/users/sendemail',
-							data: 'subject=' + subject + '&email=' + email + '&message=' + message,
+							data: 'name=' + name + '&subject=' + subject + '&email=' + email + '&message=' + message,
 							success: function(response) {
 								$('#email-alert').html('<h3 style="color: #0096ff;">Mensaje enviado con éxito</h3>');
 								$('#name').val('');

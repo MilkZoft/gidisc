@@ -31,13 +31,15 @@ class Users_Controller extends ZP_Controller {
 		$email   = POST("email");
 		$subject = POST("subject");
 		$message = POST("message");
+		$name    = POST("name");
 
 		$this->Email->email = $email;
 		$this->Email->fromEmail = "contacto@gidisc.org";
+		$this->Email->FromName = "My site's mailer";
 		$this->Email->subject = $subject;
-		$this->Email->message = $message;
-		$a = $this->Email->send();
-		var_dump($a);
+		$this->Email->IsHTML(true);
+		$this->Email->message = '<p>Mensaje enviado por: '. $name .'</p> <p>'. $message .'</p>';
+		$this->Email->send();
 	}
 	
 	public function logout() {
