@@ -37,8 +37,7 @@ class Users_Controller extends ZP_Controller {
 		$this->Email->fromEmail = "contacto@gidisc.org";
 		//$this->Email->fromName = $name;
 		$this->Email->subject = $subject;
-		$this->Email->IsHTML(true);
-		$this->Email->message = '<p>Mensaje enviado por: '. $name .'</p> <p>'. $message .'</p>';
+		$this->Email->message = $message;
 		$a = $this->Email->send();
 		die(var_dump($a));
 	}
