@@ -15,9 +15,6 @@ class Users_Controller extends ZP_Controller {
 		$helpers = array("alerts", "router", "security", "sessions");
 		$this->helper($helpers);
 
-		$this->Email = $this->core("Email");
-		$this->Email->setLibrary("PHPMailer");
-		
 		$this->application = $this->app("users");
 		
 		$this->Templates->theme();
@@ -28,6 +25,9 @@ class Users_Controller extends ZP_Controller {
 	}
 
 	public function sendEmail() {
+		$this->Email = $this->core("Email");
+		$this->Email->setLibrary("PHPMailer");
+		
 		$email   = POST("email");
 		$subject = POST("subject");
 		$message = POST("message");
