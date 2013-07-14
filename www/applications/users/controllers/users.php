@@ -27,7 +27,7 @@ class Users_Controller extends ZP_Controller {
 	public function sendEmail() {
 		$this->Email = $this->core("Email");
 		$this->Email->setLibrary("PHPMailer");
-		
+
 		$email   = POST("email");
 		$subject = POST("subject");
 		$message = POST("message");
@@ -39,7 +39,8 @@ class Users_Controller extends ZP_Controller {
 		$this->Email->subject = $subject;
 		$this->Email->IsHTML(true);
 		$this->Email->message = '<p>Mensaje enviado por: '. $name .'</p> <p>'. $message .'</p>';
-		$this->Email->send();
+		$a = $this->Email->send();
+		die(var_dump($a));
 	}
 	
 	public function logout() {
