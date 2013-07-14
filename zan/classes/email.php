@@ -87,7 +87,7 @@ class ZP_Email extends ZP_Load {
 			$this->config("email");
 
 			$this->PHPMailer = $this->library("class.phpmailer", "PHPMailer");
-			die(var_dump($this->PHPMailer));
+
 			$this->PHPMailer->isHTML(TRUE);		
 			$this->PHPMailer->isSMTP();
 			$this->PHPMailer->addAddress($this->email);
