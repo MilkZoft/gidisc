@@ -43,6 +43,11 @@
 									<?php
 								}
 							?>
+
+							<a href="<?php print path("patients/centers/" . $patient["ID_User"]);?>">
+								<span class="no-decoration"><?php print __("Asignar centro");?></span>
+							</a>
+
 							<a href="<?php print path("patients/area/" . $patient["ID_User"]);?>" title="Edit" onclick="return confirm('Do you want to do the test?')">
 								<span class="no-decoration"><?php print __("Seguimiento");?></span>
 							</a>
