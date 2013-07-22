@@ -53,6 +53,30 @@ class Patients_Controller extends ZP_Controller {
 		$this->render("content", $vars);	
 	}
 
+	public function centers($IDPatient) {
+		if (POST("assign")) {
+			$this->Patients_Model->assignCenters();
+		}
+
+		$all = $this->Patients_Model->getCenters();
+		$already = array();
+
+		foreach ($all as $center) {
+			$assigned = $this->Patients_Model->getAssignedCenters($center["ID_Center"], $IDPatient);
+
+			if($assigned) {
+				$already[] = $assigned[0];
+			}
+		}
+
+		$vars["already"]   = $already;
+		$vars["all"]       = $all;
+		$vars["IDPatient"] = $IDPatient;
+		$vars["view"]      = $this->view("centers", TRUE);
+
+		$this->render("content", $vars);
+	}
+
 	public function permissions($IDPatient) {
 		if(POST("assign")) {
 			$this->Patients_Model->assignPermissions();

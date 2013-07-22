@@ -38,10 +38,22 @@ class Patients_Model extends ZP_Model {
 			}
 		}
 	}
+
+	public function getCenters() {
+		$query = "SELECT * FROM zan_centers";
+
+		return $this->Db->query($query);
+	}
 	
 	public function getByType($IDType = 6) {
 		$query = "SELECT * FROM zan_users WHERE ID_Type_User IN ($IDType)";
 					
+		return $this->Db->query($query);
+	}
+
+	public function getAssignedCenters($ID_Center, $ID_Patient) {
+		$query = "SELECT * FROM zan_re_centers_patients WHERE ID_Center = '$ID_Center' AND ID_User_Patient = '$ID_Patient'";
+
 		return $this->Db->query($query);
 	}
 
