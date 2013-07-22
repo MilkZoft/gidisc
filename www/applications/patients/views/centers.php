@@ -9,7 +9,7 @@
  				} 
  			} 
 		?>
-			<input<?php echo $checked; ?> name="users[]" type="checkbox" value="<?php echo $center["ID_Center"]; ?>" /> <?php echo $user["Name"]; ?><br />
+			<input<?php echo $checked; ?> name="users[]" type="checkbox" value="<?php echo $center["ID_Center"]; ?>" /> <?php echo $center["Name"]; ?><br />
 		<?php
 
 			$checked = NULL;
