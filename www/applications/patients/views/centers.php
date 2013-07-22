@@ -1,7 +1,7 @@
 <form action="<?php echo path("patients/centers/$IDPatient"); ?>" method="post">
 	<?php
 		$checked = NULL;
-		
+
 		foreach($all as $center) { 			
  			foreach($already as $person) {
  				if($person["ID_Center"] === $center["ID_Center"]) { 
@@ -9,7 +9,7 @@
  				} 
  			} 
 		?>
-			<input<?php echo $checked; ?> name="centers[]" type="checkbox" value="<?php echo $center["ID_Center"]; ?>" /> <?php echo $center["Name"]; ?><br />
+			<input<?php echo $checked; ?> name="centers[]" type="radio" value="<?php echo $center["ID_Center"]; ?>" /> <?php echo $center["Name"]; ?><br />
 		<?php
 
 			$checked = NULL;
