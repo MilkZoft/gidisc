@@ -12,6 +12,8 @@
 	$contact   = $center["Contact"];
 	$situation = $center["Situation"];
 	$href	   = get("webBase") . _sh . get("webLang") . _sh . "centers" . _sh . "cpanel" . _sh . "results" . _sh;
+
+	die(var_dump($users));
 ?>	
 	<div class="span6">
 		<h4><?php print __(_("Name"));?></h4>

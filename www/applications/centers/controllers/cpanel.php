@@ -268,7 +268,6 @@ class CPanel_Controller extends ZP_Controller {
 				redirect("centers/cpanel");
 			}
 			
-			$center 		= $this->$Model->getByID($ID);
 			$vars["center"] = $center[0];
 		
 			$centers = $this->$Model->getTypesCenters();
@@ -284,6 +283,8 @@ class CPanel_Controller extends ZP_Controller {
 					$vars["type"] = $center["Type"];
 				}
 			}
+
+			$vars["users"] = $this->$Model->getUsers($ID);
 			
 			$vars["edit"] = TRUE;	
 			$vars["view"] = $this->view("view", TRUE, "centers");
