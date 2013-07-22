@@ -284,7 +284,7 @@ class CPanel_Controller extends ZP_Controller {
 				}
 			}
 
-			$vars["users"] = $this->$Model->getUsers($ID);
+			$vars["patients"] = $this->$Model->getUsers($ID);
 			
 			$vars["edit"] = TRUE;	
 			$vars["view"] = $this->view("view", TRUE, "centers");
