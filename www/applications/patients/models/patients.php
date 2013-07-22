@@ -21,6 +21,24 @@ class Patients_Model extends ZP_Model {
 		$this->Data->table($this->table);
 	}
 
+	public function assignCenters() {
+		$centers = POST("centers");
+		$ID_Patient = POST("ID_Patient");
+	
+		$this->Db->deleteBySQL("ID_User_Patient = '$ID_Patient'", "re_centers_patients");
+
+		if($centers) {
+			for($i = 0; $i <= count($centers) - 1; $i++) {
+				$data = array(
+					"ID_Center" => $centers[$i],
+					"ID_User_Patient" => $ID_Patient
+				);
+
+				$this->Db->insert("re_centers_patients", $data);
+			}
+		}
+	}
+
 	public function assignPermissions() {
 		$users = POST("users");
 		$ID_Patient = POST("ID_Patient");
