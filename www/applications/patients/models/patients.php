@@ -25,7 +25,7 @@ class Patients_Model extends ZP_Model {
 		$centers = POST("centers");
 		$ID_Patient = POST("ID_Patient");
 	
-		$this->Db->deleteBySQL("ID_User_Patient = '$ID_Patient'", "re_centers_patients");
+		$this->Db->deleteBySQL("ID_User_Patient = '$ID_Patient'", "re_users_centers");
 
 		if($centers) {
 			for($i = 0; $i <= count($centers) - 1; $i++) {
@@ -34,7 +34,7 @@ class Patients_Model extends ZP_Model {
 					"ID_User_Patient" => $ID_Patient
 				);
 
-				$this->Db->insert("re_centers_patients", $data);
+				$this->Db->insert("re_users_centers", $data);
 			}
 		}
 	}

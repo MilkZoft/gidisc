@@ -4,12 +4,12 @@
 
 		foreach($all as $center) { 			
  			foreach($already as $person) {
- 				if($person["ID_User"] === $user["ID_User"]) { 
+ 				if($person["ID_Center"] === $center["ID_Center"]) { 
  					$checked = ' checked="checked"';
  				} 
  			} 
 		?>
-			<input<?php echo $checked; ?> name="users[]" type="checkbox" value="<?php echo $center["ID_Center"]; ?>" /> <?php echo $center["Name"]; ?><br />
+			<input<?php echo $checked; ?> name="centers[]" type="checkbox" value="<?php echo $center["ID_Center"]; ?>" /> <?php echo $center["Name"]; ?><br />
 		<?php
 
 			$checked = NULL;
