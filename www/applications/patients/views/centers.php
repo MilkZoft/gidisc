@@ -19,7 +19,7 @@
 	<input name="ID_Patient" value="<?php echo $IDPatient; ?>" type="hidden" />
 	
 	<p>
-		<input name="assign" value="Asignar Permisos" class="btn primary" type="submit" />
+		<input name="assign" value="Asignar Centro" class="btn primary" type="submit" />
 	</p>
 
 	<p>
