@@ -1,15 +1,15 @@
 <form action="<?php echo path("patients/centers/$IDPatient"); ?>" method="post">
 	<?php
 		$checked = NULL;
-		die(var_dump($all));
-		foreach($all as $user) { 			
+
+		foreach($all as $center) { 			
  			foreach($already as $person) {
  				if($person["ID_User"] === $user["ID_User"]) { 
  					$checked = ' checked="checked"';
  				} 
  			} 
 		?>
-			<input<?php echo $checked; ?> name="users[]" type="checkbox" value="<?php echo $user["ID_User"]; ?>" /> <?php echo $user["Username"]; ?> (<?php echo $type; ?>)<br />
+			<input<?php echo $checked; ?> name="users[]" type="checkbox" value="<?php echo $center["ID_Center"]; ?>" /> <?php echo $user["Name"]; ?><br />
 		<?php
 
 			$checked = NULL;
