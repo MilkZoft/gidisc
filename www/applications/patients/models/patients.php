@@ -25,15 +25,15 @@ class Patients_Model extends ZP_Model {
 		$centers = POST("centers");
 		$ID_Patient = POST("ID_Patient");
 	
-		$this->Db->deleteBySQL("ID_User_Patient = '$ID_Patient'", "re_users_centers");
+		$this->Db->deleteBySQL("ID_User = '$ID_Patient'", "re_users_centers");
 
 		if($centers) {
 			for($i = 0; $i <= count($centers) - 1; $i++) {
 				$data = array(
 					"ID_Center" => $centers[$i],
-					"ID_User_Patient" => $ID_Patient
+					"ID_User" => $ID_Patient
 				);
-
+			
 				$this->Db->insert("re_users_centers", $data);
 			}
 		}
