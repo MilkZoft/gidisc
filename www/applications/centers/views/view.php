@@ -55,6 +55,8 @@
 	
 	<a href="<?php print $href;?>" title="<?php print __(_("Return"));?>"><?php print __(_("Return"));?></a>
 
+	<br />
+	
 	<?php if (isset($patients) and is_array($patients)) { ?>
 		<div class="centers"><h2><?php print __("Patients");?></h2>
 		<table class="bordered-table zebra-striped table">
