@@ -70,7 +70,7 @@ class Patients_Model extends ZP_Model {
 	}
 
 	public function getAssignedCenters($ID_Center, $ID_Patient) {
-		$query = "SELECT * FROM zan_re_centers_patients WHERE ID_Center = '$ID_Center' AND ID_User_Patient = '$ID_Patient'";
+		$query = "SELECT * FROM zan_re_users_centers WHERE ID_Center = '$ID_Center' AND ID_User = '$ID_Patient'";
 
 		return $this->Db->query($query);
 	}
