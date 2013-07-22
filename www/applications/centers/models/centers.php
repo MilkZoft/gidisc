@@ -119,7 +119,7 @@ class Centers_Model extends ZP_Model {
 		}
 	}
 
-	public function getUsers($ID_Center) {
+	public function getUsers($ID) {
 		$query = "SELECT * FROM zan_users WHERE ID_User IN (SELECT ID_User FROM zan_re_users_centers WHERE ID_Center = '$ID')";
 
 		return $this->Db->query($query);
