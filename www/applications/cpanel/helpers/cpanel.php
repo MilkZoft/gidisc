@@ -11,7 +11,7 @@ function getCheckbox($ID, $disabled = NULL) {
 }
 
 function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FALSE) {
-	$colspan = count($thead);
+	$colspan = count($caption);
 	
 	$HTML  = '	<table id="results" class="results">
 					<caption class="caption">
@@ -277,7 +277,17 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							}		
 														
 							if(isset($column["Action"])) { 
-								$HTML .= '<td class="center">'. $column["Action"] .'</td>';
+								$HTML .= '<td class="center">';
+
+								if (isset($column["ID_Type_User"]) and $column["ID_Type_User"] >= 3 and $column["ID_Type_User"] <= 5) {
+									$HTML .= '<a href="'. path("patients/centers/". $column["ID"]) .'">
+										<span class="no-decoration">'. __("Asignar centro") .'</span>
+									</a>'; 
+								} else {
+									$HTML .= '<span class="no-decoration">'. __("Asignar centro") .'</span>';
+								}
+
+								$HTML .= $column["Action"] .'</td>';
 							}
 						}
 					}
@@ -482,6 +492,7 @@ function getTFoot($trash) {
 				$tFoot = $CPanel_Model->getTFoot($a, "checkbox",  getCheckbox($record["ID_User"]), 	    $tFoot);
 				$tFoot = $CPanel_Model->getTFoot($a, "i", 		  $color, 					  			$tFoot);
 				$tFoot = $CPanel_Model->getTFoot($a, "ID", 		  $record["ID_User"], 	      	  		$tFoot);
+				$tFoot = $CPanel_Model->getTFoot($a, "ID_Type_User", $record["ID_Type_User"], 			$tFoot);
 				$tFoot = $CPanel_Model->getTFoot($a, "Username",  $record["Username"], 	  	  			$tFoot);
 				$tFoot = $CPanel_Model->getTFoot($a, "Email", 	  $record["Email"], 	  	  			$tFoot);
 				$tFoot = $CPanel_Model->getTFoot($a, "Situation", $record["Situation"], 	  			$tFoot);
