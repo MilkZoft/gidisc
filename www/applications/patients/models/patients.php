@@ -21,7 +21,7 @@ class Patients_Model extends ZP_Model {
 		$this->Data->table($this->table);
 	}
 
-	public function assignCenters() {
+	public function assignCenters($type) {
 		$centers = POST("centers");
 		$ID_Patient = POST("ID_Patient");
 	
@@ -31,7 +31,8 @@ class Patients_Model extends ZP_Model {
 			for($i = 0; $i <= count($centers) - 1; $i++) {
 				$data = array(
 					"ID_Center" => $centers[$i],
-					"ID_User" => $ID_Patient
+					"ID_User" => $ID_Patient,
+					"ID_Type_User" => $type
 				);
 			
 				$this->Db->insert("re_users_centers", $data);

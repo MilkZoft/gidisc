@@ -53,9 +53,9 @@ class Patients_Controller extends ZP_Controller {
 		$this->render("content", $vars);	
 	}
 
-	public function centers($IDPatient) {
+	public function centers($IDPatient, $type = 4) {
 		if (POST("assign")) {
-			$this->Patients_Model->assignCenters();
+			$this->Patients_Model->assignCenters($type);
 		}
 
 		$all = $this->Patients_Model->getCenters();

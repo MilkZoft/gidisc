@@ -58,15 +58,16 @@
 	<br />
 	
 	<?php if (isset($patients) and is_array($patients)) { ?>
-		<div class="centers"><h2><?php print __("Patients");?></h2>
+		<div class="centers"><h2><?php print __("Pacientes, Maestros y Directivos");?></h2>
 		<table class="bordered-table zebra-striped table">
 			<thead>
 				<tr>
 					<th>#</th>
-					<th><?php print __("Name");?></th>
-					<th><?php print __("Last Name");?></th>
-					<th><?php print __("Maiden Name");?></th>
-					<th><?php print __("Actions");?></th>
+					<th><?php print __("Tipo");?></th>
+					<th><?php print __("Nombre");?></th>
+					<th><?php print __("Apellido Paterno");?></th>
+					<th><?php print __("Apellido Materno");?></th>
+					<th><?php print __("Acciones");?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -77,6 +78,27 @@
 						foreach($patients as $patient) { ?>
 						<tr>
 							<td><?php print $patient["ID_User"];?></td>
+							<td>
+							<?php 
+								if ($patient["ID_Type_User"] == 1) {
+									echo "Administrador";
+								} elseif ($patient["ID_Type_User"] == 2) {
+									echo "Centro";
+								} elseif ($patient["ID_Type_User"] == 3) {
+									echo "Maestro";
+								} elseif ($patient["ID_Type_User"] == 4) {
+									echo "Paciente";
+								} elseif ($patient["ID_Type_User"] == 5) {
+									echo "Familiar";
+								} elseif ($patient["ID_Type_User"] == 6) {
+									echo "Terapeuta";
+								} elseif ($patient["ID_Type_User"] == 7) {
+									echo "Psicólogo";
+								} elseif ($patient["ID_Type_User"] == 8) {
+									echo "Doctor";
+								}
+							?>
+							</td>
 							<td><?php print $patient["Name"];?></td>
 							<td><?php print $patient["Last_Name"];?></td>
 							<td><?php print $patient["Maiden_Name"];?></td>
