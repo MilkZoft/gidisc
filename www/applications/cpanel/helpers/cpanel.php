@@ -278,10 +278,18 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 														
 							if(isset($column["Action"])) { 
 								$HTML .= '<td class="center">';
-		
-								$HTML .= '<a href="'. path("patients/centers/". $column["ID"]) .'">
-									<span class="no-decoration">'. __("Asignar centro") .'</span>
-								</a>'; 
+
+								if (isset($column["ID_Type_User"])) {
+									if ($column["ID_Type_User"] != 8) {
+										$HTML .= '<a href="'. path("patients/centers/". $column["ID"]) .'">
+											<span class="no-decoration">'. __("Asignar centro") .'</span>
+										</a>';
+									} else {
+										$HTML .= '<span class="no-decoration">'. __("Asignar centro") .'</span>';	
+									}
+								} else {
+									$HTML .= '<span class="no-decoration">'. __("Asignar centro") .'</span>';
+								}
 
 								$HTML .= $column["Action"] .'</td>';
 							}
