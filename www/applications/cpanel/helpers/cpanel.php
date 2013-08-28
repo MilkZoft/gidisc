@@ -279,8 +279,8 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							if(isset($column["Action"])) { 
 								$HTML .= '<td class="center">';
 
-								if (isset($column["ID_Type_User"]) and $column["ID_Type_User"] >= 3 and $column["ID_Type_User"] <= 5) {
-									$HTML .= '<a href="'. path("patients/centers/". $column["ID"] ."/". $column["ID_Type_User"]) .'">
+								if (isset($column["ID_Type_User"])) {
+									$HTML .= '<a href="'. path("patients/centers/". $column["ID"]) .'">
 										<span class="no-decoration">'. __("Asignar centro") .'</span>
 									</a>'; 
 								} else {
