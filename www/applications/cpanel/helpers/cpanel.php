@@ -278,14 +278,10 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 														
 							if(isset($column["Action"])) { 
 								$HTML .= '<td class="center">';
-
-								if (isset($column["ID_Type_User"])) {
-									$HTML .= '<a href="'. path("patients/centers/". $column["ID"]) .'">
-										<span class="no-decoration">'. __("Asignar centro") .'</span>
-									</a>'; 
-								} else {
-									$HTML .= '<span class="no-decoration">'. __("Asignar centro") .'</span>';
-								}
+		
+								$HTML .= '<a href="'. path("patients/centers/". $column["ID"]) .'">
+									<span class="no-decoration">'. __("Asignar centro") .'</span>
+								</a>'; 
 
 								$HTML .= $column["Action"] .'</td>';
 							}
