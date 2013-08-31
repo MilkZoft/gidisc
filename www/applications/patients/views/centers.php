@@ -1,4 +1,4 @@
-<form action="<?php echo path("patients/centers/$IDPatient"); ?>" method="post">
+<form action="<?php echo path("patients/centers/$IDPatient/$type"); ?>" method="post">
 	<?php
 		$checked = NULL;
 
@@ -8,8 +8,14 @@
  					$checked = ' checked="checked"';
  				} 
  			} 
+
+ 			if ($type >= 6) {
+ 				$fType = "checkbox";
+ 			} else {
+ 				$fType = "radio";
+ 			}
 		?>
-			<input<?php echo $checked; ?> name="centers[]" type="radio" value="<?php echo $center["ID_Center"]; ?>" /> <?php echo $center["Name"]; ?><br />
+			<input<?php echo $checked; ?> name="centers[]" type="<?=$fType;?>" value="<?php echo $center["ID_Center"]; ?>" /> <?php echo $center["Name"]; ?><br />
 		<?php
 
 			$checked = NULL;

@@ -69,6 +69,7 @@ class Patients_Controller extends ZP_Controller {
 			}
 		}
 
+		$vars["type"]      = $type;
 		$vars["already"]   = $already;
 		$vars["all"]       = $all;
 		$vars["IDPatient"] = $IDPatient;

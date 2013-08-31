@@ -281,7 +281,7 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 
 								if (isset($column["ID_Type_User"])) {
 									if ($column["ID_Type_User"] != 8) {
-										$HTML .= '<a href="'. path("patients/centers/". $column["ID"]) .'">
+										$HTML .= '<a href="'. path("patients/centers/". $column["ID"] ."/". $column["ID_Type_User"]) .'">
 											<span class="no-decoration">'. __("Asignar centro") .'</span>
 										</a>';
 									} else {
