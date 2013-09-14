@@ -70,9 +70,9 @@ class Users_Model extends ZP_Model {
 		return $data;
 	}
 	
-	private function all($trash, $order, $limit) {
+	private function all($trash, $order, $limit) { 
 		if(!$trash) {
-			$data = $this->Db->findBySQL("Situation != 'Deleted'", $this->table, NULL, "ID_User DESC", $limit);	
+			$data = $this->Db->findBySQL("Situation != 'Deleted' AND ID_Type_User != '4'", $this->table, NULL, "ID_User DESC", $limit);	
 		} else {
 			$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, "ID_User DESC", $limit);
 		}
