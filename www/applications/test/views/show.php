@@ -214,7 +214,7 @@
 				
 				<p>
 					<span>Trabajo en casa: </span><br />
-					<textarea class="obsv" disabled="disabled" name="work"><?php print $format["Work_Home"];?></textarea>
+					<textarea style="width:500px; height: 400px;" disabled="disabled" name="work"><?php print $format["Work_Home"];?></textarea>
 				</p>
 			</form>
 	<?php
@@ -233,7 +233,7 @@
 				
 				<p>
 					<span>Observaciones: </span><br />
-					<textarea class="obsv" disabled="disabled" name="comments"><?php print $format["Comments"];?></textarea>
+					<textarea style="width:500px; height: 400px;" disabled="disabled" name="comments"><?php print $format["Comments"];?></textarea>
 				</p>
 			</form>
 	<?php
