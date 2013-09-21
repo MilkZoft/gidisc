@@ -209,7 +209,7 @@
 				</div>
 				<p>
 					<span>Observaciones: </span><br />
-					<textarea class="obsv" disabled="disabled" name="comments"><?php print $format["Comments"];?></textarea>
+					<textarea style="width:500px; height: 400px;" disabled="disabled" name="comments"><?php print $format["Comments"];?></textarea>
 				</p>
 				
 				<p>
