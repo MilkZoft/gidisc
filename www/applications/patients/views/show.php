@@ -506,7 +506,7 @@
 			<form method="POST" action="">
 				<p>
 					<span>Observaciones: </span><br />
-					<textarea class="obsv" name="comments"><?php print $format["Comments"];?></textarea>
+					<textarea style="width: 500px; height: 300px;" name="comments"><?php print $format["Comments"];?></textarea>
 				</p>
 			</form>
 	<?php
