@@ -41,7 +41,10 @@ td {
 	text-align:center;
 }
 
-.obsv { width:300px !important; }
+.obsv { 
+	width:300px !important; 
+	height: 180px;
+}
 
 .field {
 	display: inline-block;
