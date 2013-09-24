@@ -98,7 +98,7 @@
 							<?php foreach($objectivesp as $key => $objective) { ?>
 								<tr class="molde1">
 									<td><input class="id-goal" disabled="disabled" type="text" value="<?php print $key + 1;?>" /></td>
-									<td><textarea name="objective[]" type="text"><?php print $objective["Objetive"];?></textarea></td>
+									<td><textarea name="objective[]" style="height: 180px;"><?php print $objective["Objetive"];?></textarea></td>
 								</tr>
 							<?php } ?>
 						<?php } else { ?>
