@@ -104,7 +104,7 @@
 						<?php } else { ?>
 							<tr class="molde1">
 								<td><input class="id-goal" disabled="disabled" type="text" value="1" /></td>
-								<td><input name="objective[]" type="text" value=""/></td>
+								<td><textarea name="objective[]" style="height: 180px;"></textarea></td>
 							</tr>
 						<?php } ?>
 					</table>
