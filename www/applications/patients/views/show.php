@@ -104,7 +104,7 @@
 								$i = 0;
 								foreach($objectivesp as $key => $objective) { ?>
 									<tr class="molde1">
-										<td><input class="objective-input" name="objective[]" type="text" value="<?php print $objective["Objetive"];?>"/></td>
+										<td><textarea name="objective[]" style="height:160px;"><?php print $objective["Objetive"];?></textarea></td>
 									</tr>
 							<?php 
 									$i++;
@@ -114,49 +114,49 @@
 									if($i == 4) {
 									?>
 										<tr class="molde1">
-											<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
+											<td><textarea name="objective[]" style="height:160px;"></textarea></td>
 										</tr>
 									<?php
 									} elseif($i == 3) {
 									?>
 										<tr class="molde1">
-											<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
+											<td><textarea name="objective[]" style="height:160px;"></textarea></td>
 										</tr>
 
 										<tr class="molde1">
-											<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
+											<td><textarea name="objective[]" style="height:160px;"></textarea></td>
 										</tr>										
 									<?php
 									} elseif($i == 2) {
 									?>
 										<tr class="molde1">
-											<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
+											<td><textarea name="objective[]" style="height:160px;"></textarea></td>
 										</tr>
 
 										<tr class="molde1">
-											<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
+											<td><textarea name="objective[]" style="height:160px;"></textarea></td>
 										</tr>
 
 										<tr class="molde1">
-											<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
+											<td><textarea name="objective[]" style="height:160px;"></textarea></td>
 										</tr>
 									<?php
 									} elseif($i === 1) {
 									?>
 										<tr class="molde1">
-											<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
+											<td><textarea name="objective[]" style="height:160px;"></textarea></td>
 										</tr>
 
 										<tr class="molde1">
-											<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
+											<td><textarea name="objective[]" style="height:160px;"></textarea></td>
 										</tr>
 
 										<tr class="molde1">
-											<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
+											<td><textarea name="objective[]" style="height:160px;"></textarea></td>
 										</tr>
 
 										<tr class="molde1">
-											<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
+											<td><textarea name="objective[]" style="height:160px;"></textarea></td>
 										</tr>
 									<?php
 									}
@@ -165,7 +165,7 @@
 						<?php } else { ?>
 							<tr class="molde1">
 								<td><input class="id-goal" type="text" value="1" /></td>
-								<td><input name="objective[]" type="text" value=""/></td>
+								<td><input class="objective-input" name="objective[]" type="text" value=""/></td>
 							</tr>
 						<?php } ?>
 					</table>
