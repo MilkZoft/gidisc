@@ -72,9 +72,9 @@ class Users_Model extends ZP_Model {
 	
 	private function all($trash, $order, $limit) { 
 		if(!$trash) {
-			$data = $this->Db->findBySQL("Situation != 'Deleted' AND ID_Type_User != '4'", $this->table, NULL, "ID_User DESC", $limit);	
+			$data = $this->Db->findBySQL("Situation != 'Deleted' AND ID_Type_User != '4'", $this->table, NULL, "Username ASC", $limit);	
 		} else {
-			$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, "ID_User DESC", $limit);
+			$data = $this->Db->findBy("Situation", "Deleted", $this->table, NULL, "Username ASC", $limit);
 		}
 		
 		return $data;	
@@ -108,14 +108,7 @@ class Users_Model extends ZP_Model {
 			$pwd      = POST("pwd", "encrypt");
 		}
 		
-		$validations = array(
-			"email"	   => "email?",
-			"exists"   => array(
-				"Username" 	=> $username,
-				"or" 	   	=> true,
-				"Email" 	=> POST("email")
-			)					  
-		);
+		$validations = array();
 
 		$data = array(
 			"Username" 	   => $username,
@@ -149,11 +142,7 @@ class Users_Model extends ZP_Model {
 		$this->data = $this->Data->proccess($data, $validations);
 		
 		if(isset($this->data["error"])) {
-			if(isset($this->data["field"])) {
-				showAlert("Error: el ". $this->data["field"] ." ya existe", path("users/cpanel/add/"));
-			} else {
-				return $this->data["error"];
-			}	
+			return $this->data["error"];
 		}
 	}
 	

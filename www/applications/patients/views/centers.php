@@ -1,7 +1,7 @@
 <form action="<?php echo path("patients/centers/$IDPatient/$type"); ?>" method="post">
 	<?php
 		$checked = NULL;
-
+		if (is_array($all))
 		foreach($all as $center) { 			
  			foreach($already as $person) {
  				if($person["ID_Center"] === $center["ID_Center"]) { 

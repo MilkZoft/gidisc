@@ -61,6 +61,7 @@ class Patients_Controller extends ZP_Controller {
 		$all = $this->Patients_Model->getCenters();
 		$already = array();
 
+		if (is_array($all))
 		foreach ($all as $center) {
 			$assigned = $this->Patients_Model->getAssignedCenters($center["ID_Center"], $IDPatient);
 
@@ -85,7 +86,8 @@ class Patients_Controller extends ZP_Controller {
 
 		$all = $this->Patients_Model->getByType("2, 3, 5, 6, 7, 8");
 		$already = array();
-	
+		
+		if (is_array($all))
 		foreach($all as $user) {
 			$assigned = $this->Patients_Model->getAssigned($user["ID_User"], $IDPatient);
 

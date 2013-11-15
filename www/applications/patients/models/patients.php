@@ -64,7 +64,7 @@ class Patients_Model extends ZP_Model {
 	}
 	
 	public function getByType($IDType = 6) {
-		$query = "SELECT * FROM zan_users WHERE ID_Type_User IN ($IDType)";
+		$query = "SELECT ID_User, ID_Type_User, Username FROM zan_users WHERE ID_Type_User IN ($IDType) ORDER BY Username ASC";
 					
 		return $this->Db->query($query);
 	}
@@ -76,7 +76,7 @@ class Patients_Model extends ZP_Model {
 	}
 
 	public function getAssigned($ID_User, $ID_Patient) {
-		$query = "SELECT * FROM zan_re_users_patients WHERE ID_User = '$ID_User' AND ID_User_Patient = '$ID_Patient'";
+		$query = "SELECT * FROM zan_re_users_patients WHERE ID_User = '$ID_User' AND ID_User_Patient = '$ID_Patient' ORDER BY Username ASC";
 
 		return $this->Db->query($query);
 	}
@@ -89,13 +89,15 @@ class Patients_Model extends ZP_Model {
 		return ($data) ? $data[0] : FALSE; 
 	}
 	
-	public function all($limit = 25) { 
+	public function all($limit = 1000) { 
+		$limit = "0, 5000";
+
 		if(SESSION("ZanUserTypeID") == 1) { 
-			$query = "SELECT * FROM zan_users WHERE ID_Type_User = '4' AND Situation != 'Deleted' ORDER BY ID_User DESC LIMIT {$limit}";
+			$query = "SELECT * FROM zan_users WHERE ID_Type_User = '4' AND Situation != 'Deleted' AND Name != '' ORDER BY Name ASC LIMIT {$limit}";
 		} else {
 			$userID = SESSION("ZanUserID");
 
-			$query = "SELECT * FROM zan_users WHERE Situation != 'Deleted' AND ID_User IN (SELECT zan_re_users_patients.ID_User_Patient FROM zan_re_users_patients WHERE ID_User = '$userID') ORDER BY ID_User DESC LIMIT {$limit}";
+			$query = "SELECT * FROM zan_users WHERE Situation != 'Deleted' AND Name != '' AND ID_User IN (SELECT zan_re_users_patients.ID_User_Patient FROM zan_re_users_patients WHERE ID_User = '$userID') ORDER BY Name ASC LIMIT {$limit}";
 		}
 
 		$data = $this->Db->query($query);
