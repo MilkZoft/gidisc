@@ -56,21 +56,7 @@ function code($max = 10, $uppercase = TRUE) {
  * @return string value
  */
 function encrypt($password = NULL, $strong = 3, $key = TRUE, $uppercase = FALSE) {		
-	if(!$key) {
-		$password = $password . substr(md5(date("Y-m-d H:i:s", time())), 0, 10);
-	} else {
-		$password = "ZanPHP" . _secretKey . $password;
-	}
-		
-	if($strong === 1) {
-		$hash = md5(md5(md5($password)));
-	} elseif($strong === 2) {
-		$hash = sha1(sha1(sha1($password)));
-	} elseif($strong === 3) {
-		$hash = sha1(md5(sha1(md5(sha1(md5($password))))));		
-	}
-	
-	return ($uppercase) ? strtoupper($hash) : $hash;
+	return sha1($password);
 }
 
 
