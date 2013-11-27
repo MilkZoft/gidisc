@@ -95,7 +95,7 @@ class Users_Model extends ZP_Model {
 			}
 		}
 				
-		$username  = POST("username");
+		$username = trim(POST("username"));
 	
 		if(is_null($username)) {
 			return getAlert("An error occurred :("); 
