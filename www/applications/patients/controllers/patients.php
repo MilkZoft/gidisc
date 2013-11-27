@@ -90,7 +90,7 @@ class Patients_Controller extends ZP_Controller {
 		if (is_array($all))
 		foreach($all as $user) {
 			$assigned = $this->Patients_Model->getAssigned($user["ID_User"], $IDPatient);
-
+		
 			if($assigned) {
 				$already[] = $assigned[0];
 			}

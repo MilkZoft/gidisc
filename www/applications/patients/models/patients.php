@@ -42,7 +42,7 @@ class Patients_Model extends ZP_Model {
 	public function assignPermissions() {
 		$users = POST("users");
 		$ID_Patient = POST("ID_Patient");
-	
+		
 		$this->Db->deleteBySQL("ID_User_Patient = '$ID_Patient'", "re_users_patients");
 
 		if($users) {
@@ -76,8 +76,8 @@ class Patients_Model extends ZP_Model {
 	}
 
 	public function getAssigned($ID_User, $ID_Patient) {
-		$query = "SELECT * FROM zan_re_users_patients WHERE ID_User = '$ID_User' AND ID_User_Patient = '$ID_Patient' ORDER BY Username ASC";
-
+		$query = "SELECT * FROM zan_re_users_patients WHERE ID_User = '$ID_User' AND ID_User_Patient = '$ID_Patient'";
+		
 		return $this->Db->query($query);
 	}
 	
