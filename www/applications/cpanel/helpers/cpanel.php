@@ -279,16 +279,18 @@ function getTable($caption, $thead, $tFoot, $total, $comments = FALSE, $app = FA
 							if(isset($column["Action"])) { 
 								$HTML .= '<td class="center">';
 
-								if (isset($column["ID_Type_User"])) {
-									if ($column["ID_Type_User"] != 8 and $column["ID_Type_User"] != 3 and $column["ID_Type_User"] != 5) {
-										$HTML .= '<a href="'. path("patients/centers/". $column["ID"] ."/". $column["ID_Type_User"]) .'">
-											<span class="no-decoration">'. __("Asignar centro") .'</span>
-										</a>';
+								if(SESSION("ZanUserTypeID") != 8 and SESSION("ZanUserTypeID") != 3 and SESSION("ZanUserTypeID") != 5) {
+									if (isset($column["ID_Type_User"])) {
+										if ($column["ID_Type_User"] != 8) {
+											$HTML .= '<a href="'. path("patients/centers/". $column["ID"] ."/". $column["ID_Type_User"]) .'">
+												<span class="no-decoration">'. __("Asignar centro") .'</span>
+											</a>';
+										} else {
+											$HTML .= '<span class="no-decoration">'. __("Asignar centro") .'</span>';	
+										}
 									} else {
-										$HTML .= '<span class="no-decoration">'. __("Asignar centro") .'</span>';	
+										$HTML .= '<span class="no-decoration">'. __("Asignar centro") .'</span>';
 									}
-								} else {
-									$HTML .= '<span class="no-decoration">'. __("Asignar centro") .'</span>';
 								}
 
 								$HTML .= $column["Action"] .'</td>';
