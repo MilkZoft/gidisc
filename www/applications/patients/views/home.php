@@ -63,6 +63,7 @@
 								</a>
 							<?php
 							}
+							?>
 							
 							<a href="<?php print path("users/cpanel/edit/" . $patient["ID_User"]);?>" title="Edit" onclick="return confirm('Do you want to edit the record?')">
 								<span class="tiny-image tiny-edit no-decoration">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
