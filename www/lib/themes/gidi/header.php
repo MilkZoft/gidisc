@@ -111,16 +111,22 @@
 				</li>
 			</ul>
 			
-			<ul class="nav">
-				<li class="dropdown" data-dropdown="dropdown2" >
-					<a href="#" class="dropdown-toggle" title="Centros">Centros</a>
-					<ul class="dropdown-menu option2">
-						<li><a href="<?php print path("centers/cpanel/results/"); ?>">Todos</a></li>
-						<li><a href="<?php print path("centers/cpanel/add/"); ?>">Agregar</a></li>
-						<li><a href="<?php print path("centers/cpanel/results/trash/"); ?>">Papelera</a></li>
-					</ul>
-				</li>
-			</ul>
+			<?php
+			if(SESSION("ZanUserTypeID") != 8 and SESSION("ZanUserTypeID") != 3 and SESSION("ZanUserTypeID") != 5) {
+				?>
+				<ul class="nav">
+					<li class="dropdown" data-dropdown="dropdown2" >
+						<a href="#" class="dropdown-toggle" title="Centros">Centros</a>
+						<ul class="dropdown-menu option2">
+							<li><a href="<?php print path("centers/cpanel/results/"); ?>">Todos</a></li>
+							<li><a href="<?php print path("centers/cpanel/add/"); ?>">Agregar</a></li>
+							<li><a href="<?php print path("centers/cpanel/results/trash/"); ?>">Papelera</a></li>
+						</ul>
+					</li>
+				</ul>
+				<?php
+			}
+			?>
 			
 			<ul class="nav">
 				<li class="dropdown" data-dropdown="dropdown" >
