@@ -153,7 +153,12 @@ class Test_Controller extends ZP_Controller {
 							
 							foreach($therapistsData as $therapist) { 
 								if($format["format"]["ID_Therapist"] == $therapist["ID_User"]) { 
-									$view .= '<span class="bold">Terapeuta:</span> '. decode($therapist["Name"] . " " . $therapist["Last_Name"] . " " . $therapist["Maiden_Name"]);
+									$name = isset($therapist["Name"]) ? $therapist["Name"] : null;
+									$last = isset($therapist["Last_Name"]) ? $therapist["Last_Name"] : null;
+									$maiden = isset($therapist["Maiden_Name"]) ? $therapist["Maiden_Name"] : null;
+									
+									$name = $name . " " . $last . " " . $maiden;
+									$view .= '<span class="bold">Terapeuta:</span> '. decode($name);
 								} 
 							}
 
