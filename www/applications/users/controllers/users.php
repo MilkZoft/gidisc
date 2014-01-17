@@ -39,15 +39,9 @@ class Users_Controller extends ZP_Controller {
 		$this->Email->subject = $subject;
 		$this->Email->message = $message;
 		$a = $this->Email->send();
-		die(var_dump($a));
 	}
 	
 	public function logout() {
-		setcookie("ZanUser");
-		setcookie("ZanUserPwd");
-		setcookie("ZanUserID");
-		setcookie("ZanUserType");
-		setcookie("ZanUserTypeID");
 		unsetSessions();
 	}
 
@@ -70,20 +64,20 @@ class Users_Controller extends ZP_Controller {
 				$user = FALSE;
 			}
 			
-			if($user) { 
+			if($user) {
 				SESSION("ZanUser", 		 $user[0]["Username"]);
 				SESSION("ZanUserPwd",    $user[0]["Password"]);
 				SESSION("ZanUserID",     $user[0]["ID_User"]);
 				SESSION("ZanUserType",   $user[0]["Type"]);
 				SESSION("ZanUserTypeID", $user[0]["ID_Type_User"]);
-
+				
 				$token = $this->Users_Model->setToken($user[0]["ID_User"]);
-				
-				if(!$token) {
-					redirect("cpanel/logout");
-				}
-				
-				SESSION("ZanUserToken", $token);
+                                
+                if(!$token) { die("si");
+                    redirect("cpanel/logout");
+                }
+                
+                SESSION("ZanUserToken", $token);
 
 				redirect(POST("URL"));
 			} elseif($from === "cpanel") {

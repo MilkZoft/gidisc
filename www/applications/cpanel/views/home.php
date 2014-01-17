@@ -1,4 +1,4 @@
-<?php if(!defined("_access")) { die("Error: You don't have permission to access here..."); } ?>
+<?php die("siiii"); if(!defined("_access")) { die("Error: You don't have permission to access here..."); } ?>
 
 <div id="home">
 	<div class="slider-wrapper theme-default" style="width:900px; margin: 0 auto;">

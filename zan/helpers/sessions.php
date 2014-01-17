@@ -113,12 +113,13 @@ function unsetCookie($cookie, $URL = FALSE) {
 function unsetSessions($URL = FALSE) {
 	session_unset(); 
 	session_destroy();	
+
 	setcookie("ZanUser", NULL, 0, "/");
-	setcookie("ZanUserPwd", NULL, 0, "/");		
-	setcookie("ZanUserID", NULL, 0, "/");
-	setcookie("ZanUserType", NULL, 0, "/");
-	setcookie("ZanUserTypeID", NULL, 0, "/");
-	setcookie("ZanUserToken", NULL, 0, "/");
+    setcookie("ZanUserPwd", NULL, 0, "/");                
+    setcookie("ZanUserID", NULL, 0, "/");
+    setcookie("ZanUserType", NULL, 0, "/");
+    setcookie("ZanUserTypeID", NULL, 0, "/");
+    setcookie("ZanUserToken", NULL, 0, "/");
 	
 	if($URL) {
 		redirect($URL);

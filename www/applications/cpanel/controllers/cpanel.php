@@ -22,13 +22,13 @@ class CPanel_Controller extends ZP_Controller {
 	}
 	
 	public function index() {
-		if($this->isAdmin) {			
-			if((int) SESSION("ZanUserTypeID") !== 4) {
+		if($this->isAdmin) {	
+			if(SESSION("ZanUserTypeID") != 4) { 
 				$this->home();
-			} elseif((int) SESSION("ZanUserTypeID") === 4) {
+			} elseif(SESSION("ZanUserTypeID") == 4) {
 				$this->tests();
 			}
-		} else {
+		} else { 
 			$this->login();
 		}
 	}
@@ -54,6 +54,7 @@ class CPanel_Controller extends ZP_Controller {
 		$this->vars["view"] 	   = $this->view("home", TRUE);
 		
 		$this->render("content", $this->vars);
+		exit;
 	}
 
 	public function login() {
@@ -71,6 +72,12 @@ class CPanel_Controller extends ZP_Controller {
 	}
 	
 	public function logout() {
-		unsetSessions("cpanel");
+		SESSION("ZanUser", 		 $user[0]["Username"]);
+		SESSION("ZanUserPwd",    $user[0]["Password"]);
+		SESSION("ZanUserID",     $user[0]["ID_User"]);
+		SESSION("ZanUserType",   $user[0]["Type"]);
+		SESSION("ZanUserTypeID", $user[0]["ID_Type_User"]);
+		
+		redirect("cpanel");
 	}
 }

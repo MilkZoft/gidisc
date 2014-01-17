@@ -191,18 +191,23 @@ class Users_Model extends ZP_Model {
 	}
 
 	public function isAdmin($session = FALSE) {
-		if($session) {
-			$username = SESSION("ZanUser");
-			$password = SESSION("ZanUserPwd");
+		if($session) { 
+			$username = SESSION("ZanUser") != "" ? SESSION("ZanUser") : "";
+			$password = SESSION("ZanUserPwd") != "" ? SESSION("ZanUserPwd") : "";
 		} else {
 			$username = POST("username");
 			$password = POST("password", "encrypt");
 		}
 
-		$query = "Username = '$username' AND Pwd = '$password' AND Situation = 'Active'";
-		$data  = $this->Db->findBySQL($query, $this->table);
-		
-		return $data;
+		if ($username != "" and $password != "") {
+			$query = "Username = '$username' AND Pwd = '$password' AND Situation = 'Active'";
+
+			$data  = $this->Db->findBySQL($query, $this->table);
+			
+			return $data;
+		}
+
+		return false;
 	}
 
 	public function isMember($sessions = FALSE) {
@@ -214,11 +219,13 @@ class Users_Model extends ZP_Model {
 			$password = POST("password", "encrypt");
 		}
 		
-		$query = "Username = '$username' AND Pwd = '$password' AND Situation = 'Active'";
-		$data  = $this->Db->findBySQL($query, $this->table);
-	
-		if($data) {
-			return TRUE;
+		if ($username != "" and $password != "") {
+			$query = "Username = '$username' AND Pwd = '$password' AND Situation = 'Active'";
+			$data  = $this->Db->findBySQL($query, $this->table);
+		
+			if($data) {
+				return TRUE;
+			}
 		}
 		
 		return FALSE;
