@@ -96,7 +96,7 @@ class Test_Controller extends ZP_Controller {
 			$vars["objectivesp"] = $format[0]["objectives"];
 			$vars["answers"]     = $format[0]["answers"];
 			$vars["patient"]     = $patient;
-			$vars["view"] 	     = $this->view("show", TRUE);
+			$vars["view"] 	     = $this->view("display", TRUE);
 			
 			$this->render("content", $vars);	
 		} else {
