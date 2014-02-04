@@ -16,10 +16,8 @@
 		$address 	= recoverPOST("address", $data["Address"]);
 		$phone 	    = recoverPOST("phone", $data["Phone"]);
 		$grade 	    = recoverPOST("grade", $data["Grade"]);
-		$profession = recoverPOST("profession", $data["Profession"]);
 		$birthday 	= recoverPOST("birthday", $data["Birthday"]);
 		$background = recoverPOST("background", $data["Background"]);
-		$therapist  = recoverPOST("therapist", $data["Therapist"]);
 		$situation  = recoverPOST("situation", $data["Situation"]);
 		$action	    = "edit";
 		$href	    = path("users/cpanel/edit/". $ID);

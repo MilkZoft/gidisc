@@ -275,7 +275,8 @@ class Test_Model extends ZP_Model {
 			$days 		= array_values(array_diff(POST("day"), array('')));
 			$obsv		= POST("obsv");
 			$formatID	= POST("ID_Format");
-
+			$results    = array();
+			
 			for($h = 0; $h <= count($objectives) - 1; $h++) {
 				for($k = 0; $k <= count($values) - 1; $k++) {
 					for($l = 0; $l <= count($values[$k]) - 1; $l++) {
