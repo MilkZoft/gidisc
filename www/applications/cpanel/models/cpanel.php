@@ -238,9 +238,18 @@ class CPanel_Model extends ZP_Model {
 			}
 		} elseif(!$trash) {
 			if(SESSION("ZanUserPrivilege") === "Super Admin") {
-				$count = $this->Db->countBySQL("Situation != 'Deleted'");
+				if ($this->application == "users") {	
+					$count = $this->Db->countBySQL("ID_Type_User != 4 AND Situation != 'Deleted'");
+				} else {
+					$count = $this->Db->countBySQL("Situation != 'Deleted'");	
+				}
+				
 			} else {
-				$count = $this->Db->countBySQL("Situation != 'Deleted'", $this->application);
+				if ($this->application == "users") {
+					$count = $this->Db->countBySQL("ID_Type_User != 4 AND Situation != 'Deleted'", $this->application);
+				} else {
+					$count = $this->Db->countBySQL("Situation != 'Deleted'", $this->application);
+				}
 			}
 
 			$URL = path($application ."/cpanel/results/page/");
