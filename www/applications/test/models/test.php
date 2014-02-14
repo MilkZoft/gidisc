@@ -106,6 +106,7 @@ class Test_Model extends ZP_Model {
 	public function editTest() {
 		if(POST("action") === "Update") { 
 			if(POST("area") < 32) {
+				$results    = array();
 				$objectives = array_values(array_diff(POST("objective"), array('')));
 				$values     = POST("days");
 				$days 		= array_values(array_diff(POST("day"), array('')));
@@ -188,6 +189,7 @@ class Test_Model extends ZP_Model {
 			showAlert("El formato fue actualizado con éxito", path("patients"));
 		} else {
 			if(POST("area") < 32) {
+				$results    = array();
 				$objectives = array_values(array_diff(POST("objective"), array('')));
 				$values     = POST("days");
 				$days 		= array_values(array_diff(POST("day"), array('')));
@@ -250,7 +252,9 @@ class Test_Model extends ZP_Model {
 					}
 				}
 
-				$this->Db->insertBatch("objectives_answer", $data2);
+				if (isset($data2) and is_array($data2)) {
+					$this->Db->insertBatch("objectives_answer", $data2);
+				}
 			} else {
 				$data = array( 
 					"ID_Therapist" => POST("terapist"),
