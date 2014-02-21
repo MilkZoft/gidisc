@@ -93,7 +93,8 @@
 							<th>ID</th>
 							<th>Objetivo</th>
 						</tr>
-						<?php if($objectivesp) { ?>
+						<?php if($objectivesp) { 
+							?>
 							<?php foreach($objectivesp as $key => $objective) { ?>
 								<tr class="molde1">
 									<td><input class="id-goal" disabled="disabled" type="text" value="<?php print $key + 1;?>" /></td>
