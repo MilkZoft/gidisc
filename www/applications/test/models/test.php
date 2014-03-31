@@ -112,11 +112,14 @@ class Test_Model extends ZP_Model {
 				$days 		= array_values(array_diff(POST("day"), array('')));
 				$obsv		= POST("obsv");
 				$formatID	= POST("ID_Format");
-
+				
 				for($h = 0; $h <= count($objectives) - 1; $h++) {
 					for($k = 0; $k <= count($values) - 1; $k++) {
 						for($l = 0; $l <= count($values[$k]) - 1; $l++) {
-							if($values[$k][$l] != "") {			
+							if($values[$k][$l] == "") {
+								$values[$k][$l] = 0;
+							}	
+							//if($values[$k][$l] != "") {			
 								if(!isset($results[$h][$k][0])) {
 									$results[$h][$k][0] = $values[$k][$l];
 								} else {
@@ -124,7 +127,7 @@ class Test_Model extends ZP_Model {
 										$results[$h+1][$k][0] = $values[$k][$l];
 									}
 								}
-							}
+							//}
 						}
 					}
 				}
@@ -151,7 +154,7 @@ class Test_Model extends ZP_Model {
 
 				$this->Db->deleteBySQL("ID_Format = '$formatID'", "objectives_particular");
 						
-				for($o = 0; $o <= count($values) - 1; $o++) {
+				for($o = 0; $o <= count($objectives) - 1; $o++) {
 					$data = array( 
 						"ID_Format"  => $formatID,
 						"Objetive"   => $objectives[$o],
@@ -166,7 +169,7 @@ class Test_Model extends ZP_Model {
 						$data2[] = array( 
 							"ID_Format"   => $formatID,
 							"ID_Objetive" => $IDObjective,
-							"Day_"        => $days[$d],
+							"Day_"        => isset($days[$d]) ? $days[$d] : 0,
 							"Rating"      => $values[$o][$d][0] 
 						);
 					}
