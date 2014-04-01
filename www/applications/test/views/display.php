@@ -15,6 +15,22 @@
 	$month[9]["option"] = "Octubre";    $month[9]["value"] = 10;  $month[9]["selected"] = ((int) $format["Month_"] == 10) ? TRUE : FALSE;
 	$month[10]["option"] = "Noviembre"; $month[10]["value"] = 11; $month[10]["selected"] = ((int) $format["Month_"] == 11) ? TRUE : FALSE;
 	$month[11]["option"] = "Diciembre"; $month[11]["value"] = 12; $month[11]["selected"] = ((int) $format["Month_"] == 12) ? TRUE : FALSE;
+
+	$day1 = isset($day1) ? $day1 : "";
+	$day2 = isset($day2) ? $day2 : "";
+	$day3 = isset($day3) ? $day3 : "";
+	$day4 = isset($day4) ? $day4 : "";
+	$day5 = isset($day5) ? $day5 : "";
+	$day6 = isset($day6) ? $day6 : "";
+	$day7 = isset($day7) ? $day7 : "";
+	$day8 = isset($day8) ? $day8 : "";
+	$day9 = isset($day9) ? $day9 : "";
+	$day10 = isset($day10) ? $day10 : "";
+	$day11 = isset($day11) ? $day11 : "";
+	$day12 = isset($day12) ? $day12 : "";
+	$day13 = isset($day13) ? $day13 : "";
+	$day14 = isset($day14) ? $day14 : "";
+	$day15 = isset($day15) ? $day15 : "";
 ?>
 
 <?php print isset($alert) ? $alert : NULL; ?>
@@ -140,27 +156,28 @@
 										} elseif(isset($value["Rating"])) {
 											$$var = $value["Rating"];
 										} else {
-											$$var = "";
+											$$var = isset($day1) ? $day1 : "";
 										}
 									}
+
 								?>
 								<tr class="molde">
 									<td><input class="goal" disabled="disabled" type="text" value="<?php print $key + 1;?>" /></td>
-									<td><input name="days[0][]" type="text" maxlength="1" value="<?php print (isset($day1)) ? $day1 : NULL; ?>" /></td>
-									<td><input name="days[1][]" type="text" maxlength="1" value="<?php print (isset($day2)) ? $day2 : NULL; ?>" /></td>
-									<td><input name="days[2][]" type="text" maxlength="1" value="<?php print (isset($day3)) ? $day3 : NULL; ?>" /></td>
-									<td><input name="days[3][]" type="text" maxlength="1" value="<?php print (isset($day4)) ? $day4 : NULL; ?>" /></td>
-									<td><input name="days[4][]" type="text" maxlength="1" value="<?php print (isset($day5)) ? $day5 : NULL; ?>" /></td>
-									<td><input name="days[5][]" type="text" maxlength="1" value="<?php print (isset($day6)) ? $day6 : NULL; ?>" /></td>
-									<td><input name="days[6][]" type="text" maxlength="1" value="<?php print (isset($day7)) ? $day7 : NULL; ?>" /></td>
-									<td><input name="days[7][]" type="text" maxlength="1" value="<?php print (isset($day8)) ? $day8 : NULL; ?>" /></td>
-									<td><input name="days[8][]" type="text" maxlength="1" value="<?php print (isset($day9)) ? $day9 : NULL; ?>" /></td>
-									<td><input name="days[9][]" type="text" maxlength="1" value="<?php print (isset($day10)) ? $day10 : NULL; ?>" /></td>
-									<td><input name="days[10][]" type="text" maxlength="1" value="<?php print (isset($day11)) ? $day11 : NULL; ?>" /></td>
-									<td><input name="days[11][]" type="text" maxlength="1" value="<?php print (isset($day12)) ? $day12 : NULL; ?>" /></td>
-									<td><input name="days[12][]" type="text" maxlength="1" value="<?php print (isset($day13)) ? $day13 : NULL; ?>" /></td>
-									<td><input name="days[13][]" type="text" maxlength="1" value="<?php print (isset($day14)) ? $day14 : NULL; ?>" /></td>
-									<td><input name="days[14][]" type="text" maxlength="1" value="<?php print (isset($day15)) ? $day15 : NULL; ?>" /></td>
+									<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day1); ?>" /></td>
+									<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day2); ?>" /></td>
+									<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day3); ?>" /></td>
+									<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day4); ?>" /></td>
+									<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day5); ?>" /></td>
+									<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day6); ?>" /></td>
+									<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day7); ?>" /></td>
+									<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day8); ?>" /></td>
+									<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day9); ?>" /></td>
+									<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day10); ?>" /></td>
+									<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day11); ?>" /></td>
+									<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day12); ?>" /></td>
+									<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day13); ?>" /></td>
+									<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day14); ?>" /></td>
+									<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day15); ?>" /></td>
 									<td><textarea class="obsv" name="obsv[]"><?php print $objectivesp[$key]["Comments"];?></textarea></td>
 								</tr>
 							<?php } ?>

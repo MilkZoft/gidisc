@@ -20,7 +20,7 @@
 
 ?>
 
-<?php print isset($alert) ? $alert : NULL; ?>
+<?php print isset($alert) ? $alert : ''; ?>
 
 <div id="all">
 	<?php
@@ -99,9 +99,11 @@
 						<tr>
 							<th>Objetivo</th>
 						</tr>
-						<?php if($objectivesp) { ?>
+						<?php if($objectivesp or !$objectivesp) { ?>
 							<?php 
 								$i = 0;
+
+								if ($objectivesp)
 								foreach($objectivesp as $key => $objective) { ?>
 									<tr class="molde1">
 										<td><textarea name="objective[]" style="height:140px;"><?php print $objective["Objetive"];?></textarea></td>
@@ -109,7 +111,7 @@
 							<?php 
 									$i++;
 								} 
-
+								
 								if($i < 10) {
 									if ($i == 9) {
 									?>
@@ -309,6 +311,48 @@
 											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
 										</tr>
 									<?php
+									} else {
+									?>
+										<tr class="molde1">
+											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
+										</tr>
+
+										<tr class="molde1">
+											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
+										</tr>
+
+										<tr class="molde1">
+											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
+										</tr>
+
+										<tr class="molde1">
+											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
+										</tr>
+
+										<tr class="molde1">
+											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
+										</tr>
+
+										<tr class="molde1">
+											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
+										</tr>
+
+										<tr class="molde1">
+											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
+										</tr>
+
+										<tr class="molde1">
+											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
+										</tr>
+
+										<tr class="molde1">
+											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
+										</tr>
+
+										<tr class="molde1">
+											<td><textarea name="objective[]" style="height:140px;"></textarea></td>
+										</tr>
+									<?php
 									}
 								}
 							?>
@@ -331,7 +375,7 @@
 						X - No se trabajo ese objetivo
 					</p>
 					<table id="goals-explain">
-						<?php if($answers) { ?>
+						<?php if($answers or !$answers) { ?>
 							<tr>
 								<th>Objetivo/Día</th>
 								<?php for($i = 0; $i <= 14; $i++) { ?>
@@ -346,6 +390,8 @@
 								$day8 = "";$day9 = "";$day10 = "";$day11 = "";$day12 = "";$day13 = "";$day14 = "";
 								$day15 = "";
 								$i = 0;
+
+								if ($answers)
 								foreach($answers as $key => $answer) { ?>
 								<?php 
 									if(is_array($answer)) {
@@ -358,21 +404,21 @@
 								?>
 								<tr class="molde">
 									<td><input class="goal" type="text" value="<?php print $key + 1;?>" /></td>
-									<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="<?php print (isset($day1)) ? $day1 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="<?php print (isset($day2)) ? $day2 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="<?php print (isset($day3)) ? $day3 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="<?php print (isset($day4)) ? $day4 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="<?php print (isset($day5)) ? $day5 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="<?php print (isset($day6)) ? $day6 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="<?php print (isset($day7)) ? $day8 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="<?php print (isset($day8)) ? $day9 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="<?php print (isset($day9)) ? $day9 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="<?php print (isset($day10)) ? $day10 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="<?php print (isset($day11)) ? $day11 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="<?php print (isset($day12)) ? $day12 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="<?php print (isset($day13)) ? $day13 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="<?php print (isset($day14)) ? $day14 : NULL; ?>" /></td>
-									<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="<?php print (isset($day15)) ? $day15 : NULL; ?>" /></td>
+									<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day1); ?>" /></td>
+									<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day2); ?>" /></td>
+									<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day3); ?>" /></td>
+									<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day4); ?>" /></td>
+									<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day5); ?>" /></td>
+									<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day6); ?>" /></td>
+									<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day7); ?>" /></td>
+									<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day8); ?>" /></td>
+									<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day9); ?>" /></td>
+									<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day10); ?>" /></td>
+									<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day11); ?>" /></td>
+									<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day12); ?>" /></td>
+									<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day13); ?>" /></td>
+									<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day14); ?>" /></td>
+									<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="<?php print str_replace('0', '', $day15); ?>" /></td>
 									<td><textarea class="obsv" name="obsv[]"><?php print $objectivesp[$key]["Comments"];?></textarea></td>
 								</tr>
 
@@ -381,7 +427,208 @@
 									$i++;
 								} 
 
-								if ($i == 1) {
+								if ($i == 0) {
+								?>
+									<tr class="molde">
+										<td><input class="goal" type="text" value="1" /></td>
+										<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="" /></td>
+										<td><textarea class="obsv" name="obsv[]"></textarea></td>
+									</tr>
+									<tr class="molde">
+										<td><input class="goal" type="text" value="2" /></td>
+										<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="" /></td>
+										<td><textarea class="obsv" name="obsv[]"></textarea></td>
+									</tr>
+
+									<tr class="molde">
+										<td><input class="goal" type="text" value="3" /></td>
+										<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="" /></td>
+										<td><textarea class="obsv" name="obsv[]"></textarea></td>
+									</tr>
+
+									<tr class="molde">
+										<td><input class="goal" type="text" value="4" /></td>
+										<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="" /></td>
+										<td><textarea class="obsv" name="obsv[]"></textarea></td>
+									</tr>
+
+									<tr class="molde">
+										<td><input class="goal" type="text" value="5" /></td>
+										<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="" /></td>
+										<td><textarea class="obsv" name="obsv[]"></textarea></td>
+									</tr>
+
+									<tr class="molde">
+										<td><input class="goal" type="text" value="6" /></td>
+										<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="" /></td>
+										<td><textarea class="obsv" name="obsv[]"></textarea></td>
+									</tr>
+
+									<tr class="molde">
+										<td><input class="goal" type="text" value="7" /></td>
+										<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="" /></td>
+										<td><textarea class="obsv" name="obsv[]"></textarea></td>
+									</tr>
+
+									<tr class="molde">
+										<td><input class="goal" type="text" value="8" /></td>
+										<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="" /></td>
+										<td><textarea class="obsv" name="obsv[]"></textarea></td>
+									</tr>
+
+									<tr class="molde">
+										<td><input class="goal" type="text" value="9" /></td>
+										<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="" /></td>
+										<td><textarea class="obsv" name="obsv[]"></textarea></td>
+									</tr>
+
+									<tr class="molde">
+										<td><input class="goal" type="text" value="10" /></td>
+										<td><input class="days-input" name="days[0][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[1][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[2][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[3][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[4][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[5][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[6][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[7][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[8][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[9][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[10][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[11][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[12][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[13][]" type="text" maxlength="1" value="" /></td>
+										<td><input class="days-input" name="days[14][]" type="text" maxlength="1" value="" /></td>
+										<td><textarea class="obsv" name="obsv[]"></textarea></td>
+									</tr>
+								<?php
+								} elseif ($i == 1) {
 								?>
 									<tr class="molde">
 										<td><input class="goal" type="text" value="2" /></td>
