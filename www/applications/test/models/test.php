@@ -112,32 +112,32 @@ class Test_Model extends ZP_Model {
 				$days 		= array_values(array_diff(POST("day"), array('')));
 				$obsv		= POST("obsv");
 				$formatID	= POST("ID_Format");
-				
+				$j = 0;
+
 				for($h = 0; $h <= count($objectives) - 1; $h++) {
 					for($k = 0; $k <= count($values) - 1; $k++) {
 						for($l = 0; $l <= count($values[$k]) - 1; $l++) {
-							if($values[$k][$l] == "") {
-								$values[$k][$l] = 0;
-							}	
-							//if($values[$k][$l] != "") {			
-								if(!isset($results[$h][$k][0])) {
-									$results[$h][$k][0] = $values[$k][$l];
+							if (isset($values[$l][$k])) {
+								//echo "". $h ."[ ". $l. " ] = ". $values[$l][$k] . "<br>";
+								$results[$h][$l] = $values[$l][$k];
+								
+								if ($j == count($values[$k]) - 1) {
+									$h++;
+									$j = 0;
 								} else {
-									if(!isset($results[$h+1][$k][0])) {
-										$results[$h+1][$k][0] = $values[$k][$l];
-									}
+									$j++;
 								}
-							//}
+							}
 						}
 					}
-				}
+				} 
 
-				if(count($results) > 1) {
+				/*if(count($results) > 1) {
 					array_pop($results);
-				}
+				}*/
 				
 				$values = $results;
-
+				
 				$data = array( 
 					"ID_Therapist" => POST("terapist"),
 					"ID_User"      => POST("IDPatient"),
@@ -170,7 +170,7 @@ class Test_Model extends ZP_Model {
 							"ID_Format"   => $formatID,
 							"ID_Objetive" => $IDObjective,
 							"Day_"        => isset($days[$d]) ? $days[$d] : 0,
-							"Rating"      => $values[$o][$d][0] 
+							"Rating"      => $values[$o][$d] 
 						);
 					}
 				}
