@@ -131,7 +131,8 @@ class Test_Model extends ZP_Model {
 						}
 					}
 				} 
-
+				//echo "<pre>";
+				//die(var_dump($results));
 				/*if(count($results) > 1) {
 					array_pop($results);
 				}*/

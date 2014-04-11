@@ -131,8 +131,13 @@ class Test_Controller extends ZP_Controller {
 			$j = 0;
 			
 			ob_start();
+			$count = 0;
 			foreach($formats as $format) {
-				if(isset($format["format"]) and is_array($format["format"])) {	
+				if ($format["format"]["ID_Area"] < 32) {
+					$count++;
+				}
+
+				if(isset($format["format"]) and is_array($format["format"])) {
 					$patientData    = $this->Patients_Model->getPatient($format["format"]["ID_User"]);
 					$objectivesData = $this->Test_Model->getObjectives($format["format"]["ID_Area"]);
 					$therapistsData = $this->Patients_Model->getByType();
@@ -188,8 +193,8 @@ class Test_Controller extends ZP_Controller {
 					$i++;
 				} 
 			}
-
-			if($format["format"]["ID_Area"] < 32) {
+			
+			if ($count > 0) {
 				$view .= '<div id="bloque" class="claves">
 					<p>
 						0 = no puede<br />
