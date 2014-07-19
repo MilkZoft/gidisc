@@ -120,7 +120,7 @@ class Patients_Model extends ZP_Model {
 	}
 	
 	public function search($search) {
-		$query = "SELECT * FROM zan_users WHERE ID_Type_User = '4' AND (Name LIKE '%$search%' OR Last_Name LIKE '%$search%' OR Maiden_Name LIKE '%$search%')";
+		$query = "SELECT * FROM zan_users WHERE ID_Type_User = '4' AND (Name LIKE '%$search%' OR Last_Name LIKE '%$search%' OR Maiden_Name LIKE '%$search%') ORDER BY Last_Name";
 		
 		return $this->Db->query($query);		
 	}

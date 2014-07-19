@@ -199,25 +199,24 @@ class Test_Model extends ZP_Model {
 				$days 		= array_values(array_diff(POST("day"), array('')));
 				$obsv		= POST("obsv");
 				$formatID	= POST("ID_Format");
+				$count = count($objectives) - 1;
 
-				for($h = 0; $h <= count($objectives) - 1; $h++) {
-					for($k = 0; $k <= count($values) - 1; $k++) {
-						for($l = 0; $l <= count($values[$k]) - 1; $l++) {
-							if($values[$k][$l] != "") {			
-								if(!isset($results[$h][$k][0])) {
-									$results[$h][$k][0] = $values[$k][$l];
-								} else {
-									if(!isset($results[$h+1][$k][0])) {
-										$results[$h+1][$k][0] = $values[$k][$l];
-									}
-								}
-							}
-						}
-					}
-				}
-
-				if(count($results) > 1) {
-					array_pop($results);
+				for ($i = 0; $i <= 14; $i++) {
+					$results[0][$i]  = isset($values[$i][0]) ? $values[$i][0] : '';
+					$results[1][$i]  = isset($values[$i][1]) ? $values[$i][1] : '';
+					$results[2][$i]  = isset($values[$i][2]) ? $values[$i][2] : '';
+					$results[3][$i]  = isset($values[$i][3]) ? $values[$i][3] : '';
+					$results[4][$i]  = isset($values[$i][4]) ? $values[$i][4] : '';
+					$results[5][$i]  = isset($values[$i][5]) ? $values[$i][5] : '';
+					$results[6][$i]  = isset($values[$i][6]) ? $values[$i][6] : '';
+					$results[7][$i]  = isset($values[$i][7]) ? $values[$i][7] : '';
+					$results[8][$i]  = isset($values[$i][8]) ? $values[$i][8] : '';
+					$results[9][$i]  = isset($values[$i][9]) ? $values[$i][9] : '';
+					$results[10][$i] = isset($values[$i][10]) ? $values[$i][10] : '';
+					$results[11][$i] = isset($values[$i][11]) ? $values[$i][11] : '';
+					$results[12][$i] = isset($values[$i][12]) ? $values[$i][12] : '';
+					$results[13][$i] = isset($values[$i][13]) ? $values[$i][13] : '';
+					$results[14][$i] = isset($values[$i][14]) ? $values[$i][14] : '';
 				}
 		
 				$values = $results;
@@ -227,7 +226,7 @@ class Test_Model extends ZP_Model {
 					"ID_User"      => POST("IDPatient"),
 					"ID_Area"      => POST("area"),
 					"Month_"       => POST("month"),
-					"Year"		   => POST("year"),
+					"Year"		   	 => POST("year"),
 					"Comments"     => POST("comments"),
 					"Work_Home"    => POST("work"),
 					"Date_Entry"   => now(4),
@@ -236,7 +235,7 @@ class Test_Model extends ZP_Model {
 				
 				$formatID = $this->Db->insert("formats", $data);
 				
-				for($o = 0; $o <= count($values) - 1; $o++) {
+				for($o = 0; $o <= $count; $o++) {
 					$data = array( 
 						"ID_Format"  => $formatID,
 						"Objetive"   => $objectives[$o],
@@ -250,7 +249,7 @@ class Test_Model extends ZP_Model {
 						$data2[] = array( 
 							"ID_Format"   => $formatID,
 							"ID_Objetive" => $IDObjective,
-							"Day_"        => $days[$d],
+							"Day_"        => isset($days[$d]) ? $days[$d] : '',
 							"Rating"      => $values[$o][$d][0] 
 						);
 					}
@@ -284,25 +283,24 @@ class Test_Model extends ZP_Model {
 			$obsv		= POST("obsv");
 			$formatID	= POST("ID_Format");
 			$results    = array();
-			
-			for($h = 0; $h <= count($objectives) - 1; $h++) {
-				for($k = 0; $k <= count($values) - 1; $k++) {
-					for($l = 0; $l <= count($values[$k]) - 1; $l++) {
-						if($values[$k][$l] != "") {			
-							if(!isset($results[$h][$k][0])) {
-								$results[$h][$k][0] = $values[$k][$l];
-							} else {
-								if(!isset($results[$h+1][$k][0])) {
-									$results[$h+1][$k][0] = $values[$k][$l];
-								}
-							}
-						}
-					}
-				}
-			}
+			$count = count($objectives) - 1;
 
-			if(count($results) > 1) {
-				array_pop($results);
+			for ($i = 0; $i <= 14; $i++) {
+				$results[0][$i]  = isset($values[$i][0]) ? $values[$i][0] : '';
+				$results[1][$i]  = isset($values[$i][1]) ? $values[$i][1] : '';
+				$results[2][$i]  = isset($values[$i][2]) ? $values[$i][2] : '';
+				$results[3][$i]  = isset($values[$i][3]) ? $values[$i][3] : '';
+				$results[4][$i]  = isset($values[$i][4]) ? $values[$i][4] : '';
+				$results[5][$i]  = isset($values[$i][5]) ? $values[$i][5] : '';
+				$results[6][$i]  = isset($values[$i][6]) ? $values[$i][6] : '';
+				$results[7][$i]  = isset($values[$i][7]) ? $values[$i][7] : '';
+				$results[8][$i]  = isset($values[$i][8]) ? $values[$i][8] : '';
+				$results[9][$i]  = isset($values[$i][9]) ? $values[$i][9] : '';
+				$results[10][$i] = isset($values[$i][10]) ? $values[$i][10] : '';
+				$results[11][$i] = isset($values[$i][11]) ? $values[$i][11] : '';
+				$results[12][$i] = isset($values[$i][12]) ? $values[$i][12] : '';
+				$results[13][$i] = isset($values[$i][13]) ? $values[$i][13] : '';
+				$results[14][$i] = isset($values[$i][14]) ? $values[$i][14] : '';
 			}
 
 			$values = $results;
@@ -321,7 +319,7 @@ class Test_Model extends ZP_Model {
 			
 			$formatID = $this->Db->insert("formats", $data);
 				
-			for($o = 0; $o <= count($values) - 1; $o++) {
+			for($o = 0; $o <= $count; $o++) {
 				$data = array( 
 					"ID_Format"  => $formatID,
 					"Objetive"   => $objectives[$o],
@@ -335,8 +333,8 @@ class Test_Model extends ZP_Model {
 					$data2[] = array( 
 						"ID_Format"   => $formatID,
 						"ID_Objetive" => $IDObjective,
-						"Day_"        => $days[$d],
-						"Rating"      => $values[$o][$d][0] 
+						"Day_"        => isset($days[$d]) ? $days[$d] : '',
+						"Rating"      => $values[$o][$d] 
 					);
 				}
 			}
