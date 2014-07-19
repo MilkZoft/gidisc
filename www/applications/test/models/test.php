@@ -108,36 +108,11 @@ class Test_Model extends ZP_Model {
 			if(POST("area") < 32) {
 				$results    = array();
 				$objectives = array_values(array_diff(POST("objective"), array('')));
-				$values     = POST("days");
+				$values     = $this->getResults(POST("days"));
 				$days 		= array_values(array_diff(POST("day"), array('')));
 				$obsv		= POST("obsv");
 				$formatID	= POST("ID_Format");
-				$j = 0;
-
-				for($h = 0; $h <= count($objectives) - 1; $h++) {
-					for($k = 0; $k <= count($values) - 1; $k++) {
-						for($l = 0; $l <= count($values[$k]) - 1; $l++) {
-							if (isset($values[$l][$k])) {
-								//echo "". $h ."[ ". $l. " ] = ". $values[$l][$k] . "<br>";
-								$results[$h][$l] = $values[$l][$k];
-								
-								if ($j == count($values[$k]) - 1) {
-									$h++;
-									$j = 0;
-								} else {
-									$j++;
-								}
-							}
-						}
-					}
-				} 
-				//echo "<pre>";
-				//die(var_dump($results));
-				/*if(count($results) > 1) {
-					array_pop($results);
-				}*/
-				
-				$values = $results;
+				$count = count($objectives) - 1;
 				
 				$data = array( 
 					"ID_Therapist" => POST("terapist"),
@@ -155,7 +130,7 @@ class Test_Model extends ZP_Model {
 
 				$this->Db->deleteBySQL("ID_Format = '$formatID'", "objectives_particular");
 						
-				for($o = 0; $o <= count($objectives) - 1; $o++) {
+				for($o = 0; $o <= $count; $o++) {
 					$data = array( 
 						"ID_Format"  => $formatID,
 						"Objetive"   => $objectives[$o],
@@ -195,31 +170,11 @@ class Test_Model extends ZP_Model {
 			if(POST("area") < 32) {
 				$results    = array();
 				$objectives = array_values(array_diff(POST("objective"), array('')));
-				$values     = POST("days");
+				$values     = $this->getResults(POST("days"));
 				$days 		= array_values(array_diff(POST("day"), array('')));
 				$obsv		= POST("obsv");
 				$formatID	= POST("ID_Format");
 				$count = count($objectives) - 1;
-
-				for ($i = 0; $i <= 14; $i++) {
-					$results[0][$i]  = isset($values[$i][0]) ? $values[$i][0] : '';
-					$results[1][$i]  = isset($values[$i][1]) ? $values[$i][1] : '';
-					$results[2][$i]  = isset($values[$i][2]) ? $values[$i][2] : '';
-					$results[3][$i]  = isset($values[$i][3]) ? $values[$i][3] : '';
-					$results[4][$i]  = isset($values[$i][4]) ? $values[$i][4] : '';
-					$results[5][$i]  = isset($values[$i][5]) ? $values[$i][5] : '';
-					$results[6][$i]  = isset($values[$i][6]) ? $values[$i][6] : '';
-					$results[7][$i]  = isset($values[$i][7]) ? $values[$i][7] : '';
-					$results[8][$i]  = isset($values[$i][8]) ? $values[$i][8] : '';
-					$results[9][$i]  = isset($values[$i][9]) ? $values[$i][9] : '';
-					$results[10][$i] = isset($values[$i][10]) ? $values[$i][10] : '';
-					$results[11][$i] = isset($values[$i][11]) ? $values[$i][11] : '';
-					$results[12][$i] = isset($values[$i][12]) ? $values[$i][12] : '';
-					$results[13][$i] = isset($values[$i][13]) ? $values[$i][13] : '';
-					$results[14][$i] = isset($values[$i][14]) ? $values[$i][14] : '';
-				}
-		
-				$values = $results;
 				
 				$data = array( 
 					"ID_Therapist" => POST("terapist"),
@@ -250,7 +205,7 @@ class Test_Model extends ZP_Model {
 							"ID_Format"   => $formatID,
 							"ID_Objetive" => $IDObjective,
 							"Day_"        => isset($days[$d]) ? $days[$d] : '',
-							"Rating"      => $values[$o][$d][0] 
+							"Rating"      => $values[$o][$d] 
 						);
 					}
 				}
@@ -278,33 +233,13 @@ class Test_Model extends ZP_Model {
 	public function save() {
 		if(POST("area") < 32) {
 			$objectives = array_values(array_diff(POST("objective"), array('')));
-			$values     = POST("days");
+			$values     = $this->getResults(POST("days"));
 			$days 		= array_values(array_diff(POST("day"), array('')));
 			$obsv		= POST("obsv");
 			$formatID	= POST("ID_Format");
 			$results    = array();
 			$count = count($objectives) - 1;
 
-			for ($i = 0; $i <= 14; $i++) {
-				$results[0][$i]  = isset($values[$i][0]) ? $values[$i][0] : '';
-				$results[1][$i]  = isset($values[$i][1]) ? $values[$i][1] : '';
-				$results[2][$i]  = isset($values[$i][2]) ? $values[$i][2] : '';
-				$results[3][$i]  = isset($values[$i][3]) ? $values[$i][3] : '';
-				$results[4][$i]  = isset($values[$i][4]) ? $values[$i][4] : '';
-				$results[5][$i]  = isset($values[$i][5]) ? $values[$i][5] : '';
-				$results[6][$i]  = isset($values[$i][6]) ? $values[$i][6] : '';
-				$results[7][$i]  = isset($values[$i][7]) ? $values[$i][7] : '';
-				$results[8][$i]  = isset($values[$i][8]) ? $values[$i][8] : '';
-				$results[9][$i]  = isset($values[$i][9]) ? $values[$i][9] : '';
-				$results[10][$i] = isset($values[$i][10]) ? $values[$i][10] : '';
-				$results[11][$i] = isset($values[$i][11]) ? $values[$i][11] : '';
-				$results[12][$i] = isset($values[$i][12]) ? $values[$i][12] : '';
-				$results[13][$i] = isset($values[$i][13]) ? $values[$i][13] : '';
-				$results[14][$i] = isset($values[$i][14]) ? $values[$i][14] : '';
-			}
-
-			$values = $results;
-			
 			$data = array( 
 				"ID_Therapist" => POST("terapist"),
 				"ID_User"      => POST("IDPatient"),
@@ -334,7 +269,7 @@ class Test_Model extends ZP_Model {
 						"ID_Format"   => $formatID,
 						"ID_Objetive" => $IDObjective,
 						"Day_"        => isset($days[$d]) ? $days[$d] : '',
-						"Rating"      => $values[$o][$d] 
+						"Rating"      => is_numeric($values[$o][$d]) ? (int) $values[$o][$d] : $values[$o][$d]
 					);
 				}
 			}
@@ -472,5 +407,88 @@ class Test_Model extends ZP_Model {
 		}
 
 		return isset($data) ? $data : FALSE;
+	}
+
+	public function getResults($values) {
+		$results = array();
+
+		for ($i = 0; $i <= 14; $i++) {
+			if (isset($values[$i][0]) and is_numeric($values[$i][0])) 
+				$results[0][$i]  = ((int) $values[$i][0]  == 0) ? '$' : $values[$i][0];
+			else
+				$results[0][$i]  = isset($values[$i][0]) ? $values[$i][0] : '';
+
+			if (isset($values[$i][1]) and is_numeric($values[$i][1])) 
+				$results[1][$i]  = ((int) $values[$i][1]  == 0) ? '$' : $values[$i][1];
+			else
+				$results[1][$i]  = isset($values[$i][1]) ? $values[$i][1] : '';
+
+			if (isset($values[$i][2]) and is_numeric($values[$i][2])) 
+				$results[2][$i]  = ((int) $values[$i][2]  == 0) ? '$' : $values[$i][2];
+			else	
+				$results[2][$i]  = isset($values[$i][2]) ? $values[$i][2] : '';
+
+			if (isset($values[$i][3]) and is_numeric($values[$i][3])) 
+				$results[3][$i]  = ((int) $values[$i][3]  == 0) ? '$' : $values[$i][3];
+			else
+				$results[3][$i]  = isset($values[$i][3]) ? $values[$i][3] : '';
+				
+			if (isset($values[$i][4]) and is_numeric($values[$i][4])) 
+				$results[4][$i]  = ((int) $values[$i][4]  == 0) ? '$' : $values[$i][4];
+			else
+				$results[4][$i]  = isset($values[$i][4]) ? $values[$i][4] : '';
+
+			if (isset($values[$i][5]) and is_numeric($values[$i][5])) 
+				$results[5][$i]  = ((int) $values[$i][5]  == 0) ? '$' : $values[$i][5];
+			else
+				$results[5][$i]  = isset($values[$i][5]) ? $values[$i][5] : '';
+
+			if (isset($values[$i][6]) and is_numeric($values[$i][6])) 
+				$results[6][$i]  = ((int) $values[$i][6]  == 0) ? '$' : $values[$i][6];
+			else
+				$results[6][$i]  = isset($values[$i][6]) ? $values[$i][6] : '';
+
+			if (isset($values[$i][7]) and is_numeric($values[$i][7])) 
+				$results[7][$i]  = ((int) $values[$i][7]  == 0) ? '$' : $values[$i][7];
+			else
+				$results[7][$i]  = isset($values[$i][7]) ? $values[$i][7] : '';
+
+			if (isset($values[$i][8]) and is_numeric($values[$i][8])) 
+				$results[8][$i]  = ((int) $values[$i][8]  == 0) ? '$' : $values[$i][8];
+			else
+				$results[8][$i]  = isset($values[$i][8]) ? $values[$i][8] : '';
+
+			if (isset($values[$i][9]) and is_numeric($values[$i][9])) 
+				$results[9][$i]  = ((int) $values[$i][9]  == 0) ? '$' : $values[$i][9];
+			else
+				$results[9][$i]  = isset($values[$i][9]) ? $values[$i][9] : '';
+
+			if (isset($values[$i][10]) and is_numeric($values[$i][10])) 
+				$results[10][$i] = ((int) $values[$i][10] == 0) ? '$' : $values[$i][10];
+			else
+				$results[10][$i]  = isset($values[$i][10]) ? $values[$i][10] : '';
+
+			if (isset($values[$i][11]) and is_numeric($values[$i][11])) 
+				$results[11][$i] = ((int) $values[$i][11] == 0) ? '$' : $values[$i][11];
+			else
+				$results[11][$i]  = isset($values[$i][11]) ? $values[$i][11] : '';
+
+			if (isset($values[$i][12]) and is_numeric($values[$i][12])) 
+				$results[12][$i] = ((int) $values[$i][12] == 0) ? '$' : $values[$i][12];
+			else
+				$results[12][$i]  = isset($values[$i][12]) ? $values[$i][12] : '';
+
+			if (isset($values[$i][13]) and is_numeric($values[$i][13])) 
+				$results[13][$i] = ((int) $values[$i][13] == 0) ? '$' : $values[$i][13];
+			else
+				$results[13][$i]  = isset($values[$i][13]) ? $values[$i][13] : '';
+
+			if (isset($values[$i][14]) and is_numeric($values[$i][14])) 
+				$results[14][$i] = ((int) $values[$i][14] == 0) ? '$' : $values[$i][14];
+			else
+				$results[14][$i]  = isset($values[$i][14]) ? $values[$i][14] : '';
+		}
+
+		return $results;
 	}
 }

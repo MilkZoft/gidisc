@@ -21,7 +21,7 @@
 			<?php if($formats) { 				 					 
 				 	foreach($formats as $format) { ?>
 					<tr>
-						<td><input name="ids[]" type="checkbox" value="<?php print $format["ID_Format"];?>" checked="checked" /> <?php print $format["ID_Format"];?></td>
+						<td><input name="ids[]" type="checkbox" value="<?php print $format["ID_Format"];?>" /> <?php print $format["ID_Format"];?></td>
 						<td><?php print $format["Name"];?></td>
 						<td><?php print month($format["Month_"]);?></td>
 						<td><?php print $format["Text_Date"];?></td>
