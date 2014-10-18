@@ -29,16 +29,28 @@ class Users_Controller extends ZP_Controller {
 		$this->Email->setLibrary("PHPMailer");
 
 		$email   = POST("email");
+		$emails  = explode(",", str_replace(", ", ",", POST("email")));
 		$subject = POST("subject");
 		$message = POST("message");
 		$name    = POST("name");
 
-		$this->Email->email = $email;
-		$this->Email->fromEmail = "contacto@gidisc.org";
-		$this->Email->fromName = $name;
-		$this->Email->subject = $subject;
-		$this->Email->message = $message;
-		$a = $this->Email->send();
+		if (is_array($emails)) {
+			foreach ($emails as $email) {
+				$this->Email->email = $email;
+				$this->Email->fromEmail = "contacto@gidisc.org";
+				$this->Email->fromName = $name;
+				$this->Email->subject = $subject;
+				$this->Email->message = $message;
+				$this->Email->send();
+			}
+		} else {
+			$this->Email->email = $email;
+			$this->Email->fromEmail = "contacto@gidisc.org";
+			$this->Email->fromName = $name;
+			$this->Email->subject = $subject;
+			$this->Email->message = $message;
+			$this->Email->send();
+		}
 	}
 	
 	public function logout() {

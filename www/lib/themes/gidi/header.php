@@ -33,11 +33,6 @@
 						$('#email-alert').html('<h3 style="color: red">Necesitas escribir el mensaje</h3>');	
 					}
 
-					if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
-						error = true;
-						$('#email-alert').html('<h3 style="color: red">Necesitas escribir un e-mail válido</h3>');	
-					}
-
 					if (subject == '') {
 						error = true;
 						$('#email-alert').html('<h3 style="color: red">Necesitas especificar un asunto</h3>');
