@@ -13,12 +13,70 @@ class Patients_Controller extends ZP_Controller {
 		$this->Patients_Model = $this->model("Patients_Model");
 
 		$this->helpers();
-		$this->helper("pagination");
+		$this->helper(array("files", "pagination"));
 		$this->CSS("default");
 		
 		$this->application = $this->app("patients");
 		
 		$this->Templates->theme();
+	}
+
+	public function upload($userId, $deleteFile = false) {
+		$dir = "www/lib/files/documents/". $userId ."/";
+
+		if ($deleteFile) {
+			$fileToDelete = $dir . $deleteFile;
+
+			@unlink($fileToDelete);
+
+			showAlert("Archivo eliminado", path("patients/upload/$userId"));
+		}
+
+		if (POST("upload")) {
+			$this->Files = $this->core("Files");
+
+			$total = count(FILES("files", "name")) - 1;
+
+			for ($i = 0; $i <= $total; $i++) {
+				$this->Files->filename  = FILES("files", "name", $i);
+				$this->Files->fileType  = FILES("files", "type", $i);
+				$this->Files->fileSize  = FILES("files", "size", $i);
+				$this->Files->fileError = FILES("files", "error", $i);
+				$this->Files->fileTmp   = FILES("files", "tmp_name", $i);
+
+				$upload = $this->Files->upload($dir);
+			}
+
+			if ($upload["upload"]) {
+				showAlert("Los archivos se subieron con éxito", path("patients/upload/$userId"));
+			} else {
+				showAlert("El archivo ya existe", path("patients/upload/$userId"));
+			}
+		}
+		
+		$files = @scandir($dir);
+
+		if ($files) {
+			if (count($files) > 2) {
+				$documents = array();
+
+				$i = 0;
+				foreach ($files as $file) {
+					if ($file != "." and $file != ".." and $file != ".DS_Store") {
+						$documents[$i]["filename"] = $file;
+						$documents[$i]["url"] = path($dir . $file, true);
+						$i++;
+					}
+				}
+				
+				$vars["documents"] = $documents;
+			} 
+		} 
+
+		$vars["userId"] = $userId;
+		$vars["view"] = $this->view("documents", TRUE);
+						
+		$this->render("content", $vars);
 	}
 	
 	public function index() {

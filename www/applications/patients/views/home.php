@@ -55,6 +55,8 @@
 							<a href="<?php print path("test/get/" . $patient["ID_User"]);?>" title="Ver seguimientos">
 								<span class="no-decoration"><?php print __("Ver Seguimientos");?></span>
 							</a>
+
+
 							<?php
 							if(SESSION("ZanUserTypeID") != 8 and SESSION("ZanUserTypeID") != 3 and SESSION("ZanUserTypeID") != 5) {
 							?>
@@ -64,6 +66,10 @@
 							<?php
 							}
 							?>
+
+							<a href="<?php print path("patients/upload/" . $patient["ID_User"]);?>" title="Ver seguimientos">
+								<span style="color: red;" class="no-decoration"><?php print __("Subir Documentos");?></span>
+							</a>
 							
 							<a href="<?php print path("users/cpanel/edit/" . $patient["ID_User"]);?>" title="Edit" onclick="return confirm('Do you want to edit the record?')">
 								<span class="tiny-image tiny-edit no-decoration">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
